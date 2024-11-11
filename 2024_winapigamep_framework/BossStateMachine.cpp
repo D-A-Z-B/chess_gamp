@@ -21,5 +21,5 @@ void BossStateMachine::ChangeState(BossStateEnum newState)
 
 void BossStateMachine::AddState(BossStateEnum stateEnum, BossState* bossState)
 {
-	StateMap.insert(stateEnum, bossState);
+	//StateMap.insert(stateEnum, bossState);
 }
