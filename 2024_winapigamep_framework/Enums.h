@@ -5,6 +5,7 @@ enum class LAYER
 	BACKGROUND,
 	PLAYER,
 	ENEMY,
+	BOSS,
 	PROJECTILE,
 	// UI
 	END = 30
@@ -33,5 +34,5 @@ enum class EVENT_TYPE
 
 enum class BOSS_STATE
 {
-	Pawn, Bishop, Knight, Rook, Queen, King
+	PAWN, BISHOP, KNIGHT, ROOK, QUEEN, KING
 };

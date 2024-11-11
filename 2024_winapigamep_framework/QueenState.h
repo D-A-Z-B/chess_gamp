@@ -3,5 +3,12 @@
 class QueenState :
     public BossState
 {
+public:
+    QueenState(Boss* boss, BossStateMachine* stateMachine, wstring texture)
+        : BossState(boss, stateMachine, texture) {}
+    virtual ~QueenState() {}
+public:
+    void Enter() override;
+    void UpdateState() override;
+    void Exit() override;
 };
-

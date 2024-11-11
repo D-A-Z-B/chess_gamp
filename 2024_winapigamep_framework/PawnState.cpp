@@ -5,7 +5,7 @@ void PawnState::Enter()
 {
 	__super::Enter();
 
-	cout << "Pawn State Enter";
+	cout << "Pawn State Enter" << endl;
 }
 
 void PawnState::UpdateState()
@@ -15,6 +15,6 @@ void PawnState::UpdateState()
 
 void PawnState::Exit()
 {
-	cout << "Pawn State Exit";
+	cout << "Pawn State Exit" << endl;
 	__super::Exit();
 }
