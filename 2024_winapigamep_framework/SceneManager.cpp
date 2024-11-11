@@ -18,8 +18,8 @@ void SceneManager::Init()
 	//LoadScene(L"BossTestScene");
 
 	// ¾À ·Îµå
-	LoadScene(L"TitleScene");
-	//LoadScene(L"GameScene");
+	//LoadScene(L"TitleScene");
+	LoadScene(L"GameScene");
 }
 
 void SceneManager::Update()

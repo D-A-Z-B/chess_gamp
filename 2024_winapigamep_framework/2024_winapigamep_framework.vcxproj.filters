@@ -41,6 +41,9 @@
     <Filter Include="Engine\03. Object\Boss\States">
       <UniqueIdentifier>{03ed825b-b75c-44b4-aacb-6d5078748446}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Utils">
+      <UniqueIdentifier>{08c19a94-02b5-469a-aeeb-7dc34fa554d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -163,6 +166,12 @@
     <ClInclude Include="KingState.h">
       <Filter>Engine\03. Object\Boss\States</Filter>
     </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Engine\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework.rc">
@@ -255,6 +264,12 @@
     </ClCompile>
     <ClCompile Include="BossState.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Engine\Utils</Filter>
     </ClCompile>
     <ClCompile Include="PawnState.cpp">
       <Filter>Engine\03. Object\Boss\States</Filter>
