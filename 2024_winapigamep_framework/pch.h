@@ -21,6 +21,7 @@
 #include "Define.h"
 #include "Enums.h"
 #include "Vec2.h"
+#include "Utils.h"
 
 // °¢Á¾ lib
 #pragma comment(lib, "winmm.lib")
