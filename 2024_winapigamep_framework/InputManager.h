@@ -26,6 +26,7 @@ class InputManager
 public:
 	void Init();
 	void Update();
+	void Render(HDC _hdc);
 	const KEY_STATE& GetKey(KEY_TYPE _eKey) const
 	{
 		return m_vecKey[(int)_eKey].eState;

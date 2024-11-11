@@ -48,6 +48,10 @@ void InputManager::Update()
 	::GetCursorPos(&m_ptMouse); // 마우스 좌표 받기
 	// 우리가 가진 윈도우 창 기준으로 좌표 변경
 	::ScreenToClient(GET_SINGLE(Core)->GetHwnd(), &m_ptMouse);
+}
 
-
+void InputManager::Render(HDC _hdc)
+{
+	wstring str = std::format(L"Mouse({0}, {1})", m_ptMouse.x, m_ptMouse.y);
+	::TextOut(_hdc, 1150, 0, str.c_str(), str.length());
 }

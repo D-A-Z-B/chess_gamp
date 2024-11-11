@@ -13,6 +13,7 @@ void SceneManager::Init()
 
 	// ¾À ·Îµå
 	LoadScene(L"TitleScene");
+	//LoadScene(L"GameScene");
 }
 
 void SceneManager::Update()
