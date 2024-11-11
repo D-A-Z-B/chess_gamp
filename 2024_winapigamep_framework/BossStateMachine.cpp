@@ -5,21 +5,16 @@ BossStateMachine::~BossStateMachine()
 {
 }
 
-void BossStateMachine::Initialize(BossStateEnum startState, Boss* boss)
+void BossStateMachine::Initialize(BOSS_STATE startState, Boss* boss)
 {
 	CurrentState = StateMap[startState];
 	this->boss = boss;
 	CurrentState->Enter();
 }
 
-void BossStateMachine::ChangeState(BossStateEnum newState)
+void BossStateMachine::ChangeState(BOSS_STATE newState)
 {
 	CurrentState->Exit();
 	CurrentState = StateMap[newState];
 	CurrentState->Enter();
-}
-
-void BossStateMachine::AddState(BossStateEnum stateEnum, BossState* bossState)
-{
-	StateMap.insert({stateEnum, bossState });
 }

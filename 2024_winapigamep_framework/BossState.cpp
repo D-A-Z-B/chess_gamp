@@ -2,10 +2,9 @@
 #include "BossState.h"
 #include "Boss.h"
 
-BossState::BossState(Boss* boss, BossStateMachine* stateMachine) 
-	: boss(boss), stateMachine(stateMachine)
+BossState::BossState(Boss* boss, BossStateMachine* stateMachine, wstring texture) 
+	: boss(boss), stateMachine(stateMachine), texture(texture)
 {
-
 }
 
 BossState::~BossState()
@@ -14,6 +13,7 @@ BossState::~BossState()
 
 void BossState::Enter()
 {
+	//boss->SetBossTexture(texture);
 }
 
 void BossState::UpdateState()

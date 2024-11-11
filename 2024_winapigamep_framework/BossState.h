@@ -7,8 +7,9 @@ class BossState
 protected:
 	BossStateMachine* stateMachine;
 	Boss* boss;
+	wstring texture;
 public:
-	BossState(Boss* boss, BossStateMachine* stateMachine);
+	BossState(Boss* boss, BossStateMachine* stateMachine, wstring texture);
 	~BossState();
 public:
 	virtual void Enter();

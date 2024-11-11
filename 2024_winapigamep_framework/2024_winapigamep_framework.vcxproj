@@ -171,7 +171,6 @@
     <ClInclude Include="BishopState.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossState.h" />
-    <ClInclude Include="BossStateEnum.h" />
     <ClInclude Include="BossStateMachine.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
