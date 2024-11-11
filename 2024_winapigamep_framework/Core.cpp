@@ -86,6 +86,7 @@ void Core::MainRender()
 	// 1. clear
 	::PatBlt(m_hBackDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
 	// 2. Render
+	GET_SINGLE(InputManager)->Render(m_hBackDC);
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
 	// 3. display	
 	::BitBlt(m_hDC, 0,0, SCREEN_WIDTH,SCREEN_HEIGHT,
