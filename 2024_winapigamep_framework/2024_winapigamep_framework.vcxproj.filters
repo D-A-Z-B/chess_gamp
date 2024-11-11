@@ -145,6 +145,24 @@
     <ClInclude Include="BossStateEnum.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="PawnState.h">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClInclude>
+    <ClInclude Include="BishopState.h">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightState.h">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClInclude>
+    <ClInclude Include="RookState.h">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClInclude>
+    <ClInclude Include="QueenState.h">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClInclude>
+    <ClInclude Include="KingState.h">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework.rc">
@@ -237,6 +255,24 @@
     </ClCompile>
     <ClCompile Include="BossState.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="PawnState.cpp">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClCompile>
+    <ClCompile Include="BishopState.cpp">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightState.cpp">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClCompile>
+    <ClCompile Include="RookState.cpp">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClCompile>
+    <ClCompile Include="QueenState.cpp">
+      <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClCompile>
+    <ClCompile Include="KingState.cpp">
+      <Filter>Engine\03. Object\Boss\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

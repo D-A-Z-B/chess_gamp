@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Boss.h"
 
-Boss::Boss() : m_hp(100)
+Boss::Boss() : m_hp(100), m_pTex(nullptr)
 {
 	StateMachine = new BossStateMachine();
 }
@@ -13,6 +13,7 @@ Boss::~Boss()
 
 void Boss::Update()
 {
+	StateMachine->CurrentState->UpdateState();
 }
 
 void Boss::Render(HDC _hdc)

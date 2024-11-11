@@ -2,7 +2,9 @@
 
 #include "Object.h"
 #include "BossStateMachine.h"
+#include "ResourceManager.h"
 
+class Texture;
 class Boss :
     public Object
 {
@@ -18,7 +20,10 @@ public:
 	virtual void ExitCollision(Collider* _other);
 public:
 	BossStateMachine* StateMachine;
+public:
+	void SetBossTexture(wstring texture) { m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(texture, L"Texture\\" + texture + L".bmp"); }
 private:
 	int m_hp;
+	Texture* m_pTex;
 };
 
