@@ -6,7 +6,7 @@ class PawnState : public BossState
 public:
     PawnState(Boss* boss, BossStateMachine* stateMachine, wstring texture)
         : BossState(boss, stateMachine, texture) {}
-    virtual ~PawnState() {}
+    ~PawnState() {}
 public:
     void Enter() override;
     void UpdateState() override;

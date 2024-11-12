@@ -6,7 +6,7 @@ class KnightState :
 public:
     KnightState(Boss* boss, BossStateMachine* stateMachine, wstring texture)
         : BossState(boss, stateMachine, texture) {}
-    virtual ~KnightState() {}
+    ~KnightState() {}
 public:
     void Enter() override;
     void UpdateState() override;

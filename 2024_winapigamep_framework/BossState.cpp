@@ -13,7 +13,7 @@ BossState::~BossState()
 
 void BossState::Enter()
 {
-	//boss->SetBossTexture(texture);
+	boss->SetBossTexture(texture);
 }
 
 void BossState::UpdateState()

@@ -2,6 +2,7 @@
 
 class BossStateMachine;
 class Boss;
+
 class BossState
 {
 protected:
@@ -10,7 +11,7 @@ protected:
 	wstring texture;
 public:
 	BossState(Boss* boss, BossStateMachine* stateMachine, wstring texture);
-	~BossState();
+	virtual ~BossState();
 public:
 	virtual void Enter();
 	virtual void UpdateState();

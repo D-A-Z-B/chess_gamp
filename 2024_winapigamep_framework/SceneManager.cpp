@@ -13,13 +13,13 @@ void SceneManager::Init()
 	RegisterScene(L"GameScene",std::make_shared<GameScene>());
 
 	//Test Scene
-	//RegisterScene(L"BossTestScene", std::make_shared<BossTestScene>());
+	RegisterScene(L"BossTestScene", std::make_shared<BossTestScene>());
 
-	//LoadScene(L"BossTestScene");
+	LoadScene(L"BossTestScene");
 
 	// ¾À ·Îµå
 	//LoadScene(L"TitleScene");
-	LoadScene(L"GameScene");
+	//LoadScene(L"GameScene");
 }
 
 void SceneManager::Update()

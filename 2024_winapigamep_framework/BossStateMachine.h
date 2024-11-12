@@ -13,13 +13,17 @@ public:
 
 	template <typename T>
 	void AddState(BOSS_STATE stateEnum, T* bossState) {
-		StateMap.insert({ stateEnum, bossState });
+		StateMap[stateEnum] = bossState;
 	}
 public:
-	BossState* CurrentState;
-	BossState* GetCurrentState() { return CurrentState; }
+	BossState* CurrentState = nullptr;
+
+	BossState* GetCurrentState() {
+		return CurrentState;
+	}
 public:
-	map<BOSS_STATE, BossState*> StateMap;
+	std::unordered_map<BOSS_STATE, BossState*> StateMap;
 	Boss* boss;
+
 };
 

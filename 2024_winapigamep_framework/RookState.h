@@ -6,7 +6,7 @@ class RookState :
 public:
     RookState(Boss* boss, BossStateMachine* stateMachine, wstring texture)
         : BossState(boss, stateMachine, texture) {}
-    virtual ~RookState() {}
+    ~RookState() {}
 public:
     void Enter() override;
     void UpdateState() override;
