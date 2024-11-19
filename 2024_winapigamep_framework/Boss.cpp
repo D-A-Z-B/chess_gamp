@@ -15,6 +15,17 @@
 
 Boss::Boss() : m_hp(100), m_pTex(nullptr)
 {
+}
+
+Boss::~Boss()
+{
+	delete StateMachine;
+}
+
+void Boss::Initialize()
+{
+	ComponentInitialize();
+
 	StateMachine = new BossStateMachine();
 
 	StateMachine->AddState(BOSS_STATE::PAWN, new PawnState(this, StateMachine, L"B_Pawn"));
@@ -27,11 +38,6 @@ Boss::Boss() : m_hp(100), m_pTex(nullptr)
 	StateMachine->Initialize(BOSS_STATE::PAWN, this);
 }
 
-Boss::~Boss()
-{
-	delete StateMachine;
-}
-
 
 void Boss::ComponentInitialize()
 {
@@ -39,17 +45,11 @@ void Boss::ComponentInitialize()
 
 	AddComponent<Collider>();
 	GetComponent<Collider>()->SetOwner(this);
-	GetComponent<Collider>()->SetOffSetPos({ 0.f, 30.f });
-	GetComponent<Collider>()->SetSize({vSize.x, vSize.y / 1.2f});
 }
 
 void Boss::Update()
 {
 	StateMachine->CurrentState->UpdateState();
-
-	if (GET_KEYDOWN(KEY_TYPE::T)) {
-		StateMachine->ChangeState(BOSS_STATE::KING);
-	}
 }
 
 void Boss::Render(HDC _hdc)

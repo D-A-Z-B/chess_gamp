@@ -4,9 +4,9 @@ enum class LAYER
 	DEFAULT,
 	BACKGROUND,
 	Ground,
-	PLAYER,
 	ENEMY,
 	BOSS,
+	PLAYER,
 	PROJECTILE,
 	// UI
 	END = 30

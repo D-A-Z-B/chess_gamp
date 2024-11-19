@@ -192,6 +192,7 @@
     <ClInclude Include="PawnState.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="QueenState.h" />
     <ClInclude Include="Resource.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PawnState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="QueenState.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

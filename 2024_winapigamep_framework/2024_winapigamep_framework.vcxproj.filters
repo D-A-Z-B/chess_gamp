@@ -145,9 +145,6 @@
     <ClInclude Include="BossState.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="BossStateEnum.h">
-      <Filter>Engine\03. Object\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="PawnState.h">
       <Filter>Engine\03. Object\Boss\States</Filter>
     </ClInclude>
@@ -171,6 +168,10 @@
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Engine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="BossTestScene.h" />
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Engine\02. Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -288,6 +289,10 @@
     </ClCompile>
     <ClCompile Include="KingState.cpp">
       <Filter>Engine\03. Object\Boss\States</Filter>
+    </ClCompile>
+    <ClCompile Include="BossTestScene.cpp" />
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

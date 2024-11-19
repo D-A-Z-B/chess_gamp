@@ -10,6 +10,9 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+
+#include "PlayerManager.h"
+
 Player::Player()
 	: m_pTex(nullptr)
 {
@@ -25,6 +28,8 @@ Player::Player()
 		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
 
+	GET_SINGLE(PlayerManager)->SetPlayer(this);
+
 }
 Player::~Player()
 {
@@ -36,9 +41,9 @@ void Player::Update()
 	Vec2 vPos = GetPos();
 	//if(GET_KEY(KEY_TYPE::LEFT))
 	if (GET_KEY(KEY_TYPE::A))
-		vPos.x -= 100.f * fDT;
+		vPos.y -= 200.f * fDT;
 	if (GET_KEY(KEY_TYPE::D))
-		vPos.x += 100.f * fDT;
+		vPos.y += 200.f * fDT;
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		CreateProjectile();
 	SetPos(vPos);

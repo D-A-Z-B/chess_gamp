@@ -12,9 +12,11 @@ public:
 	Boss();
 	~Boss();
 public:
+	void Initialize();
+public:
 	void Update() override;
 	void Render(HDC _hdc) override;
-public:
+private:
 	void ComponentInitialize();
 public:
 	virtual void EnterCollision(Collider* _other);
@@ -24,8 +26,16 @@ public:
 	BossStateMachine* StateMachine;
 public:
 	void SetBossTexture(wstring texture) { m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(texture, L"Texture\\Boss\\" + texture + L".bmp"); }
+public:
+	void SetPatternDelayTime(float time) {
+		patternDelayTime = time;
+	}
+	float GetPatternDelayTime() {
+		return patternDelayTime;
+	}
 private:
 	int m_hp;
+	float patternDelayTime = 0;
 	Texture* m_pTex;
 };
 
