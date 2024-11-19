@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Ground.h"
+#include "Collider.h"
 Ground::Ground()
 {
+	
 }
 
 Ground::~Ground()
