@@ -37,26 +37,28 @@ Player::~Player()
 void Player::Update()
 {
 	Vec2 vPos = GetPos();
-
 	if (GET_KEY(KEY_TYPE::A))
 		vPos.x -= 200.f * fDT;
 	if (GET_KEY(KEY_TYPE::D))
 		vPos.x += 200.f * fDT;
-	if (GET_KEYDOWN(KEY_TYPE::SPACE) && ISGROUND)
+	if (GET_KEYDOWN(KEY_TYPE::SPACE) && (ISGROUND || m_jumpCnt <= m_maxJumpCnt - 1))
 	{
-		m_speed = { 0, -2 };
-		m_isJump = true;
+		m_speed = -m_jumpPower;
+		m_jumpCnt++;
+	}
+	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+	{
+		CreateProjectile();
 	}
 
+	vPos += {0.f, m_speed};
 	if (!ISGROUND)
-		m_speed.y += 9.8f * 1.f * fDT;
-	
-	vPos += m_speed;
+		m_speed += m_gravity * fDT;
+
 	if (ISGROUND)
 	{
 		vPos.y = 550;
-		m_speed = {0, 0};
-		m_isJump = false;
+		m_jumpCnt = 0;
 	}
 	SetPos(vPos);
 }
@@ -77,7 +79,10 @@ void Player::CreateProjectile()
 	vPos.y -= GetSize().y / 2.f;
 	pProj->SetPos(vPos);
 	pProj->SetSize({ 30.f,30.f });
-	pProj->SetDir({ 0.f, -1.f });
+
+	Vec2 dir = (Vec2)GET_MOUSEPOS - vPos;
+	dir = NORMALIZE(dir);
+	pProj->SetDir(dir);
 	pProj->SetName(L"PlayerBullet");
 
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);

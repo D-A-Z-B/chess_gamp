@@ -14,6 +14,10 @@ private:
 private:
 	Texture* m_pTex;
 	bool m_isJump = false;
-	Vec2 m_speed = {0,0};
+	float m_speed = 0.f;
+	float m_jumpPower = 2.5f;
+	float m_gravity = 9.8f;
+	int m_jumpCnt = 0;
+	int m_maxJumpCnt = 2;
 };
 
