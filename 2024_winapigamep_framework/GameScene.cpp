@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "Ground.h"
 #include "Player.h"
+#include "Aim.h"
 void GameScene::Init()
 {
 	Object* pPlayer = new Player;
@@ -15,4 +16,7 @@ void GameScene::Init()
 	pGround->SetSize({ (float)SCREEN_WIDTH, 150.f });
 	pGround->SetName(L"Ground");
 	AddObject(pGround, LAYER::Ground);
+
+	Object* pAim = new Aim;
+	AddObject(pAim, LAYER::AIM);
 }
