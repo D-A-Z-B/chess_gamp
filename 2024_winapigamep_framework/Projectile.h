@@ -27,5 +27,6 @@ private:
 	float m_angle;
 	Vec2 m_vDir;
 	Texture* m_pTex;
+	float m_speed = 1000.f;
 };
 

@@ -13,6 +13,5 @@ void GameScene::Init()
 	Object* pGround = new Ground;
 	pGround->SetPos({ SCREEN_WIDTH / 2.f,650.f });
 	pGround->SetSize({ (float)SCREEN_WIDTH, 150.f });
-	pGround->SetName(L"Ground");
 	AddObject(pGround, LAYER::Ground);
 }
