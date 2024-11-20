@@ -144,7 +144,7 @@ void PawnState::NextPattern() {
 
 
     endRoutineElapsedTime = 0;
-    stateMachine->ChangeState(BOSS_STATE::ROOK);
+    stateMachine->ChangeState(BOSS_STATE::BISHOP);
     //stateMachine->ChangeState(static_cast<BOSS_STATE>(randNum));
 }
 

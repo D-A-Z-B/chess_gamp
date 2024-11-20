@@ -11,5 +11,13 @@ public:
     void Enter() override;
     void UpdateState() override;
     void Exit() override;
+private:
+    void MoveRoutine();
+    void AttackRoutine();
+    void EndRoutine();
+private:
+    bool isMove;
+    bool isAttack;
+    bool isEnd;
 };
 
