@@ -15,7 +15,7 @@ void SceneManager::Init()
 	//Test Scene
 	RegisterScene(L"BossTestScene", std::make_shared<BossTestScene>());
 
-	LoadScene(L"GameScene");
+	LoadScene(L"BossTestScene");
 
 	// ¾À ·Îµå
 	//LoadScene(L"TitleScene");

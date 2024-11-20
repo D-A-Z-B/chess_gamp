@@ -61,7 +61,7 @@ void Player::Update()
 		m_jumpSpeed = -m_jumpPower;
 		m_jumpCnt++;
 	}
-	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > 1.f)
+	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > 0.5f)
 	{
 		m_isDash = true;
 		m_dashSpeed = m_dashPower * m_ispacing;
@@ -78,7 +78,7 @@ void Player::Update()
 	if (m_isDash)
 	{
 		m_dashTimer += fDT;
-		if (m_dashTimer > 0.05f)
+		if (m_dashTimer > 0.03f)
 		{
 			m_dashTimer = 0;
 			m_isDash = false;

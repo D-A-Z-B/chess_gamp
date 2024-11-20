@@ -39,10 +39,10 @@ void BishopState::Exit()
         int attackRepeatCount = 4;
 
         static float attackElapsedTime = 0;
-        float attackTime = 0.8f;
+        float attackTime = 0.9f;
 
         static float waitElapsedTime = 0;
-        float waitTime = 0.1f;
+        float waitTime = 0.2f;
 
         static bool isAttack = false;
         static bool isWait = true;
@@ -54,13 +54,13 @@ void BishopState::Exit()
 
         if (isRefresh) {
             if (isTopDown) {
-                startPos.x = rand() % 1280;
                 startPos.y = -200;
             }
             else {
-                startPos.x = rand() % 1280;
                 startPos.y = SCREEN_HEIGHT + 200;
             }
+
+            startPos.x = rand() % 1280;
             Vec2 playerPos = GET_SINGLE(PlayerManager)->GetPlayer()->GetPos();
             Vec2 dir = playerPos - startPos;
             dir.Normalize();
