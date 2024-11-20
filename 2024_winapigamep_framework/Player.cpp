@@ -61,7 +61,7 @@ void Player::Update()
 		m_jumpSpeed = -m_jumpPower;
 		m_jumpCnt++;
 	}
-	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > 1.f)
+	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > m_dashCooldown)
 	{
 		m_isDash = true;
 		m_dashSpeed = m_dashPower * m_ispacing;
@@ -107,6 +107,15 @@ void Player::Render(HDC _hdc)
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 	ComponentRender(_hdc);
+}
+
+void Player::EnterCollision(Collider* _other)
+{
+	Object* pOtherObj = _other->GetOwner();
+	if (pOtherObj->GetName() == L"Boss")
+	{
+		GET_SINGLE(SceneManager)->LoadScene(L"EndScene");
+	}
 }
 
 void Player::CreateProjectile()
