@@ -12,12 +12,10 @@ public:
     void UpdateState() override;
     void Exit() override;
 private:
-    void MoveRoutine();
     void AttackRoutine();
     void EndRoutine();
 private:
-    bool isMove;
-    bool isAttack;
-    bool isEnd;
+    bool isAttack = false;
+    bool isEnd = false;
 };
 
