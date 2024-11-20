@@ -11,6 +11,9 @@ public:
 	void Render(HDC _hdc) override;
 private:
 	void CreateProjectile();
+private:
 	Texture* m_pTex;
+	bool m_isJump = false;
+	Vec2 m_speed = {0,0};
 };
 

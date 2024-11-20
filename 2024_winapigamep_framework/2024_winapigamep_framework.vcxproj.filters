@@ -97,9 +97,6 @@
     <ClInclude Include="GameScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -172,6 +169,9 @@
     <ClInclude Include="BossTestScene.h" />
     <ClInclude Include="PlayerManager.h">
       <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Engine\03. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
