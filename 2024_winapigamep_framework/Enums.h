@@ -8,6 +8,7 @@ enum class LAYER
 	BOSS,
 	PLAYER,
 	PROJECTILE,
+	AIM,
 	// UI
 	END = 30
 };

@@ -10,23 +10,31 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
-
+#include "InputManager.h"
 #include "PlayerManager.h"
+#include "SceneManager.h"
+#include "Scene.h"
+#include "Aim.h"
 
 #define ISGROUND (vPos.y >= 550)
 
 Player::Player()
 	: m_pTex(nullptr)
 {
+	Object* pAim = new Aim;
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pAim, LAYER::AIM);
+
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
 
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
-		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
-	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
+	GetComponent<Animator>()
+		->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f), Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
+	GetComponent<Animator>()
+		->PlayAnimation(L"JiwooFront", true);
 
-	this->AddComponent<Collider>();
-	GetComponent<Collider>()->SetSize({ 40.f, 40.f });
+	AddComponent<Collider>();
+	GetComponent<Collider>()
+		->SetSize({ 40.f, 40.f });
 
 	GET_SINGLE(PlayerManager)->SetPlayer(this);
 
@@ -42,21 +50,25 @@ void Player::Update()
 		vPos.x -= 200.f * fDT;
 	if (GET_KEY(KEY_TYPE::D))
 		vPos.x += 200.f * fDT;
-	if (GET_KEYDOWN(KEY_TYPE::SPACE) && ISGROUND)
+	if (GET_KEYDOWN(KEY_TYPE::SPACE) && (ISGROUND || m_jumpCnt <= 1))
 	{
-		m_speed = { 0, -2 };
+		m_speed = -m_jumpPower;
 		m_isJump = true;
+		m_jumpCnt++;
 	}
+	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+		CreateProjectile();
 
 	if (!ISGROUND)
-		m_speed.y += 9.8f * 1.f * fDT;
-	
-	vPos += m_speed;
+		m_speed += m_gravity * fDT;
+
+	vPos += {0.f, m_speed};
 	if (ISGROUND)
 	{
 		vPos.y = 550;
-		m_speed = {0, 0};
+		m_speed = 0;
 		m_isJump = false;
+		m_jumpCnt = 0;
 	}
 	SetPos(vPos);
 }
@@ -77,7 +89,9 @@ void Player::CreateProjectile()
 	vPos.y -= GetSize().y / 2.f;
 	pProj->SetPos(vPos);
 	pProj->SetSize({ 30.f,30.f });
-	pProj->SetDir({ 0.f, -1.f });
+	
+	Vec2 dir = NORMALIZE(((Vec2)GET_MOUSEPOS - vPos));
+	pProj->SetDir(dir);
 	pProj->SetName(L"PlayerBullet");
 
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
