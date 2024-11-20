@@ -47,27 +47,54 @@ void Player::Update()
 	Vec2 vPos = GetPos();
 
 	if (GET_KEY(KEY_TYPE::A))
+	{
 		vPos.x -= 200.f * fDT;
+		m_ispacing = -1;
+	}
 	if (GET_KEY(KEY_TYPE::D))
+	{
 		vPos.x += 200.f * fDT;
+		m_ispacing = 1;
+	}
 	if (GET_KEYDOWN(KEY_TYPE::SPACE) && (ISGROUND || m_jumpCnt <= 1))
 	{
-		m_speed = -m_jumpPower;
-		m_isJump = true;
+		m_jumpSpeed = -m_jumpPower;
 		m_jumpCnt++;
+	}
+	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > 1.f)
+	{
+		m_isDash = true;
+		m_dashSpeed = m_dashPower * m_ispacing;
+
+		m_dashCoolTimer = 0;
 	}
 	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
 		CreateProjectile();
 
-	if (!ISGROUND)
-		m_speed += m_gravity * fDT;
+	if (!ISGROUND && !m_isDash)
+		m_jumpSpeed += m_gravity * fDT;
 
-	vPos += {0.f, m_speed};
+	m_dashCoolTimer += fDT;
+	if (m_isDash)
+	{
+		m_dashTimer += fDT;
+		if (m_dashTimer > 0.05f)
+		{
+			m_dashTimer = 0;
+			m_isDash = false;
+			m_dashSpeed = 0;
+		}
+	}
+
+	if (m_isDash)
+		vPos.x += m_dashSpeed;
+	else
+		vPos.y += m_jumpSpeed;
+	
 	if (ISGROUND)
 	{
 		vPos.y = 550;
-		m_speed = 0;
-		m_isJump = false;
+		m_jumpSpeed = 0;
 		m_jumpCnt = 0;
 	}
 	SetPos(vPos);
@@ -90,7 +117,8 @@ void Player::CreateProjectile()
 	pProj->SetPos(vPos);
 	pProj->SetSize({ 30.f,30.f });
 	
-	Vec2 dir = NORMALIZE(((Vec2)GET_MOUSEPOS - vPos));
+	Vec2 dir = (Vec2)GET_MOUSEPOS - vPos;
+	dir.Normalize();
 	pProj->SetDir(dir);
 	pProj->SetName(L"PlayerBullet");
 
