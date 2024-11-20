@@ -53,7 +53,6 @@ void Player::Update()
 	if (GET_KEYDOWN(KEY_TYPE::SPACE) && (ISGROUND || m_jumpCnt <= 1))
 	{
 		m_speed = -m_jumpPower;
-		m_isJump = true;
 		m_jumpCnt++;
 	}
 	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
@@ -67,7 +66,6 @@ void Player::Update()
 	{
 		vPos.y = 550;
 		m_speed = 0;
-		m_isJump = false;
 		m_jumpCnt = 0;
 	}
 	SetPos(vPos);

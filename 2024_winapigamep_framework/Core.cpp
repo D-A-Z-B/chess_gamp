@@ -29,9 +29,7 @@ bool Core::Init(HWND _hwnd)
 	GET_SINGLE(ResourceManager)->Init();
 	GET_SINGLE(SceneManager)->Init();
 
-	//m_obj.SetPos(Vec2(SCREEN_WIDTH / 2
-	//				,SCREEN_HEIGHT/ 2));
-	//m_obj.SetSize(Vec2(100, 100));
+	ShowCursor(false);
 	return true;
 }
 void Core::CleanUp()
