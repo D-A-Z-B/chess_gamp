@@ -9,8 +9,6 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
-public:
-	virtual void EnterCollision(Collider* _other);
 private:
 	void CreateProjectile();
 private:
