@@ -52,6 +52,13 @@ void BishopState::Exit()
         static Vec2 startPos;
         static Vec2 endPos;
 
+        if (currentAttackCount == attackRepeatCount) {
+            currentAttackCount = 0;
+            isEnd = true;
+            this->isAttack = false;
+            return;
+        }
+
         if (isRefresh) {
             if (isTopDown) {
                 startPos.y = -200;
@@ -71,38 +78,56 @@ void BishopState::Exit()
             isRefresh = false;
         }
 
-        if (waitElapsedTime < waitTime && isWait) {
-            float t = waitElapsedTime / waitTime;
+        if (isWait) {
+            if (waitElapsedTime < waitTime) {
+                float t = waitElapsedTime / waitTime;
 
-            waitElapsedTime += fDT;
+                waitElapsedTime += fDT;
+            }
+            else {
+                isWait = false;
+                isAttack = true;
+                waitElapsedTime = 0;
+            }
         }
-        else if (waitElapsedTime > waitTime && isWait) {
-            isWait = false;
-            isAttack = true;
-            waitElapsedTime = 0;
+
+        if (isAttack) {
+            if (attackElapsedTime < attackTime) {
+                float t = attackElapsedTime / attackTime;
+
+                float calcT = sqrt(1 - pow(t - 1, 2));
+
+                float x = startPos.x * (1 - calcT) + endPos.x * calcT;
+                float y = startPos.y * (1 - calcT) + endPos.y * calcT;
+
+                __super::boss->SetPos({ x, y });
+
+                attackElapsedTime += fDT;
+            }
+            else {
+                attackElapsedTime = 0;
+
+                isAttack = false;
+                isWait = true;
+                isRefresh = true;
+                currentAttackCount++;
+            }
         }
 
-        if (attackElapsedTime < attackTime && isAttack) {
-            float t = attackElapsedTime / attackTime;
-
-            float calcT = sqrt(1 - pow(t - 1, 2));
-
-            float x = startPos.x * (1 - calcT) + endPos.x * calcT;
-            float y = startPos.y * (1 - calcT) + endPos.y * calcT;
-
-            __super::boss->SetPos({ x, y });
-
-            attackElapsedTime += fDT;
-        }
-        else if (attackElapsedTime > attackTime && isAttack) {
-            attackElapsedTime = 0;
-
-            isAttack = false;
-            isWait = true;
-            isRefresh = true;
-        }
     }
 
 void BishopState::EndRoutine()
 {
+    static float elapsedTime = 0;
+    float targetTime = 1.f;
+
+    if (elapsedTime < targetTime) {
+        float t = elapsedTime / targetTime;
+
+        elapsedTime += fDT;
+    }
+    else {
+        elapsedTime = 0;
+        stateMachine->ChangeState(BOSS_STATE::PAWN);
+    }
 }

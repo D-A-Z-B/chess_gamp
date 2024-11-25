@@ -93,60 +93,66 @@ void RookState::AttackRoutine()
     static Vec2 attackStartPos;
     static Vec2 attackEndPos;
 
-    if (FollowElapsedTime < targetTime && isFollow) {
-        float t = FollowElapsedTime / targetTime;
+    if (isFollow) {
+        if (FollowElapsedTime < targetTime) {
+            float t = FollowElapsedTime / targetTime;
 
-        float calcT = sqrt(1 - pow(t - 1, 2));
+            float calcT = sqrt(1 - pow(t - 1, 2));
 
-        Vec2 startPos = __super::boss->GetPos();
-        Vec2 endPos = {startPos.x, player->GetPos().y};
+            Vec2 startPos = __super::boss->GetPos();
+            Vec2 endPos = { startPos.x, player->GetPos().y };
 
-        float x = startPos.x * (1 - calcT * fDT * followSpeed) + endPos.x * calcT * fDT * followSpeed;
-        float y = startPos.y * (1 - calcT * fDT * followSpeed) + endPos.y * calcT    * fDT * followSpeed;
+            float x = startPos.x * (1 - calcT * fDT * followSpeed) + endPos.x * calcT * fDT * followSpeed;
+            float y = startPos.y * (1 - calcT * fDT * followSpeed) + endPos.y * calcT * fDT * followSpeed;
 
-        __super::boss->SetPos({ x, y });
+            __super::boss->SetPos({ x, y });
 
-        FollowElapsedTime += fDT;
-    }
-    else if (FollowElapsedTime > targetTime && isFollow) {
-        FollowElapsedTime = 0;
+            FollowElapsedTime += fDT;
+        }
+        else {
+            FollowElapsedTime = 0;
 
-        isFollow = false;
-        isWait = true;
+            isFollow = false;
+            isWait = true;
 
-        attackStartPos = __super::boss->GetPos();
-        attackEndPos = { -100.f, __super::boss->GetPos().y };
-    }
-
-    if (waitElapsedTime < waitTime && isWait) {
-
-        waitElapsedTime += fDT;
-        return;
-    }
-    else if (waitElapsedTime > waitTime && isWait) {
-        isWait = false;
-        waitElapsedTime = 0;
+            attackStartPos = __super::boss->GetPos();
+            attackEndPos = { -100.f, __super::boss->GetPos().y };
+        }
     }
 
-    if (attackElapsedTime < attackTime && isFollow == false) {
-        float t = attackElapsedTime / attackTime;
+    if (isWait) {
+        if (waitElapsedTime < waitTime) {
 
-        float calcT = sqrt(1 - pow(t - 1, 2));
-
-        float x = attackStartPos.x * (1 - calcT) + attackEndPos.x * calcT;
-        float y = attackStartPos.y * (1 - calcT) + attackEndPos.y * calcT;
-
-        __super::boss->SetPos({ x, y });
-
-        attackElapsedTime += fDT;
+            waitElapsedTime += fDT;
+            return;
+        }
+        else {
+            isWait = false;
+            waitElapsedTime = 0;
+        }
     }
-    else if (attackElapsedTime > attackTime && isFollow == false) {
-        attackElapsedTime = 0;
 
-        isFollow = true;
+    if (isFollow == false) {
+        if (attackElapsedTime < attackTime) {
+            float t = attackElapsedTime / attackTime;
 
-        isAttack = false;
-        isEnd = true;
+            float calcT = sqrt(1 - pow(t - 1, 2));
+
+            float x = attackStartPos.x * (1 - calcT) + attackEndPos.x * calcT;
+            float y = attackStartPos.y * (1 - calcT) + attackEndPos.y * calcT;
+
+            __super::boss->SetPos({ x, y });
+
+            attackElapsedTime += fDT;
+        }
+        else {
+            attackElapsedTime = 0;
+
+            isFollow = true;
+
+            isAttack = false;
+            isEnd = true;
+        }
     }
 }
 

@@ -30,6 +30,10 @@ public:
 		assert(!(0.f == _vOther.x || 0.f == _vOther.y));
 		return Vec2(x / _vOther.x, y / _vOther.y);
 	}
+	Vec2 operator / (float _val)
+	{
+		return Vec2(x / _val, y / _val);
+	}
 	void operator+=(const Vec2& _other)
 	{
 		x += _other.x;

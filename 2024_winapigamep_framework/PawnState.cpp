@@ -75,7 +75,6 @@ void PawnState::StartRoutine() {
         elapsedTime += fDT;
     }
     else {
-        // 종료 시 위치를 명확히 설정
         __super::boss->SetPos(endPos);
 
         elapsedTime = 0;
@@ -94,7 +93,7 @@ void PawnState::EndRoutine() {
 
     if (isEndRoutineStart == false) {
         startPos = __super::boss->GetPos();
-        endPos = { float(SCREEN_WIDTH) + 100, 150.f };
+        endPos = { float(SCREEN_WIDTH) + 150, 150.f };
         isEndRoutineStart = true;
     }
 
@@ -118,7 +117,7 @@ void PawnState::EndRoutine() {
 }
 
 void PawnState::Floating() {
-    static int amplitude = 60;
+    static int amplitude = 30;
     static double speed = 1.5f;
 
     Vec2 vPos = __super::boss->GetPos();
@@ -144,7 +143,7 @@ void PawnState::NextPattern() {
 
 
     endRoutineElapsedTime = 0;
-    stateMachine->ChangeState(BOSS_STATE::BISHOP);
+    stateMachine->ChangeState(BOSS_STATE::KNIGHT);
     //stateMachine->ChangeState(static_cast<BOSS_STATE>(randNum));
 }
 

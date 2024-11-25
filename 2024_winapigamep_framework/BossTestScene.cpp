@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "CollisionManager.h"
 
+#include "Background.h"
+
 void BossTestScene::Init()
 {
 	Boss* pBoss = new Boss();
@@ -18,4 +20,9 @@ void BossTestScene::Init()
 	pPlayer->SetSize({ 100.f,100.f });
 	AddObject(pPlayer, LAYER::PLAYER);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
+
+	Background* pBackground = new Background();
+	pBackground->SetPos({ 500, 0 });
+	pBackground->SetSize({1920, 1920});
+	AddObject(pBackground, LAYER::BACKGROUND);
 }
