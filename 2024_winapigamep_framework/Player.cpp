@@ -21,27 +21,31 @@
 Player::Player()
 	: m_pTex(nullptr)
 {
+	//texure
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
+
+	//component
+	AddComponent<Animator>();
+	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f), Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
+	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
+
+	AddComponent<Collider>();
+	GetComponent<Collider>()->SetOwner(this);
+	GetComponent<Collider>()->SetSize({ 40.f, 40.f });
+	
+	//aim
 	Object* pAim = new Aim;
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pAim, LAYER::AIM);
 
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
-
-	AddComponent<Animator>();
-	GetComponent<Animator>()
-		->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f), Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
-	GetComponent<Animator>()
-		->PlayAnimation(L"JiwooFront", true);
-
-	AddComponent<Collider>();
-	GetComponent<Collider>()
-		->SetSize({ 40.f, 40.f });
-
+	//set
 	GET_SINGLE(PlayerManager)->SetPlayer(this);
-
+	SetName(L"Player");
 }
+
 Player::~Player()
 {
 }
+
 void Player::Update()
 {
 	Vec2 vPos = GetPos();
@@ -61,7 +65,7 @@ void Player::Update()
 		m_jumpSpeed = -m_jumpPower;
 		m_jumpCnt++;
 	}
-	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > 0.5f)
+	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > m_dashCooldown)
 	{
 		m_isDash = true;
 		m_dashSpeed = m_dashPower * m_ispacing;
@@ -78,7 +82,7 @@ void Player::Update()
 	if (m_isDash)
 	{
 		m_dashTimer += fDT;
-		if (m_dashTimer > 0.03f)
+		if (m_dashTimer > 0.05f)
 		{
 			m_dashTimer = 0;
 			m_isDash = false;

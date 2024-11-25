@@ -12,6 +12,7 @@
 #include "Collider.h"
 
 #include "InputManager.h"
+#include "SceneManager.h";
 
 Boss::Boss() : m_hp(100), m_pTex(nullptr)
 {
@@ -71,6 +72,11 @@ void Boss::Render(HDC _hdc)
 
 void Boss::EnterCollision(Collider* _other)
 {
+	Object* pOtherObj = _other->GetOwner();
+	if (pOtherObj->GetName() == L"Player")
+	{
+		GET_SINGLE(SceneManager)->LoadScene(L"EndScene");
+	}
 }
 
 void Boss::StayCollision(Collider* _other)

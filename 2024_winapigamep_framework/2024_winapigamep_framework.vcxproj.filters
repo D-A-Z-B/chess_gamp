@@ -166,7 +166,6 @@
     <ClInclude Include="Utils.h">
       <Filter>Engine\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="BossTestScene.h" />
     <ClInclude Include="PlayerManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
@@ -175,6 +174,12 @@
     </ClInclude>
     <ClInclude Include="Aim.h">
       <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BossTestScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="EndScene.h">
+      <Filter>Engine\04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Engine\03. Object</Filter>
@@ -296,12 +301,17 @@
     <ClCompile Include="KingState.cpp">
       <Filter>Engine\03. Object\Boss\States</Filter>
     </ClCompile>
-    <ClCompile Include="BossTestScene.cpp" />
     <ClCompile Include="PlayerManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
     <ClCompile Include="Aim.cpp">
       <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="BossTestScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Engine\03. Object</Filter>
