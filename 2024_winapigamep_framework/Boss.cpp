@@ -19,7 +19,7 @@
 
 Boss::Boss() : m_hp(100), m_pTex(nullptr)
 {
-	stateMachine = new StateMachine<BOSS_STATE>();
+
 }
 
 Boss::~Boss()
