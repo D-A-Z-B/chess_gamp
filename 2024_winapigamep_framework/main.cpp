@@ -12,7 +12,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //_CrtSetBreakAlloc(306);
     //_CRTDBG_ALLOC_MEM_DF; // 할당
     _CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
-    //_CrtSetBreakAlloc(371);
+    //_CrtSetBreakAlloc(468);
     game.Run(hInstance, lpCmdLine, nCmdShow);
     //Scene* pScene = new TitleScene;
     //delete pScene;

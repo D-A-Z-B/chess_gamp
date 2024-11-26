@@ -1,11 +1,7 @@
 #include "pch.h"
-#include "BossState.h"
 #include "Boss.h"
+#include "BossState.h"
 
-BossState::BossState(Boss* boss, BossStateMachine* stateMachine, wstring texture) 
-	: boss(boss), stateMachine(stateMachine), texture(texture)
-{
-}
 
 BossState::~BossState()
 {
@@ -13,11 +9,11 @@ BossState::~BossState()
 
 void BossState::Enter()
 {
-	boss->SetBossTexture(texture);
 }
 
 void BossState::UpdateState()
 {
+	boss->SetBossTexture(texture);
 }
 
 void BossState::Exit()

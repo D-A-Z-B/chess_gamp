@@ -4,7 +4,7 @@ class KnightState :
     public BossState
 {
 public:
-    KnightState(Boss* boss, BossStateMachine* stateMachine, wstring texture)
+    KnightState(Boss* boss, StateMachine<BOSS_STATE>* stateMachine, wstring texture)
         : BossState(boss, stateMachine, texture) {}
     ~KnightState() {}
 public:
