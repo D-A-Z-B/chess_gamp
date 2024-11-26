@@ -44,6 +44,9 @@
     <Filter Include="Engine\Utils">
       <UniqueIdentifier>{08c19a94-02b5-469a-aeeb-7dc34fa554d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Player">
+      <UniqueIdentifier>{c08ac0fc-3dd4-4e51-97ad-1bc0c2f361b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -169,20 +172,20 @@
     <ClInclude Include="PlayerManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="Aim.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="BossTestScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="EndScene.h">
+    <ClInclude Include="EndingScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Engine\03. Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +231,6 @@
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Engine\03. Object</Filter>
@@ -307,7 +307,7 @@
     <ClCompile Include="Aim.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="EndScene.cpp">
+    <ClCompile Include="EndingScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="BossTestScene.cpp">
@@ -315,6 +315,9 @@
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
