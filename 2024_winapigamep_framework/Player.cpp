@@ -60,10 +60,9 @@ void Player::Update()
 		vPos.x += 200.f * fDT;
 		m_ispacing = 1;
 	}
-	if (GET_KEYDOWN(KEY_TYPE::SPACE) && (ISGROUND || m_jumpCnt <= 1))
+	if (GET_KEYDOWN(KEY_TYPE::SPACE) && (ISGROUND))
 	{
 		m_jumpSpeed = -m_jumpPower;
-		m_jumpCnt++;
 	}
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > m_dashCooldown)
 	{
@@ -76,8 +75,8 @@ void Player::Update()
 		CreateProjectile();
 
 	if (!ISGROUND && !m_isDash)
-		m_jumpSpeed += m_gravity * fDT;
-
+		m_jumpSpeed += m_gravity * 200.f * fDT;
+		// v = 
 	m_dashCoolTimer += fDT;
 	if (m_isDash)
 	{
@@ -91,15 +90,14 @@ void Player::Update()
 	}
 
 	if (m_isDash)
-		vPos.x += m_dashSpeed;
+		vPos.x += m_dashSpeed * fDT; // s = v*t // s = vo + at * t
 	else
-		vPos.y += m_jumpSpeed;
+		vPos.y += m_jumpSpeed * fDT;
 	
 	if (ISGROUND)
 	{
 		vPos.y = 550;
 		m_jumpSpeed = 0;
-		m_jumpCnt = 0;
 	}
 	SetPos(vPos);
 }
