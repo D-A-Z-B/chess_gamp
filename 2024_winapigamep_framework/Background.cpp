@@ -20,16 +20,22 @@ void Background::Update()
 
 void Background::Render(HDC _hdc)
 {
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = m_pTex->GetWidth();
-	int height = m_pTex->GetHeight();
+    Vec2 vPos = GetPos();
+    Vec2 vSize = GetSize();
+    int width = m_pTex->GetWidth();
+    int height = m_pTex->GetHeight();
 
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - vSize.x / 2)
-		, (int)(vPos.y - vSize.y / 2)
-		, vSize.x, vSize.y,
-		m_pTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+    HDC hTexDC = m_pTex->GetTexDC();
 
+    StretchBlt(
+        _hdc,
+        (int)(vPos.x - vSize.x / 2),
+        (int)(vPos.y - vSize.y / 2),
+        (int)vSize.x, (int)vSize.y,
+        hTexDC,
+        0, 0,
+        width, height,
+        SRCCOPY
+    );
 }
+

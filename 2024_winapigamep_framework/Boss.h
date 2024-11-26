@@ -33,6 +33,11 @@ public:
 	float GetPatternDelayTime() {
 		return patternDelayTime;
 	}
+public:
+	BOSS_STATE currentStateEnum;
+	void SetCurrentStateEnum(BOSS_STATE newStateEnum) {
+		currentStateEnum = newStateEnum;
+	}
 private:
 	int m_hp;
 	float patternDelayTime = 0;

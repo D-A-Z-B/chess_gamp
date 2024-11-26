@@ -10,6 +10,8 @@ void PawnState::Enter()
 {
 	__super::Enter();
 
+    __super::boss->SetCurrentStateEnum(BOSS_STATE::PAWN);
+
 	Vec2 vSize = __super::boss->GetSize();
 	__super::boss->GetComponent<Collider>()->SetOffSetPos({ 0.f, vSize.y / 4 });
 	__super::boss->GetComponent<Collider>()->SetSize({ vSize.x, vSize.y / 2});
@@ -143,7 +145,8 @@ void PawnState::NextPattern() {
 
 
     endRoutineElapsedTime = 0;
-    stateMachine->ChangeState(BOSS_STATE::KNIGHT);
+    stateMachine->ChangeState(BOSS_STATE::BISHOP);
+    __super::boss->SetCurrentStateEnum(static_cast<BOSS_STATE>(randNum));
     //stateMachine->ChangeState(static_cast<BOSS_STATE>(randNum));
 }
 

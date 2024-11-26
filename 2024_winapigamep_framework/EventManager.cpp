@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "EventManager.h"
 #include "Object.h"
+
+#include "SceneManager.h"
+
 void EventManager::Update()
 {
 	// 이전 프레임에서 등록해둔 
@@ -28,6 +31,14 @@ void EventManager::DeleteObject(Object* _pObj)
 	}
 }
 
+void EventManager::ChangeScene(std::wstring nextSceneName)
+{
+	changeSceneName = nextSceneName;
+	tEvent eve = {};
+	eve.eveType = EVENT_TYPE::SCENE_CHANGE;
+	m_vecEvent.push_back(eve);
+}
+
 void EventManager::Excute(const tEvent& _eve)
 {
 	switch (_eve.eveType)
@@ -42,6 +53,8 @@ void EventManager::Excute(const tEvent& _eve)
 	case EVENT_TYPE::CREATE_OBJECT:
 		break;
 	case EVENT_TYPE::SCENE_CHANGE:
+		GET_SINGLE(SceneManager)->LoadScene(changeSceneName);
+		changeSceneName = L"";
 		break;
 	}
 }

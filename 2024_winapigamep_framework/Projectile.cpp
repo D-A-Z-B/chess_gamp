@@ -61,7 +61,7 @@ void Projectile::Render(HDC _hdc)
 void Projectile::EnterCollision(Collider* _other)
 {
 	Object* pOtherObj = _other->GetOwner();
-	if (pOtherObj->GetName() == L"Enemy")
+	if (pOtherObj->GetName() == L"Boss")
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}

@@ -18,9 +18,11 @@ public:
 	void Update();
 	void DeleteObject(Object* _pObj);
 	// todo..
+	void ChangeScene(std::wstring nextSceneName);
 private:
 	void Excute(const tEvent& _eve);
 private:
 	vector<tEvent> m_vecEvent;
 	vector<Object*> m_vecDead;
+	std::wstring changeSceneName;
 };

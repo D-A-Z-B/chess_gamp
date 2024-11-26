@@ -5,6 +5,7 @@
 #include "CollisionManager.h"
 
 #include "Background.h"
+#include "Ground.h"
 
 void BossTestScene::Init()
 {
@@ -20,11 +21,18 @@ void BossTestScene::Init()
 	pPlayer->SetSize({ 100.f,100.f });
 	AddObject(pPlayer, LAYER::PLAYER);
 
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::BOSS, LAYER::PLAYER);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
-
 	Background* pBackground = new Background();
 	pBackground->SetPos({ 500, 0 });
 	pBackground->SetSize({1920, 1920});
 	AddObject(pBackground, LAYER::BACKGROUND);
+
+	Object* pGround = new Ground;
+	pGround->SetPos({ SCREEN_WIDTH / 2.f,650.f });
+	pGround->SetSize({ (float)SCREEN_WIDTH, 150.f });
+	AddObject(pGround, LAYER::Ground);
+
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::BOSS, LAYER::PLAYER);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::BOSS);
+
 }

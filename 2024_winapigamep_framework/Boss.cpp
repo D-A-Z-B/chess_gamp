@@ -13,6 +13,7 @@
 
 #include "InputManager.h"
 #include "SceneManager.h";
+#include "EventManager.h";
 
 Boss::Boss() : m_hp(100), m_pTex(nullptr)
 {
@@ -75,7 +76,8 @@ void Boss::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")
 	{
-		GET_SINGLE(SceneManager)->LoadScene(L"EndScene");
+		pOtherObj->SetDead();
+		GET_SINGLE(EventManager)->ChangeScene(L"EndScene");
 	}
 }
 

@@ -39,7 +39,7 @@ void BishopState::Exit()
         int attackRepeatCount = 4;
 
         static float attackElapsedTime = 0;
-        float attackTime = 0.9f;
+        float attackTime = 1.f;
 
         static float waitElapsedTime = 0;
         float waitTime = 0.2f;
