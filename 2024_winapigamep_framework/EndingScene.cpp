@@ -6,6 +6,6 @@ void EndingScene::Init()
 }
 
 void EndingScene::Render(HDC _hdc)
-{
+{	
 	
 }
