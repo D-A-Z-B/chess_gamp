@@ -4,7 +4,7 @@
 class PawnState : public BossState
 {
 public:
-    PawnState(Boss* boss, BossStateMachine* stateMachine, wstring texture)
+    PawnState(Boss* boss, StateMachine<BOSS_STATE>* stateMachine, wstring texture)
         : BossState(boss, stateMachine, texture) {}
     ~PawnState() {}
 public:

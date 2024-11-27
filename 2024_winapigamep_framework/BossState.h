@@ -1,20 +1,22 @@
 #pragma once
 
-class BossStateMachine;
+#include "StateMachine.h"
+#include "State.h"
 class Boss;
 
-class BossState
+class BossState : public State<BOSS_STATE>
 {
 protected:
-	BossStateMachine* stateMachine;
+	StateMachine<BOSS_STATE>* stateMachine;
 	Boss* boss;
 	wstring texture;
 public:
-	BossState(Boss* boss, BossStateMachine* stateMachine, wstring texture);
+	BossState(Boss* boss, StateMachine<BOSS_STATE>* stateMachine, std::wstring texture)
+		: boss(boss), stateMachine(stateMachine), texture(texture) {};
 	virtual ~BossState();
 public:
-	virtual void Enter();
-	virtual void UpdateState();
-	virtual void Exit();
+	void Enter() override;
+	void UpdateState() override;
+	void Exit() override;
 };
 

@@ -15,29 +15,32 @@
 #include "SceneManager.h";
 #include "EventManager.h";
 
+#include "StateMachine.h"
+
 Boss::Boss() : m_hp(100), m_pTex(nullptr)
 {
+
 }
 
 Boss::~Boss()
 {
-	delete StateMachine;
+	delete stateMachine;
 }
 
 void Boss::Initialize()
 {
 	ComponentInitialize();
 
-	StateMachine = new BossStateMachine();
+	stateMachine = new StateMachine<BOSS_STATE>();
 
-	StateMachine->AddState(BOSS_STATE::PAWN, new PawnState(this, StateMachine, L"B_Pawn"));
-	StateMachine->AddState(BOSS_STATE::BISHOP, new BishopState(this, StateMachine, L"B_Bishop"));
-	StateMachine->AddState(BOSS_STATE::ROOK, new RookState(this, StateMachine, L"B_Rook"));
-	StateMachine->AddState(BOSS_STATE::KNIGHT, new KnightState(this, StateMachine, L"B_Knight"));
-	StateMachine->AddState(BOSS_STATE::QUEEN, new QueenState(this, StateMachine, L"B_Queen"));
-	StateMachine->AddState(BOSS_STATE::KING, new KingState(this, StateMachine, L"B_King"));
+	stateMachine->AddState(BOSS_STATE::PAWN, new PawnState(this, stateMachine, L"B_Pawn"));
+	stateMachine->AddState(BOSS_STATE::BISHOP, new BishopState(this, stateMachine, L"B_Bishop"));
+	stateMachine->AddState(BOSS_STATE::ROOK, new RookState(this, stateMachine, L"B_Rook"));
+	stateMachine->AddState(BOSS_STATE::KNIGHT, new KnightState(this, stateMachine, L"B_Knight"));
+	stateMachine->AddState(BOSS_STATE::QUEEN, new QueenState(this, stateMachine, L"B_Queen"));
+	stateMachine->AddState(BOSS_STATE::KING, new KingState(this, stateMachine, L"B_King"));
 
-	StateMachine->Initialize(BOSS_STATE::PAWN, this);
+	stateMachine->Initialize(BOSS_STATE::PAWN, this);
 }
 
 
@@ -51,7 +54,7 @@ void Boss::ComponentInitialize()
 
 void Boss::Update()
 {
-	StateMachine->CurrentState->UpdateState();
+	stateMachine->CurrentState->UpdateState();
 }
 
 void Boss::Render(HDC _hdc)
@@ -73,6 +76,7 @@ void Boss::Render(HDC _hdc)
 
 void Boss::EnterCollision(Collider* _other)
 {
+	if (GetCurrentStateEnum() == BOSS_STATE::PAWN) return;
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")
 	{

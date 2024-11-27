@@ -47,6 +47,9 @@
     <Filter Include="Engine\03. Object\Player">
       <UniqueIdentifier>{c08ac0fc-3dd4-4e51-97ad-1bc0c2f361b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\FSM">
+      <UniqueIdentifier>{bf57edcb-cb2d-4430-868d-27f19656d425}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -139,9 +142,6 @@
     <ClInclude Include="Boss.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="BossStateMachine.h">
-      <Filter>Engine\03. Object\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="BossState.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
@@ -186,6 +186,15 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Engine\03. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="KingAttackObject.h">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Engine\03. Object\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Engine\03. Object\FSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -271,9 +280,6 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="BossStateMachine.cpp">
-      <Filter>Engine\03. Object\Boss</Filter>
-    </ClCompile>
     <ClCompile Include="BossState.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClCompile>
@@ -318,6 +324,15 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="KingAttackObject.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Engine\03. Object\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Engine\03. Object\FSM</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

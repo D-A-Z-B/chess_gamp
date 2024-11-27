@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.h"
-#include "BossStateMachine.h"
+#include "StateMachine.h"
 #include "ResourceManager.h"
 
 class Texture;
@@ -23,7 +23,7 @@ public:
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 public:
-	BossStateMachine* StateMachine;
+	StateMachine<BOSS_STATE>* stateMachine;
 public:
 	void SetBossTexture(wstring texture) { m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(texture, L"Texture\\Boss\\" + texture + L".bmp"); }
 public:
@@ -33,8 +33,13 @@ public:
 	float GetPatternDelayTime() {
 		return patternDelayTime;
 	}
-public:
+
+private:
 	BOSS_STATE currentStateEnum;
+public:
+	BOSS_STATE GetCurrentStateEnum() {
+		return currentStateEnum;
+	}
 	void SetCurrentStateEnum(BOSS_STATE newStateEnum) {
 		currentStateEnum = newStateEnum;
 	}
