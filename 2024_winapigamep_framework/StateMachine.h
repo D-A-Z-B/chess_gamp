@@ -15,8 +15,9 @@ public:
 
     void Initialize(T startState, void* ownerObject) {
         owner = ownerObject;
-        ChangeState(startState);
-    }
+        CurrentState = stateMap[startState];
+        CurrentState->Enter();
+    }  
 
     void ChangeState(T newState) {
         if (CurrentState) {
