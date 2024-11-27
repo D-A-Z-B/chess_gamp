@@ -13,7 +13,13 @@ public:
     virtual void EnterCollision(Collider* _other);
     virtual void StayCollision(Collider* _other);
     virtual void ExitCollision(Collider* _other);
+public:
+    void StartAttackRoutine(Vec2 size, float duration);
 private:
-    bool canAttack = false;
+    void AttackRoutine();
+private:
+    bool isAttack = false;
+    Vec2 targetSize;
+    float targerDuration;
 };
 

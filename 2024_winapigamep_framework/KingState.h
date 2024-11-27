@@ -12,12 +12,10 @@ public:
     void UpdateState() override;
     void Exit() override;
 private:
-    void StartRoutine();
     void AttackRoutine();
     void EndRoutine();
-    void CreateAttackObject();
+    void CreateAttackObject(Vec2 size, float duration);
 private:
-    bool isStart;
     bool isAttack;
     bool isEnd;
 };
