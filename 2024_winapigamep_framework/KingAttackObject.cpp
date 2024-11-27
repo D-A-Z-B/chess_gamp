@@ -42,5 +42,5 @@ void KingAttackObject::StartAttackRoutine(Vec2 size, float duration)
 
 void KingAttackObject::AttackRoutine()
 {
-	//
+
 }
