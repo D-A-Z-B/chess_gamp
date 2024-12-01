@@ -1,38 +1,56 @@
 #include "pch.h"
 #include "Player.h"
-#include "TimeManager.h"
-#include "InputManager.h"
+#include "Aim.h"
 #include "Projectile.h"
-#include "SceneManager.h"
-#include "Scene.h"
+
+#include "PlayerIdleState.h"
+#include "PlayerMoveState.h"
+#include "PlayerJumpState.h"
+#include "PlayerDashState.h"
+
 #include "Texture.h"
-#include "ResourceManager.h"
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
-#include "InputManager.h"
-#include "PlayerManager.h"
-#include "SceneManager.h"
-#include "Scene.h"
-#include "Aim.h"
 
-#define ISGROUND (vPos.y >= 550)
+#include "TimeManager.h"
+#include "InputManager.h"
+#include "SceneManager.h"
+#include "PlayerManager.h"
+#include "ResourceManager.h"
+
+#include "Scene.h"
+#include "StateMachine.h"
 
 Player::Player()
 	: m_pTex(nullptr)
 {
 	//texure
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player\\Player.bmp");
+
+	//state
+	stateMachine = new StateMachine<PLAYER_STATE>();
+
+	stateMachine->AddState(PLAYER_STATE::IDLE, new PlayerIdleState(this, stateMachine));
+	stateMachine->AddState(PLAYER_STATE::MOVE, new PlayerMoveState(this, stateMachine));
+	stateMachine->AddState(PLAYER_STATE::JUMP, new PlayerJumpState(this, stateMachine));
+	stateMachine->AddState(PLAYER_STATE::DASH, new PlayerDashState(this, stateMachine));
+
+	stateMachine->Initialize(PLAYER_STATE::IDLE, this);
+
 
 	//component
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f), Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
-	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
+	GetComponent<Animator>()->CreateAnimation(L"LPlayerMove", m_pTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"RPlayerMove", m_pTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"LPlayerIdle", m_pTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 1, 0.f);
+	GetComponent<Animator>()->CreateAnimation(L"RPlayerIdle", m_pTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 1, 0.f);
+	GetComponent<Animator>()->PlayAnimation(L"RPlayerIdle", true);
 
 	AddComponent<Collider>();
 	GetComponent<Collider>()->SetOwner(this);
 	GetComponent<Collider>()->SetSize({ 40.f, 40.f });
-	
+
 	//aim
 	Object* pAim = new Aim;
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pAim, LAYER::AIM);
@@ -44,62 +62,63 @@ Player::Player()
 
 Player::~Player()
 {
+	delete stateMachine;
 }
 
 void Player::Update()
 {
-	Vec2 vPos = GetPos();
+	stateMachine->CurrentState->UpdateState();
 
-	if (GET_KEY(KEY_TYPE::A))
-	{
-		vPos.x -= 200.f * fDT;
-		m_ispacing = -1;
-	}
-	if (GET_KEY(KEY_TYPE::D))
-	{
-		vPos.x += 200.f * fDT;
-		m_ispacing = 1;
-	}
-	if (GET_KEYDOWN(KEY_TYPE::SPACE) && (ISGROUND))
-	{
-		m_jumpSpeed = -m_jumpPower;
-	}
-	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && m_dashCoolTimer > m_dashCooldown)
-	{
-		m_isDash = true;
-		m_dashSpeed = m_dashPower * m_ispacing;
-
-		m_dashCoolTimer = 0;
-	}
 	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
-		CreateProjectile();
-
-	if (!ISGROUND && !m_isDash)
-		m_jumpSpeed += m_gravity * 200.f * fDT;
-		// v = 
-	m_dashCoolTimer += fDT;
-	if (m_isDash)
 	{
-		m_dashTimer += fDT;
-		if (m_dashTimer > 0.05f)
-		{
-			m_dashTimer = 0;
-			m_isDash = false;
-			m_dashSpeed = 0;
-		}
+		CreateProjectile();
 	}
 
-	if (m_isDash)
-		vPos.x += m_dashSpeed * fDT; // s = v*t // s = vo + at * t
-	else
-		vPos.y += m_jumpSpeed * fDT;
-	
-	if (ISGROUND)
+	if (GetPos().y < GROUND && !isDash)
 	{
-		vPos.y = 550;
-		m_jumpSpeed = 0;
+		yVelocity += gravity * 200.f * fDT;
+	}
+	if (!isDash)
+	{
+		dashCoolTimer += fDT;
+	}
+
+	Vec2 vPos = GetPos();
+	vPos.y += yVelocity * fDT;
+	if (vPos.y >= GROUND)
+	{
+		yVelocity = 0;
+		vPos.y = GROUND;
 	}
 	SetPos(vPos);
+
+	CheckChangeState();
+}
+
+void Player::CheckChangeState()
+{
+	if (currentStateEnum != PLAYER_STATE::DASH)
+	{
+		if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && dashCoolTimer >= dashCoolTime)
+		{
+			stateMachine->ChangeState(PLAYER_STATE::DASH);
+
+			dashCoolTimer = 0;
+			return;
+		}
+
+		if (currentStateEnum != PLAYER_STATE::JUMP && GET_KEYDOWN(KEY_TYPE::SPACE) && GetPos().y >= GROUND)
+		{
+			stateMachine->ChangeState(PLAYER_STATE::JUMP);
+			return;
+		}
+
+		if (currentStateEnum == PLAYER_STATE::IDLE && (GET_KEY(KEY_TYPE::D) || GET_KEY(KEY_TYPE::A)))
+		{
+			stateMachine->ChangeState(PLAYER_STATE::MOVE);
+			return;
+		}
+	}
 }
 
 void Player::Render(HDC _hdc)
@@ -108,7 +127,28 @@ void Player::Render(HDC _hdc)
 	Vec2 vSize = GetSize();
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
+
+
+
 	ComponentRender(_hdc);
+}
+
+void Player::ChangePacing(int pacing)
+{
+	if (pacing != isPacing)
+	{
+		isPacing = pacing;
+
+		ChangeAnimation();
+	}
+}
+
+void Player::ChangeAnimation()
+{
+	if (isMove)
+		GetComponent<Animator>()->PlayAnimation((isPacing == 1 ? L"RPlayerMove" : L"LPlayerMove"), true);
+	else
+		GetComponent<Animator>()->PlayAnimation((isPacing == 1 ? L"RPlayerIdle" : L"LPlayerIdle"), true);
 }
 
 void Player::CreateProjectile()
@@ -118,7 +158,7 @@ void Player::CreateProjectile()
 	vPos.y -= GetSize().y / 2.f;
 	pProj->SetPos(vPos);
 	pProj->SetSize({ 30.f,30.f });
-	
+
 	Vec2 dir = (Vec2)GET_MOUSEPOS - vPos;
 	dir.Normalize();
 	pProj->SetDir(dir);

@@ -39,6 +39,7 @@ using std::wstring;
 #define PI 3.14159265f
 #define SCREEN_WIDTH  1280
 #define SCREEN_HEIGHT 720
+#define GROUND 550
 
 // 디버깅용 콘솔창
 #ifdef _DEBUG

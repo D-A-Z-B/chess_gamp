@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "StateMachine.h"
 class Texture;
 class Player : public Object
 {
@@ -9,21 +10,26 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
+	void SetCurrentStateEnum(PLAYER_STATE newStateEnum) { currentStateEnum = newStateEnum; }
+	void ChangePacing(int pacing);
+	void ChangeAnimation();
 private:
-	void CreateProjectile(); 
+	void CreateProjectile();
+	void CheckChangeState();
+public:
+	StateMachine<PLAYER_STATE>* stateMachine;
+
+	float yVelocity = 0;
+	float moveSpeed = 200.f;
+	bool isDash = false;
+	bool isMove = false;
+	int isPacing = 1;
 private:
+	PLAYER_STATE currentStateEnum;
 	Texture* m_pTex;
-	int m_ispacing = 1;
 
-	float m_dashSpeed = 0;
-	float m_dashPower = 5000.f;
-	float m_dashTimer = 0;
-	float m_dashCooldown = 0.5f;
-	float m_dashCoolTimer = 0;
-	bool m_isDash = false;
-
-	float m_jumpSpeed = 0;
-	float m_jumpPower = 700.f;
-	float m_gravity = 9.8f;
+	float dashCoolTimer = 0;
+	float dashCoolTime = 0.5;
+	float gravity = 9.8f;
 };
 

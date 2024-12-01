@@ -173,6 +173,11 @@
     <ClInclude Include="BishopState.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossState.h" />
+    <ClInclude Include="PlayerDashState.h" />
+    <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerJumpState.h" />
+    <ClInclude Include="PlayerMoveState.h" />
+    <ClInclude Include="PlayerState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="BossTestScene.h" />
@@ -222,6 +227,11 @@
     <ClCompile Include="BishopState.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossState.cpp" />
+    <ClCompile Include="PlayerDashState.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerJumpState.cpp" />
+    <ClCompile Include="PlayerMoveState.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="BossTestScene.cpp" />

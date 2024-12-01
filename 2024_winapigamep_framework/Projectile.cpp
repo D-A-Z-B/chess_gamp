@@ -14,7 +14,7 @@ Projectile::Projectile()
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\Bullet.bmp";
 	//m_pTex->Load(path);
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Bullet.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Boss\\W_Pawn.bmp");
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ 20.f,20.f });
 }

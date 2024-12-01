@@ -39,3 +39,8 @@ enum class BOSS_STATE
 {
 	PAWN, BISHOP, KNIGHT, ROOK, QUEEN, KING
 };
+
+enum class PLAYER_STATE
+{
+	IDLE, MOVE, JUMP, DASH
+};
