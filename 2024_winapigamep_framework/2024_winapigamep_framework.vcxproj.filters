@@ -214,6 +214,9 @@
     <ClInclude Include="PlayerDashState.h">
       <Filter>Engine\03. Object\Player\State</Filter>
     </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework.rc">
@@ -366,6 +369,9 @@
     </ClCompile>
     <ClCompile Include="PlayerDashState.cpp">
       <Filter>Engine\03. Object\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
