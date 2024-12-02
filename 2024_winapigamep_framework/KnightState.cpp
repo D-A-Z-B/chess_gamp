@@ -2,6 +2,7 @@
 #include "KnightState.h"
 
 #include "TimeManager.h"
+#include "CameraManager.h"
 
 #include "Collider.h"
 #include "Boss.h"
@@ -142,6 +143,10 @@ void KnightState::AttackRoutine()
             dropElapsedTime += fDT;
         }
         else {
+            GET_SINGLE(CameraManager)->Shake(10, 0.1f);
+
+            GET_SINGLE(ResourceManager)->Play(L"TakeDown");
+
             isDrop = false;
             isWait = true;
             __super::boss->SetPos(dropEndPos);
