@@ -145,7 +145,7 @@ void PawnState::NextPattern() {
 
 
     endRoutineElapsedTime = 0;
-    stateMachine->ChangeState(BOSS_STATE::KING);
+    stateMachine->ChangeState(BOSS_STATE::KNIGHT);
     __super::boss->SetCurrentStateEnum(static_cast<BOSS_STATE>(randNum));
     //stateMachine->ChangeState(static_cast<BOSS_STATE>(randNum));
 }

@@ -81,7 +81,7 @@ void Boss::EnterCollision(Collider* _other)
 	if (pOtherObj->GetName() == L"Player")
 	{
 		pOtherObj->SetDead();
-		GET_SINGLE(EventManager)->ChangeScene(L"EndingScene");
+		//GET_SINGLE(EventManager)->ChangeScene(L"EndingScene");
 	}
 }
 

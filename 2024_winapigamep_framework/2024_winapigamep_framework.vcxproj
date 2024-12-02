@@ -178,6 +178,7 @@
     <ClInclude Include="PlayerJumpState.h" />
     <ClInclude Include="PlayerMoveState.h" />
     <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="BossTestScene.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="PlayerJumpState.cpp" />
     <ClCompile Include="PlayerMoveState.cpp" />
     <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="BossTestScene.cpp" />

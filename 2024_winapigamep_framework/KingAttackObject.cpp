@@ -62,8 +62,6 @@ void KingAttackObject::AttackRoutine()
 
 		SetSize({ x, y });
 
-		cout << x << endl;
-
 		elapsedTime += fDT;
 	}
 	else {
