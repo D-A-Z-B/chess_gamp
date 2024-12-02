@@ -69,11 +69,6 @@ void Player::Update()
 {
 	stateMachine->CurrentState->UpdateState();
 
-	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
-	{
-		CreateProjectile();
-	}
-
 	if (GetPos().y < GROUND && !isDash)
 	{
 		yVelocity += gravity * 200.f * fDT;
@@ -81,6 +76,13 @@ void Player::Update()
 	if (!isDash)
 	{
 		dashCoolTimer += fDT;
+	}
+	attackCoolTimer += fDT;
+
+	if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && attackCoolTimer >= attackCoolTime)
+	{
+		attackCoolTimer = 0;
+		CreateProjectile();
 	}
 
 	Vec2 vPos = GetPos();
