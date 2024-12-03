@@ -9,10 +9,7 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 public:
-	void SetAngle(float _f)
-	{
-		m_angle = _f;
-	}
+	void SetAngle(float _f);
 	void SetDir(Vec2 _dir)
 	{
 		m_vDir = _dir;
