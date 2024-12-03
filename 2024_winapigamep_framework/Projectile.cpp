@@ -10,7 +10,6 @@ Projectile::Projectile()
 	, m_vDir(1.f, 1.f)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Boss\\W_Pawn.bmp");
-	//m_pTex->RotateBMP()
 
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ 20.f,20.f });
@@ -41,20 +40,23 @@ void Projectile::Update()
 void Projectile::Render(HDC _hdc)
 {
 	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	//ELLIPSE_RENDER(_hdc, vPos.x, vPos.y
-	//	, vSize.x, vSize.y);
+	m_pTex->Render(_hdc, vPos);
 
-	int width = m_pTex->GetWidth();
-	int height = m_pTex->GetHeight();
-
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		m_pTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+	//int width = m_pTex->GetWidth();
+	//int height = m_pTex->GetHeight();
+	//::TransparentBlt(_hdc
+	//	, (int)(vPos.x - width / 2)
+	//	, (int)(vPos.y - height / 2)
+	//	, width, height,
+	//	m_pTex->GetTexDC()
+	//	, 0, 0, width, height, RGB(255, 0, 255));
 	ComponentRender(_hdc);
+}
+
+void Projectile::SetAngle(float _f)
+{
+	m_angle = _f;
+	m_pTex->Rotate(m_angle);
 }
 
 void Projectile::EnterCollision(Collider* _other)
