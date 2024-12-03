@@ -42,5 +42,5 @@ enum class BOSS_STATE
 
 enum class PLAYER_STATE
 {
-	IDLE, MOVE, JUMP, DASH
+	IDLE, MOVE, JUMP, DASH, DEAD
 };

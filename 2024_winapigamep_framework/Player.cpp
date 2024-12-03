@@ -7,6 +7,7 @@
 #include "PlayerMoveState.h"
 #include "PlayerJumpState.h"
 #include "PlayerDashState.h"
+#include "PlayerDeadState.h"
 
 #include "Texture.h"
 #include "Collider.h"
@@ -35,6 +36,7 @@ Player::Player()
 	stateMachine->AddState(PLAYER_STATE::MOVE, new PlayerMoveState(this, stateMachine));
 	stateMachine->AddState(PLAYER_STATE::JUMP, new PlayerJumpState(this, stateMachine));
 	stateMachine->AddState(PLAYER_STATE::DASH, new PlayerDashState(this, stateMachine));
+	stateMachine->AddState(PLAYER_STATE::DEAD, new PlayerDeadState(this, stateMachine));
 
 	stateMachine->Initialize(PLAYER_STATE::IDLE, this);
 
@@ -163,6 +165,12 @@ void Player::CreateProjectile()
 	dir.Normalize();
 	pProj->SetDir(dir);
 	pProj->SetName(L"PlayerBullet");
+
+	Vec2 v = { 0, -1 };
+	float radian = acos(v.Dot(dir));
+	float r = asin(v.Cross(dir));
+	radian *= (r > 0 ? 1 : -1);
+	pProj->SetAngle(radian);
 
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
 }
