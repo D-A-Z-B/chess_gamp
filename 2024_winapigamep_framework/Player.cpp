@@ -28,18 +28,7 @@ Player::Player()
 {
 	//texure
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player\\Player.bmp");
-
-	//state
-	stateMachine = new StateMachine<PLAYER_STATE>();
-
-	stateMachine->AddState(PLAYER_STATE::IDLE, new PlayerIdleState(this, stateMachine));
-	stateMachine->AddState(PLAYER_STATE::MOVE, new PlayerMoveState(this, stateMachine));
-	stateMachine->AddState(PLAYER_STATE::JUMP, new PlayerJumpState(this, stateMachine));
-	stateMachine->AddState(PLAYER_STATE::DASH, new PlayerDashState(this, stateMachine));
-	stateMachine->AddState(PLAYER_STATE::DEAD, new PlayerDeadState(this, stateMachine));
-
-	stateMachine->Initialize(PLAYER_STATE::IDLE, this);
-
+	m_pDeadTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerDead", L"Texture\\Player\\Player_Die.bmp");
 
 	//component
 	AddComponent<Animator>();
@@ -47,11 +36,23 @@ Player::Player()
 	GetComponent<Animator>()->CreateAnimation(L"RPlayerMove", m_pTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.1f);
 	GetComponent<Animator>()->CreateAnimation(L"LPlayerIdle", m_pTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 1, 0.f);
 	GetComponent<Animator>()->CreateAnimation(L"RPlayerIdle", m_pTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 1, 0.f);
-	GetComponent<Animator>()->PlayAnimation(L"RPlayerIdle", true);
+	GetComponent<Animator>()->CreateAnimation(L"LPlayerDead", m_pDeadTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 8, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"RPlayerDead", m_pDeadTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 8, 0.1f);
 
 	AddComponent<Collider>();
 	GetComponent<Collider>()->SetOwner(this);
 	GetComponent<Collider>()->SetSize({ 40.f, 40.f });
+
+	//state
+	stateMachine = new StateMachine<PLAYER_STATE>();
+
+	stateMachine->AddState(PLAYER_STATE::IDLE, new PlayerIdleState(this, stateMachine, L"PlayerIdle"));
+	stateMachine->AddState(PLAYER_STATE::MOVE, new PlayerMoveState(this, stateMachine, L"PlayerMove"));
+	stateMachine->AddState(PLAYER_STATE::JUMP, new PlayerJumpState(this, stateMachine, L"PlayerMove"));
+	stateMachine->AddState(PLAYER_STATE::DASH, new PlayerDashState(this, stateMachine, L"PlayerIdle"));
+	stateMachine->AddState(PLAYER_STATE::DEAD, new PlayerDeadState(this, stateMachine, L"PlayerDead"));
+
+	stateMachine->Initialize(PLAYER_STATE::IDLE, this);
 
 	//aim
 	Object* pAim = new Aim;
@@ -132,8 +133,6 @@ void Player::Render(HDC _hdc)
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 
-
-
 	ComponentRender(_hdc);
 }
 
@@ -143,16 +142,15 @@ void Player::ChangePacing(int pacing)
 	{
 		isPacing = pacing;
 
-		ChangeAnimation();
+		ChangeAnimation(curAnimaton, true);
 	}
 }
 
-void Player::ChangeAnimation()
+void Player::ChangeAnimation(wstring changeAnimation, bool isRepeat)
 {
-	if (isMove)
-		GetComponent<Animator>()->PlayAnimation((isPacing == 1 ? L"RPlayerMove" : L"LPlayerMove"), true);
-	else
-		GetComponent<Animator>()->PlayAnimation((isPacing == 1 ? L"RPlayerIdle" : L"LPlayerIdle"), true);
+	curAnimaton = changeAnimation;
+	GetComponent<Animator>()->StopAnimation();
+	GetComponent<Animator>()->PlayAnimation((isPacing == 1 ? L"R" : L"L") + changeAnimation, isRepeat);
 }
 
 void Player::CreateProjectile()

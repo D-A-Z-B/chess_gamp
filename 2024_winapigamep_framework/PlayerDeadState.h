@@ -7,8 +7,8 @@ class PlayerDeadState
 	: public PlayerState
 {
 public:
-    PlayerDeadState(Player* player, StateMachine<PLAYER_STATE>* stateMachine)
-        : PlayerState(player, stateMachine) {
+    PlayerDeadState(Player* player, StateMachine<PLAYER_STATE>* stateMachine, wstring animation)
+        : PlayerState(player, stateMachine, animation) {
     }
     ~PlayerDeadState() {}
 public:
@@ -16,4 +16,3 @@ public:
     void UpdateState() override;
     void Exit() override;
 };
-

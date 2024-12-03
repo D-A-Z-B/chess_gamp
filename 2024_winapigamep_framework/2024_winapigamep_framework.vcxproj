@@ -174,6 +174,7 @@
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossState.h" />
     <ClInclude Include="PlayerDashState.h" />
+    <ClInclude Include="PlayerDeadState.h" />
     <ClInclude Include="PlayerIdleState.h" />
     <ClInclude Include="PlayerJumpState.h" />
     <ClInclude Include="PlayerMoveState.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossState.cpp" />
     <ClCompile Include="PlayerDashState.cpp" />
+    <ClCompile Include="PlayerDeadState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
     <ClCompile Include="PlayerJumpState.cpp" />
     <ClCompile Include="PlayerMoveState.cpp" />

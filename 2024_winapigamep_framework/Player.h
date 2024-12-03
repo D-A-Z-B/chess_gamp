@@ -12,12 +12,13 @@ public:
 	void Render(HDC _hdc) override;
 	void SetCurrentStateEnum(PLAYER_STATE newStateEnum) { currentStateEnum = newStateEnum; }
 	void ChangePacing(int pacing);
-	void ChangeAnimation();
+	void ChangeAnimation(wstring changeAnimation, bool isRepeat);
 private:
 	void CreateProjectile();
 	void CheckChangeState();
 public:
 	StateMachine<PLAYER_STATE>* stateMachine;
+	PLAYER_STATE currentStateEnum;
 
 	float yVelocity = 0;
 
@@ -28,8 +29,10 @@ public:
 
 	int isPacing = 1;
 private:
-	PLAYER_STATE currentStateEnum;
 	Texture* m_pTex;
+	Texture* m_pDeadTex;
+
+	wstring curAnimaton;
 
 	float dashCoolTimer = 0;
 	float dashCoolTime = 0.5;

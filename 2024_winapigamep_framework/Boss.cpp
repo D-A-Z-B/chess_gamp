@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Boss.h"
+#include "Player.h"
 
 #include "PawnState.h"
 #include "BishopState.h"
@@ -80,8 +81,8 @@ void Boss::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")
 	{
-		pOtherObj->SetDead();
-		//GET_SINGLE(EventManager)->ChangeScene(L"EndingScene");
+		Player* player = dynamic_cast<Player*>(pOtherObj);
+		(*player).stateMachine->ChangeState(PLAYER_STATE::DEAD);
 	}
 }
 

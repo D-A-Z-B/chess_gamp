@@ -4,7 +4,8 @@
 
 void PlayerDeadState::Enter()
 {
-	player->SetCurrentStateEnum(PLAYER_STATE::DEAD)
+	player->SetCurrentStateEnum(PLAYER_STATE::DEAD);
+	__super::Enter();
 }
 
 void PlayerDeadState::UpdateState()

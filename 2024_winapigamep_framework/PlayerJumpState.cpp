@@ -9,6 +9,7 @@ void PlayerJumpState::Enter()
 {
 	std::cout << "jump\n";
 	player->SetCurrentStateEnum(PLAYER_STATE::JUMP);
+	__super::Enter();
 
 	player->yVelocity = -m_jumpPower;
 	stateMachine->ChangeState(PLAYER_STATE::IDLE);

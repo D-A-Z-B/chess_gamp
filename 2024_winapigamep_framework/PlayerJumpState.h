@@ -5,8 +5,8 @@ class PlayerJumpState :
     public PlayerState
 {
 public:
-    PlayerJumpState(Player* player, StateMachine<PLAYER_STATE>* stateMachine)
-        : PlayerState(player, stateMachine) { }
+    PlayerJumpState(Player* player, StateMachine<PLAYER_STATE>* stateMachine, wstring animation)
+        : PlayerState(player, stateMachine, animation) { }
     ~PlayerJumpState() {}
 public:
     void Enter() override;

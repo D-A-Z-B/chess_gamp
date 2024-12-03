@@ -9,6 +9,7 @@ void PlayerIdleState::Enter()
 {
 	std::cout << "idle\n";
 	player->SetCurrentStateEnum(PLAYER_STATE::IDLE);
+	__super::Enter();
 }
 
 void PlayerIdleState::UpdateState()
