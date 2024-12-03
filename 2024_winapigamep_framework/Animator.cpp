@@ -51,10 +51,14 @@ Animation* Animator::FindAnimation(const wstring& _strName)
 	return iter->second;
 }
 
-void Animator::PlayAnimation(const wstring& _strName, bool _IsRepeat, int _repeatcnt)
+void Animator::PlayAnimation(const wstring& _strName, bool _IsRepeat, int _repeatcnt, bool _isTransition)
 {
+	int frame = 0;
+	if (_isTransition)
+		frame = m_pCurrentAnimation->GetCurFrame();
+
 	m_pCurrentAnimation = FindAnimation(_strName);
-	m_pCurrentAnimation->SetFrame(0);
+	m_pCurrentAnimation->SetFrame(frame);
 	m_IsRepeat = _IsRepeat;
 	m_repeatcnt = _repeatcnt;
 }

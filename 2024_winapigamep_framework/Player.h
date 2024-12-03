@@ -31,14 +31,14 @@ public:
 private:
 	Texture* m_pTex;
 	Texture* m_pDeadTex;
+	Texture* m_pFireTex;
 
 	wstring curAnimaton;
 
 	float dashCoolTimer = 0;
 	float dashCoolTime = 0.5;
 
-	float attackCoolTimer = 0;
-	float attackCoolTime = 0.2f;
-
 	float gravity = 9.8f;
+
+	bool isShooting = false;
 };

@@ -20,7 +20,7 @@ public:
 	Animation* FindAnimation(const wstring& _strName);
 
 	// 애니메이션 플레이 함수
-	void PlayAnimation(const wstring& _strName, bool _IsRepeat, int _repeatcnt = 1);
+	void PlayAnimation(const wstring& _strName, bool _IsRepeat, int _repeatcnt = 1, bool _isTransition = false);
 	void StopAnimation();
 public:
 	Animation* GetCurrentAnim() { return m_pCurrentAnimation; }

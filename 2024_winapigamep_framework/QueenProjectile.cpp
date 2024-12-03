@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "QueenProjectile.h"
+#include "Player.h"
 
 #include "TimeManager.h"
 #include "EventManager.h"
@@ -71,8 +72,8 @@ void QueenProjectile::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")
 	{
-		pOtherObj->SetDead();
-		//GET_SINGLE(EventManager)->ChangeScene(L"EndingScene");
+		Player* player = dynamic_cast<Player*>(pOtherObj);
+		(*player).stateMachine->ChangeState(PLAYER_STATE::DEAD);
 	}
 }
 
