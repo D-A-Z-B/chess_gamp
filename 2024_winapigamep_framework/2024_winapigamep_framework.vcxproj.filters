@@ -217,6 +217,9 @@
     <ClInclude Include="CameraManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="QueenProjectile.h">
+      <Filter>Engine\03. Object\Boss</Filter>
+      </ClInclude>
     <ClInclude Include="PlayerDeadState.h">
       <Filter>Engine\03. Object\Player\State</Filter>
     </ClInclude>
@@ -376,6 +379,9 @@
     <ClCompile Include="CameraManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
+    <ClCompile Include="QueenProjectile.cpp">
+      <Filter>Engine\03. Object\Boss</Filter>
+      </ClCompile>
     <ClCompile Include="PlayerDeadState.cpp">
       <Filter>Engine\03. Object\Player\State</Filter>
     </ClCompile>

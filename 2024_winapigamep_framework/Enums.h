@@ -8,10 +8,11 @@ enum class LAYER
 	BOSS_ATTACK_OBJECT,
 	BOSS,
 	PLAYER,
+	BOSS_PROJECTILE,
 	PROJECTILE,
 	AIM,
 	// UI
-	END = 30
+	END
 };
 
 enum class PEN_TYPE

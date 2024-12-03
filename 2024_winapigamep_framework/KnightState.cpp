@@ -3,6 +3,7 @@
 
 #include "TimeManager.h"
 #include "CameraManager.h"
+#include "ResourceManager.h"
 
 #include "Collider.h"
 #include "Boss.h"
@@ -103,6 +104,14 @@ void KnightState::AttackRoutine()
 
     // ÀÌµ¿
     if (isMove) {
+        static bool isSoundPlay = false;
+
+        if (isSoundPlay == false) {
+            GET_SINGLE(ResourceManager)->Play(L"BossMove_Knight");
+
+            isSoundPlay = true;
+        }
+
         if (moveElapsedTime < moveTime) {
             float t = moveElapsedTime / moveTime;
             Vec2 newPos = {
@@ -116,6 +125,8 @@ void KnightState::AttackRoutine()
             isMove = false;
             isDropWait = true;
             moveElapsedTime = 0;
+
+            isSoundPlay = false;
         }
     }
 
@@ -143,7 +154,7 @@ void KnightState::AttackRoutine()
             dropElapsedTime += fDT;
         }
         else {
-            GET_SINGLE(CameraManager)->Shake(10, 0.1f);
+            GET_SINGLE(CameraManager)->Shake(50, 0.2f);
 
             GET_SINGLE(ResourceManager)->Play(L"TakeDown");
 

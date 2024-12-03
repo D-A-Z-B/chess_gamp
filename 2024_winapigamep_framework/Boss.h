@@ -43,8 +43,10 @@ public:
 	void SetCurrentStateEnum(BOSS_STATE newStateEnum) {
 		currentStateEnum = newStateEnum;
 	}
+public :
+	void ApplyDamage() { m_hp--; }
 private:
-	int m_hp;
+	int m_hp = 800;
 	float patternDelayTime = 0;
 	Texture* m_pTex;
 };

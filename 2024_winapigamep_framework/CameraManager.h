@@ -16,7 +16,7 @@ public:
 
 	int shakeIntensity;
 	float elapsedTime;
-	float shakeDuration;
+	float shakeTime;
 
 	bool isShaking;
 };
