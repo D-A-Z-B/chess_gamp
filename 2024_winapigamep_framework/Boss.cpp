@@ -14,6 +14,7 @@
 #include "InputManager.h"
 #include "SceneManager.h";
 #include "EventManager.h";
+#include "CameraManager.h"
 
 #include "StateMachine.h"
 
@@ -77,6 +78,11 @@ void Boss::Render(HDC _hdc)
 void Boss::EnterCollision(Collider* _other)
 {
 	if (GetCurrentStateEnum() == BOSS_STATE::PAWN) return;
+
+	if (GetCurrentStateEnum() == BOSS_STATE::BISHOP || GetCurrentStateEnum() == BOSS_STATE::ROOK) {
+		GET_SINGLE(CameraManager)->Shake(50, 0.15f);
+	}
+
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")
 	{

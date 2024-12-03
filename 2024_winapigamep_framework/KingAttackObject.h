@@ -17,8 +17,10 @@ public:
     void StartAttackRoutine(Vec2 size, float duration);
 private:
     void AttackRoutine();
+    void EndRoutine();
 private:
     bool isAttack = false;
+    bool isEnd = false;
     Vec2 targetSize;
     float targerDuration;
 };

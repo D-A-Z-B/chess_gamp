@@ -2,6 +2,7 @@
 #include "PawnState.h"
 
 #include "TimeManager.h"
+#include "ResourceManager.h"
 
 #include "Boss.h"
 #include "Collider.h"
@@ -59,6 +60,14 @@ void PawnState::StartRoutine() {
     static Vec2 startPos;
     static Vec2 endPos;
 
+    static bool isSoundPlay = false;
+
+    if (isSoundPlay == false) {
+        GET_SINGLE(ResourceManager)->Play(L"BossMove");
+
+        isSoundPlay = true;
+    }
+
     if (isRoutineStart == false) {
         startPos = __super::boss->GetPos();
         endPos = { SCREEN_WIDTH / 2.f, 150.f };
@@ -81,6 +90,8 @@ void PawnState::StartRoutine() {
 
         elapsedTime = 0;
         isRoutineStart = false;
+
+        isSoundPlay = false;
         isStart = false;
     }
 }
@@ -92,6 +103,14 @@ void PawnState::EndRoutine() {
 
     static Vec2 startPos;
     static Vec2 endPos;
+
+    static bool isSoundPlay = false;
+
+    if (isSoundPlay == false) {
+        GET_SINGLE(ResourceManager)->Play(L"BossMove");
+
+        isSoundPlay = true;
+    }
 
     if (isEndRoutineStart == false) {
         startPos = __super::boss->GetPos();
@@ -113,6 +132,8 @@ void PawnState::EndRoutine() {
     else {
         isEndRoutineStart = false;
         NextPattern();
+
+        endRoutineElapsedTime = 0;
 
         __super::boss->SetPos(endPos);
     }
@@ -145,8 +166,8 @@ void PawnState::NextPattern() {
 
 
     endRoutineElapsedTime = 0;
-    stateMachine->ChangeState(BOSS_STATE::KNIGHT);
+    //stateMachine->ChangeState(BOSS_STATE::QUEEN);
     __super::boss->SetCurrentStateEnum(static_cast<BOSS_STATE>(randNum));
-    //stateMachine->ChangeState(static_cast<BOSS_STATE>(randNum));
+    stateMachine->ChangeState(static_cast<BOSS_STATE>(randNum));
 }
 

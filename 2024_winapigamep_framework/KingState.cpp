@@ -8,6 +8,7 @@
 #include "TimeManager.h"
 #include "SceneManager.h"
 #include "PlayerManager.h"
+#include "ResourceManager.h"
 
 void KingState::Enter()
 {
@@ -48,38 +49,18 @@ void KingState::AttackRoutine()
 	int moveTime = 1.f;
 
 	static float attackElapsedTime = 0;
-	float attackTime = 0.5f;
+	float attackTime = 0.3f;
 
 	static float waitElapsedTime = 0;
-	float waitTime = 0.2f;
+	float waitTime = 0.5f;
+
+	static float decreaseElapsedTime = 0;
+	float decreaseTime = attackTime / 2;
 
 	static bool isWait = true;
 	static bool isMove = false;
 	static bool isAttack = false;
-	static bool isRefresh = true;
-
-	static Vec2 startPos;
-	static Vec2 endPos;
-
-	if (currentAttackCount >= attackCount) {
-		isEnd = true;
-		this->isAttack = false;
-
-		currentAttackCount = 0;
-
-		return;
-	}
-
-	if (isRefresh) {
-		Vec2 vPos = __super::boss->GetPos();
-		startPos = { vPos.x, 300.f };
-
-		float x = GET_SINGLE(PlayerManager)->GetPlayer()->GetPos().x;
-
-		endPos = { x, 300.f };
-
-		isRefresh = false;
-	}
+	static bool isDecrease = false;
 
 	if (isWait) {
 		if (waitElapsedTime < waitTime) {
@@ -93,27 +74,38 @@ void KingState::AttackRoutine()
 			waitElapsedTime = 0;
 		}
 	}
+
+	if (currentAttackCount >= attackCount) {
+		isEnd = true;
+		this->isAttack = false;
+
+		currentAttackCount = 0;
+
+		return;
+	}
 	
 	if (isMove) {
-		if (moveElapsedTime < moveTime) {
-			float t = moveElapsedTime / moveTime;
+		float targetX = GET_SINGLE(PlayerManager)->GetPlayer()->GetPos().x;
 
-			float calcT = t; // 나중에 이징 넣을거임
+		Vec2 startPos = __super::boss->GetPos();
+		Vec2 endPos = { targetX, 300.f };
 
-			float x = startPos.x * (1 - calcT) + endPos.x * calcT;
-			float y = startPos.y * (1 - calcT) + endPos.y * calcT;
+		float followSpeed = 0.03f;
 
-			__super::boss->SetPos({ x, y });
+		float x = startPos.x + (endPos.x - startPos.x) * followSpeed;
+		float y = startPos.y + (endPos.y - startPos.y) * followSpeed;
 
-			moveElapsedTime += fDT;
-		}
-		else {
+		__super::boss->SetPos({ x, y });
+
+		moveElapsedTime += fDT;
+
+		if (moveElapsedTime >= moveTime) {
 			isMove = false;
 			isAttack = true;
-
 			moveElapsedTime = 0;
 		}
 	}
+
 
 	if (isAttack) {
 		static bool alreadyCreated = false;
@@ -130,14 +122,26 @@ void KingState::AttackRoutine()
 		}
 		else {
 			isAttack = false;
-			isWait = true;
-			isRefresh = true;
+			isDecrease = true;
 
 			alreadyCreated = false;
 
 			attackElapsedTime = 0;
 
 			currentAttackCount++;
+		}
+	}
+
+	if (isDecrease) {
+		if (decreaseElapsedTime < decreaseTime) {
+
+			decreaseElapsedTime += fDT;
+		}
+		else {
+			isWait = true;
+			isDecrease = false;
+
+			decreaseElapsedTime = 0;
 		}
 	}
 }

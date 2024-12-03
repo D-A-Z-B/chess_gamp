@@ -20,7 +20,7 @@ void CameraManager::Update()
 		shakingPos.x = centerPos.x + (rand() % shakeIntensity - 10);
 		shakingPos.y = centerPos.y + (rand() % shakeIntensity - 10);
 
-		if (elapsedTime >= shakeDuration) {
+		if (elapsedTime >= shakeTime) {
 			isShaking = false;
 			shakingPos = centerPos;
 		}
@@ -30,7 +30,7 @@ void CameraManager::Update()
 void CameraManager::Shake(float intensity, float time)
 {
 	isShaking = true;
-	shakeDuration = time;
+	shakeTime = time;
 	shakeIntensity = intensity;
 	elapsedTime = 0.f;
 }

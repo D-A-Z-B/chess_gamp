@@ -3,6 +3,7 @@
 
 #include "TimeManager.h"
 #include "PlayerManager.h"
+#include "ResourceManager.h"
 
 #include "boss.h"
 
@@ -42,7 +43,7 @@ void BishopState::Exit()
         float attackTime = 2.f;
 
         static float waitElapsedTime = 0;
-        float waitTime = 0.2f;
+        float waitTime = 1.2f;
 
         static bool isAttack = false;
         static bool isWait = true;
@@ -59,39 +60,61 @@ void BishopState::Exit()
             return;
         }
 
-        if (isRefresh) {
-            if (isTopDown) {
-                startPos.y = -200;
-            }
-            else {
-                startPos.y = SCREEN_HEIGHT + 200;
-            }
-
-            startPos.x = rand() % 1280;
-            Vec2 playerPos = GET_SINGLE(PlayerManager)->GetPlayer()->GetPos();
-            Vec2 dir = playerPos - startPos;
-            dir.Normalize();
-            endPos = playerPos + dir * (sqrt(pow(SCREEN_WIDTH, 2) + pow(SCREEN_HEIGHT, 2)));
-
-            __super::boss->SetPos(startPos);
-            isTopDown = !isTopDown;
-            isRefresh = false;
-        }
-
         if (isWait) {
+            static bool isSoundPlay = false;
+            if (isSoundPlay == false) {
+                GET_SINGLE(ResourceManager)->Play(L"Caution");
+
+                isSoundPlay = true;
+            }
+
             if (waitElapsedTime < waitTime) {
                 float t = waitElapsedTime / waitTime;
+
+                if (waitElapsedTime > 1.f) {
+                    if (isRefresh) {
+                        if (isTopDown) {
+                            startPos.y = -200;
+                        }
+                        else {
+                            startPos.y = SCREEN_HEIGHT + 200;
+                        }
+
+                        startPos.x = rand() % 1280;
+                        Vec2 playerPos = GET_SINGLE(PlayerManager)->GetPlayer()->GetPos();
+                        Vec2 dir = playerPos - startPos;
+                        dir.Normalize();
+                        endPos = playerPos + dir * (sqrt(pow(SCREEN_WIDTH, 2) + pow(SCREEN_HEIGHT, 2)));
+
+                        __super::boss->SetPos(startPos);
+                        isTopDown = !isTopDown;
+                        isRefresh = false;
+                    }
+                }
 
                 waitElapsedTime += fDT;
             }
             else {
+
                 isWait = false;
                 isAttack = true;
+
+                isSoundPlay = false;
+
                 waitElapsedTime = 0;
             }
         }
 
         if (isAttack) {
+            static bool isSoundPlay = false;
+
+
+            if (isSoundPlay == false) {
+                GET_SINGLE(ResourceManager)->Play(L"BossMove_isFast");
+
+                isSoundPlay = true;
+            }
+
             if (attackElapsedTime < attackTime) {
                 float t = attackElapsedTime / attackTime;
 
@@ -110,6 +133,9 @@ void BishopState::Exit()
                 isAttack = false;
                 isWait = true;
                 isRefresh = true;
+
+                isSoundPlay = false;
+
                 currentAttackCount++;
             }
         }
