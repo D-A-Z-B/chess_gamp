@@ -86,17 +86,20 @@ void Player::Update()
 		dashCoolTimer += fDT;
 	}
 
-	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+	if(!isDead)
 	{
-		isShooting = true;
-		ChangeAnimation(curAnimaton, true);
+		if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+		{
+			isShooting = true;
+			ChangeAnimation(curAnimaton, true);
 
-		CreateProjectile();
-	}
-	else if (GET_KEYUP(KEY_TYPE::LBUTTON))
-	{
-		isShooting = false;
-		ChangeAnimation(curAnimaton, true);
+			CreateProjectile();
+		}
+		else if (GET_KEYUP(KEY_TYPE::LBUTTON))
+		{
+			isShooting = false;
+			ChangeAnimation(curAnimaton, true);
+		}
 	}
 
 	Vec2 vPos = GetPos();
@@ -113,7 +116,7 @@ void Player::Update()
 
 void Player::CheckChangeState()
 {
-	if (currentStateEnum != PLAYER_STATE::DASH && currentStateEnum != PLAYER_STATE::DEAD)
+	if (currentStateEnum != PLAYER_STATE::DASH && !isDead)
 	{
 		if (GET_KEYDOWN(KEY_TYPE::LSHIFT) && dashCoolTimer >= dashCoolTime)
 		{
@@ -164,9 +167,15 @@ void Player::ChangeAnimation(wstring changeAnimation, bool isRepeat)
 	GetComponent<Animator>()->StopAnimation();
 	if (isShooting)
 		GetComponent<Animator>()
-		->PlayAnimation((isPacing == 1 ? L"R" : L"L") + changeAnimation + L"Fire", isRepeat, true);
+			->PlayAnimation((isPacing == 1 ? L"R" : L"L") + changeAnimation + L"Fire", isRepeat, true);
 	else
 		GetComponent<Animator>()->PlayAnimation((isPacing == 1 ? L"R" : L"L") + changeAnimation, isRepeat);
+}
+
+void Player::SetDead()
+{
+	isDead = true;
+	isShooting = false;
 }
 
 void Player::CreateProjectile()

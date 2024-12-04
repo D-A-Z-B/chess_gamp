@@ -20,6 +20,9 @@ public:
     }  
 
     void ChangeState(T newState) {
+        if (CurrentState == stateMap[newState])
+            return;
+
         if (CurrentState) {
             CurrentState->Exit();
         }

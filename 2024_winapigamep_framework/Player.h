@@ -13,6 +13,7 @@ public:
 	void SetCurrentStateEnum(PLAYER_STATE newStateEnum) { currentStateEnum = newStateEnum; }
 	void ChangePacing(int pacing);
 	void ChangeAnimation(wstring changeAnimation, bool isRepeat);
+	void SetDead();
 private:
 	void CreateProjectile();
 	void CheckChangeState();
@@ -41,4 +42,6 @@ private:
 	float gravity = 9.8f;
 
 	bool isShooting = false;
+
+	bool isDead = false;
 };
