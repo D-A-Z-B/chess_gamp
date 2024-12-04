@@ -20,6 +20,9 @@ TitleScene::~TitleScene()
 void TitleScene::Init()
 {
 	Background* pBackground1 = new Background();
+
+	wstring path = GET_SINGLE(ResourceManager)->GetResPath();
+
 	pBackground1->SetPos({ 0, 150 });
 	pBackground1->SetSize({ 1280, 1280 });
 	pBackground1->SetBackgroundTexture(L"board_plain_04_darkened");
@@ -39,7 +42,7 @@ void TitleScene::Init()
 	pText->SetSize({ 300, 0 });
 	pText->SetColor(RGB(255, 255, 255));
 	Vec2 vSize = pText->GetSize();
-	pText->LoadFont(L"C:\\Cpp\\chess_gamp\\Output\\build\\Resource\\Font\\Galmuri7.ttf", L"Galmuri7 Regular", vSize.x / 2);
+	pText->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", vSize.x / 2);
 	pText->Init();
 	AddObject(pText, LAYER::UI);
 
@@ -49,7 +52,7 @@ void TitleScene::Init()
 	startText->SetSize({ 175, 0 });
 	startText->SetColor(RGB(255, 255, 255));
 	Vec2 startTextSize = startText->GetSize();
-	startText->LoadFont(L"C:\\Cpp\\chess_gamp\\Output\\build\\Resource\\Font\\Galmuri7.ttf", L"Galmuri7 Regular", startTextSize.x / 2);
+	startText->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", startTextSize.x / 2);
 	startText->Init();
 	AddObject(startText, LAYER::UI);
 	vecButtons.push_back(startText);
@@ -100,14 +103,14 @@ void TitleScene::Update()
 	}
 
 	for (int i = 0; i < vecButtons.size(); ++i) {
+		wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 		if (currentSelectedNumber == i) {
 			vecButtons[i]->SetSize({ { 225, 0 } });
-			vecButtons[i]->LoadFont(L"C:\\Cpp\\chess_gamp\\Output\\build\\Resource\\Font\\Galmuri7.ttf", L"Galmuri7 Regular", vecButtons[i]->GetSize().x / 2);
 		}
 		else {
 			vecButtons[i]->SetSize({ { 175, 0 } });
-			vecButtons[i]->LoadFont(L"C:\\Cpp\\chess_gamp\\Output\\build\\Resource\\Font\\Galmuri7.ttf", L"Galmuri7 Regular", vecButtons[i]->GetSize().x / 2);
 		}
+		vecButtons[i]->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", vecButtons[i]->GetSize().x / 2);
 	}
 
 	for (Background* pBackground : vecBackground)
