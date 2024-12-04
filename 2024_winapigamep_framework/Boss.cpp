@@ -80,11 +80,12 @@ void Boss::EnterCollision(Collider* _other)
 {
 	if (GetCurrentStateEnum() == BOSS_STATE::PAWN) return;
 
-	if (GetCurrentStateEnum() == BOSS_STATE::BISHOP || GetCurrentStateEnum() == BOSS_STATE::ROOK) {
+	Object* pOtherObj = _other->GetOwner();
+
+	if (pOtherObj->GetName() != L"PlayerBullet" && (GetCurrentStateEnum() == BOSS_STATE::BISHOP || GetCurrentStateEnum() == BOSS_STATE::ROOK)) {
 		GET_SINGLE(CameraManager)->Shake(50, 0.15f);
 	}
 
-	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")
 	{
 		Player* player = dynamic_cast<Player*>(pOtherObj);

@@ -10,6 +10,7 @@
 void BossTestScene::Init()
 {
 	Boss* pBoss = new Boss();
+	pBoss->SetName(L"Boss");
 	pBoss->SetPos({SCREEN_WIDTH / 2.f, 150.f });
 	pBoss->SetSize({ 160.f, 320.f });
 	pBoss->SetPatternDelayTime(3.f);
@@ -19,11 +20,13 @@ void BossTestScene::Init()
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
 	pPlayer->SetSize({ 100.f,100.f });
+	pPlayer->SetName(L"Player");
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Background* pBackground = new Background();
 	pBackground->SetPos({ 500, 0 });
 	pBackground->SetSize({1920, 1920});
+	pBackground->SetBackgroundTexture(L"board_plain_04");
 	AddObject(pBackground, LAYER::BACKGROUND);
 
 	Object* pGround = new Ground;
@@ -42,4 +45,11 @@ void BossTestScene::Init()
 	GET_SINGLE(ResourceManager)->LoadSound(L"BossMove", L"Sound\\Boss\\BossMove.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"BossMove_isFast", L"Sound\\Boss\\BossMove_isFast.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"BossMove_Knight", L"Sound\\Boss\\BossMove_Knight.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"BossMove_Rook", L"Sound\\Boss\\BossMove_Rook.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"KingMove", L"Sound\\Boss\\KingMove.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"KingAttack", L"Sound\\Boss\\KingAttack.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShootSound", L"Sound\\Player\\PlayerShootSound.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"GameBGM", L"Sound\\GameBGM.mp3", true);
+
+	GET_SINGLE(ResourceManager)->Play(L"GameBGM");
 }

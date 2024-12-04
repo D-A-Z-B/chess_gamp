@@ -10,8 +10,9 @@ enum class LAYER
 	PLAYER,
 	BOSS_PROJECTILE,
 	PROJECTILE,
-	AIM,
 	// UI
+	UI,
+	AIM,
 	END
 };
 
