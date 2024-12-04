@@ -75,7 +75,9 @@ void KingAttackObject::AttackRoutine()
 
 	if (elapsedTime < targerDuration) {
 		float t = elapsedTime / targerDuration;
-		float calcT = t == 0 ? 0 : t == 1 ? 1 : t < 0.5 ? pow(2, 20 * t - 10) / 2 : (2 - pow(2, -20 * t + 10)) / 2;
+		//float calcT = t == 0 ? 0 : t == 1 ? 1 : t < 0.5 ? pow(2, 20 * t - 10) / 2 : (2 - pow(2, -20 * t + 10)) / 2;
+		float c4 = (2 * PI) / 3;
+		float calcT = t == 0 ? 0 : t == 1 ? 1: pow(2, -10 * t) * sin((t * 10 - 0.75) * c4) + 1;
 
 		float x = startSize.x * (1 - calcT) + targetSize.x * calcT;
 		float y = startSize.y * (1 - calcT) + targetSize.y * calcT;

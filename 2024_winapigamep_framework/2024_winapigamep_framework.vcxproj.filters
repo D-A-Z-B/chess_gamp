@@ -53,6 +53,9 @@
     <Filter Include="Engine\03. Object\Player\State">
       <UniqueIdentifier>{51c339c8-9047-44b5-94e4-c614ff48f6c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\UI">
+      <UniqueIdentifier>{a789702c-f731-44e1-96d6-ca58eee9d262}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -220,6 +223,12 @@
     <ClInclude Include="QueenProjectile.h">
       <Filter>Engine\03. Object\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadState.h">
+      <Filter>Engine\03. Object\Player\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework.rc">
@@ -378,6 +387,12 @@
     </ClCompile>
     <ClCompile Include="QueenProjectile.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadState.cpp">
+      <Filter>Engine\03. Object\Player\State</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

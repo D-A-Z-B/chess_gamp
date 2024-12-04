@@ -46,10 +46,10 @@ void KingState::AttackRoutine()
 	int attackCount = 4;
 
 	static float moveElapsedTime = 0;
-	int moveTime = 1.f;
+	int moveTime = 3.f;
 
 	static float attackElapsedTime = 0;
-	float attackTime = 0.3f;
+	float attackTime = 1.f;
 
 	static float waitElapsedTime = 0;
 	float waitTime = 0.5f;
@@ -85,6 +85,13 @@ void KingState::AttackRoutine()
 	}
 	
 	if (isMove) {
+		static bool isSoundPlay = false;
+		if (isSoundPlay == false) {
+			GET_SINGLE(ResourceManager)->Play(L"KingMove");
+
+			isSoundPlay = true;
+		}
+
 		float targetX = GET_SINGLE(PlayerManager)->GetPlayer()->GetPos().x;
 
 		Vec2 startPos = __super::boss->GetPos();
@@ -102,6 +109,7 @@ void KingState::AttackRoutine()
 		if (moveElapsedTime >= moveTime) {
 			isMove = false;
 			isAttack = true;
+			isSoundPlay = false;
 			moveElapsedTime = 0;
 		}
 	}
@@ -109,6 +117,13 @@ void KingState::AttackRoutine()
 
 	if (isAttack) {
 		static bool alreadyCreated = false;
+
+		static bool isSoundPlay = false;
+		if (isSoundPlay == false) {
+			GET_SINGLE(ResourceManager)->Play(L"KingAttack");
+
+			isSoundPlay = true;
+		}
 
 		if (alreadyCreated == false) {
 			CreateAttackObject({ 500, 500 }, attackTime);
@@ -123,6 +138,7 @@ void KingState::AttackRoutine()
 		else {
 			isAttack = false;
 			isDecrease = true;
+			isSoundPlay = false;
 
 			alreadyCreated = false;
 

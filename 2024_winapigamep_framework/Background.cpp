@@ -7,7 +7,6 @@
 
 Background::Background() : m_pTex(nullptr)
 {
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Background", L"Texture\\\Background\\board_plain_04.bmp");
 }
 
 Background::~Background()
