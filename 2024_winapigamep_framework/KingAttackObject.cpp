@@ -6,6 +6,7 @@
 #include "CameraManager.h"
 
 #include "Collider.h"
+#include "Player.h"
 
 KingAttackObject::KingAttackObject()
 {
@@ -46,8 +47,8 @@ void KingAttackObject::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")
 	{
-		pOtherObj->SetDead();
-		//GET_SINGLE(EventManager)->ChangeScene(L"EndingScene");
+		Player* player = dynamic_cast<Player*>(pOtherObj);
+		(*player).stateMachine->ChangeState(PLAYER_STATE::DEAD);
 	}
 }
 

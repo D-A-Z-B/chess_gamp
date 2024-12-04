@@ -3,6 +3,7 @@
 
 #include "TimeManager.h"
 #include "PlayerManager.h"
+#include "ResourceManager.h"
 
 #include "Boss.h"
 
@@ -133,6 +134,13 @@ void RookState::AttackRoutine()
     }
 
     if (isFollow == false) {
+        static bool isSoundPlay = false;
+
+        if (isSoundPlay == false) {
+            GET_SINGLE(ResourceManager)->Play(L"BossMove_Rook");
+            isSoundPlay = true;
+        }
+
         if (attackElapsedTime < attackTime) {
             float t = attackElapsedTime / attackTime;
 

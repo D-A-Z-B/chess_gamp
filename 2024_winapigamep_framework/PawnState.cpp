@@ -131,6 +131,7 @@ void PawnState::EndRoutine() {
     }
     else {
         isEndRoutineStart = false;
+        isSoundPlay = false;
         NextPattern();
 
         endRoutineElapsedTime = 0;
@@ -167,7 +168,7 @@ void PawnState::NextPattern() {
 
     endRoutineElapsedTime = 0;
     //stateMachine->ChangeState(BOSS_STATE::QUEEN);
-    __super::boss->SetCurrentStateEnum(static_cast<BOSS_STATE>(BOSS_STATE::KING));
-    stateMachine->ChangeState(static_cast<BOSS_STATE>(BOSS_STATE::KING));
+    __super::boss->SetCurrentStateEnum(static_cast<BOSS_STATE>(BOSS_STATE::ROOK));
+    stateMachine->ChangeState(static_cast<BOSS_STATE>(BOSS_STATE::ROOK));
 }
 

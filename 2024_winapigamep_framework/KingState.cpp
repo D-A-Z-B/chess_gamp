@@ -9,6 +9,7 @@
 #include "SceneManager.h"
 #include "PlayerManager.h"
 #include "ResourceManager.h"
+#include "CameraManager.h"
 
 void KingState::Enter()
 {
@@ -54,11 +55,15 @@ void KingState::AttackRoutine()
 	static float waitElapsedTime = 0;
 	float waitTime = 0.5f;
 
+	static float attackWaitElapsedTime = 0;
+	float attackWaitTime = 0.5f;
+
 	static float decreaseElapsedTime = 0;
 	float decreaseTime = attackTime / 2;
 
 	static bool isWait = true;
 	static bool isMove = false;
+	static bool isAttackWait = false;
 	static bool isAttack = false;
 	static bool isDecrease = false;
 
@@ -108,9 +113,21 @@ void KingState::AttackRoutine()
 
 		if (moveElapsedTime >= moveTime) {
 			isMove = false;
-			isAttack = true;
+			isAttackWait = true;
 			isSoundPlay = false;
 			moveElapsedTime = 0;
+		}
+	}
+
+	if (isAttackWait) {
+		if (attackWaitElapsedTime < attackWaitTime) {
+
+			attackWaitElapsedTime += fDT;
+		}
+		else {
+			isAttackWait = false;
+			isAttack = true;
+			attackWaitElapsedTime = 0;
 		}
 	}
 
@@ -119,10 +136,17 @@ void KingState::AttackRoutine()
 		static bool alreadyCreated = false;
 
 		static bool isSoundPlay = false;
+		static bool isShaked = false;
+
 		if (isSoundPlay == false) {
 			GET_SINGLE(ResourceManager)->Play(L"KingAttack");
 
 			isSoundPlay = true;
+		}
+
+		if (isShaked == false) {
+			GET_SINGLE(CameraManager)->Shake(50, 0.1f);
+			isShaked = true;
 		}
 
 		if (alreadyCreated == false) {
@@ -139,7 +163,7 @@ void KingState::AttackRoutine()
 			isAttack = false;
 			isDecrease = true;
 			isSoundPlay = false;
-
+			isShaked = false;
 			alreadyCreated = false;
 
 			attackElapsedTime = 0;
