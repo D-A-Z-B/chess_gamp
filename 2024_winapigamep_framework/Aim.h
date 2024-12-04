@@ -1,5 +1,8 @@
 #pragma once
 #include "Object.h"
+
+class Texture;
+
 class Aim :
     public Object
 {
@@ -9,5 +12,7 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
+private:
+	Texture* m_pTex;
 };
 

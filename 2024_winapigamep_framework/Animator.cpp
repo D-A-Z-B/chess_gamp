@@ -56,6 +56,7 @@ void Animator::PlayAnimation(const wstring& _strName, bool _IsRepeat, int _repea
 	int frame = 0;
 	if (_isTransition)
 		frame = m_pCurrentAnimation->GetCurFrame();
+	std::cout << frame << "\n";
 
 	m_pCurrentAnimation = FindAnimation(_strName);
 	m_pCurrentAnimation->SetFrame(frame);

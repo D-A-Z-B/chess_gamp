@@ -41,8 +41,8 @@ Player::Player()
 	GetComponent<Animator>()->CreateAnimation(L"RPlayerIdleFire", m_pFireTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 1, 0.f);
 	GetComponent<Animator>()->CreateAnimation(L"LPlayerMoveFire", m_pFireTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.1f);
 	GetComponent<Animator>()->CreateAnimation(L"RPlayerMoveFire", m_pFireTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.1f);
-	GetComponent<Animator>()->CreateAnimation(L"LPlayerDead", m_pDeadTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 8, 0.1f);
-	GetComponent<Animator>()->CreateAnimation(L"RPlayerDead", m_pDeadTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 8, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"LPlayerDead", m_pDeadTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 9, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"RPlayerDead", m_pDeadTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 9, 0.1f);
 
 	AddComponent<Collider>();
 	GetComponent<Collider>()->SetOwner(this);
@@ -61,6 +61,7 @@ Player::Player()
 
 	//aim
 	Object* pAim = new Aim;
+	pAim->SetSize({ 50, 50 });
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pAim, LAYER::AIM);
 
 	//set
@@ -142,11 +143,6 @@ void Player::CheckChangeState()
 
 void Player::Render(HDC _hdc)
 {
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = m_pTex->GetWidth();
-	int height = m_pTex->GetHeight();
-
 	ComponentRender(_hdc);
 }
 
