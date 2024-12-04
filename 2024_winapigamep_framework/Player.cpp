@@ -87,18 +87,26 @@ void Player::Update()
 		dashCoolTimer += fDT;
 	}
 
-	if(!isDead)
+	if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && !isDead)
 	{
-		if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+		if (!isShooting)
 		{
 			isShooting = true;
-			GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound");
 			ChangeAnimation(curAnimaton, true);
-
-			CreateProjectile();
 		}
-		else if (GET_KEYUP(KEY_TYPE::LBUTTON))
+
+		fireAnimTimer = 0;
+		GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound");
+
+		CreateProjectile();
+	}
+	if (isShooting)
+	{
+		std::cout << fireAnimTimer << "\n";
+		fireAnimTimer += fDT;
+		if (fireAnimTimer >= fireAnimTime)
 		{
+			fireAnimTimer = 0;
 			isShooting = false;
 			ChangeAnimation(curAnimaton, true);
 		}
@@ -161,12 +169,19 @@ void Player::ChangeAnimation(wstring changeAnimation, bool isRepeat)
 {
 	curAnimaton = changeAnimation;
 
+	//std::wcout << changeAnimation;
 	GetComponent<Animator>()->StopAnimation();
 	if (isShooting)
+	{
+		//std::cout << "Fire";
 		GetComponent<Animator>()
 			->PlayAnimation((isPacing == 1 ? L"R" : L"L") + changeAnimation + L"Fire", isRepeat, true);
+	}
 	else
+	{
 		GetComponent<Animator>()->PlayAnimation((isPacing == 1 ? L"R" : L"L") + changeAnimation, isRepeat);
+	}
+	//std::cout << "\n";
 }
 
 void Player::SetDead()
@@ -179,7 +194,7 @@ void Player::CreateProjectile()
 {
 	Projectile* pProj = new Projectile;
 	Vec2 vPos = GetPos();
-	vPos.y -= GetSize().y / 2.f;
+	vPos.x += (GetSize().x / 2.f) * isPacing;
 	pProj->SetPos(vPos);
 	pProj->SetSize({ 30.f,30.f });
 

@@ -6,7 +6,6 @@
 
 void PlayerDashState::Enter()
 {
-	std::cout << "dash\n";
 	player->SetCurrentStateEnum(PLAYER_STATE::DASH);
 	__super::Enter();
 

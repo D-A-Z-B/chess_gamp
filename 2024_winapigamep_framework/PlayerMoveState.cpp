@@ -7,7 +7,6 @@
 
 void PlayerMoveState::Enter()
 {
-	std::cout << "move\n";
 	player->SetCurrentStateEnum(PLAYER_STATE::MOVE);
 	__super::Enter();
 
