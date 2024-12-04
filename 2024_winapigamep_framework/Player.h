@@ -12,24 +12,36 @@ public:
 	void Render(HDC _hdc) override;
 	void SetCurrentStateEnum(PLAYER_STATE newStateEnum) { currentStateEnum = newStateEnum; }
 	void ChangePacing(int pacing);
-	void ChangeAnimation();
+	void ChangeAnimation(wstring changeAnimation, bool isRepeat);
+	void SetDead();
 private:
 	void CreateProjectile();
 	void CheckChangeState();
 public:
 	StateMachine<PLAYER_STATE>* stateMachine;
+	PLAYER_STATE currentStateEnum;
 
 	float yVelocity = 0;
+
 	float moveSpeed = 200.f;
-	bool isDash = false;
 	bool isMove = false;
+
+	bool isDash = false;
+
 	int isPacing = 1;
 private:
-	PLAYER_STATE currentStateEnum;
 	Texture* m_pTex;
+	Texture* m_pDeadTex;
+	Texture* m_pFireTex;
+
+	wstring curAnimaton;
 
 	float dashCoolTimer = 0;
 	float dashCoolTime = 0.5;
-	float gravity = 9.8f;
-};
 
+	float gravity = 9.8f;
+
+	bool isShooting = false;
+
+	bool isDead = false;
+};

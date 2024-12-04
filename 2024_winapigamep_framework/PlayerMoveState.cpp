@@ -9,9 +9,9 @@ void PlayerMoveState::Enter()
 {
 	std::cout << "move\n";
 	player->SetCurrentStateEnum(PLAYER_STATE::MOVE);
+	__super::Enter();
 
 	player->isMove = true;
-	player->ChangeAnimation();
 }
 
 void PlayerMoveState::UpdateState()
@@ -32,11 +32,11 @@ void PlayerMoveState::UpdateState()
 		stateMachine->ChangeState(PLAYER_STATE::IDLE);
 		return;
 	}
+	vPos.x = std::clamp(vPos.x, 20.f, (float)SCREEN_WIDTH - 20.f);
 	player->SetPos(vPos);
 }
 
 void PlayerMoveState::Exit()
 {
 	player->isMove = false;
-	player->ChangeAnimation();
 }

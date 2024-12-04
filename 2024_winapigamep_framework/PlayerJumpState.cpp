@@ -9,13 +9,31 @@ void PlayerJumpState::Enter()
 {
 	std::cout << "jump\n";
 	player->SetCurrentStateEnum(PLAYER_STATE::JUMP);
+	__super::Enter();
 
 	player->yVelocity = -m_jumpPower;
-	stateMachine->ChangeState(PLAYER_STATE::IDLE);
 }
 
 void PlayerJumpState::UpdateState()
 {
+	Vec2 vPos = player->GetPos();
+	if (GET_KEY(KEY_TYPE::A))
+	{
+		vPos.x -= player->moveSpeed * fDT;
+		player->ChangePacing(-1);
+	}
+	else if (GET_KEY(KEY_TYPE::D))
+	{
+		vPos.x += player->moveSpeed * fDT;
+		player->ChangePacing(1);
+	}
+	vPos.x = std::clamp(vPos.x, 20.f, (float)SCREEN_WIDTH - 20.f);
+	player->SetPos(vPos);
+
+	if (player->yVelocity != -m_jumpPower && player->GetPos().y >= GROUND)
+	{
+		stateMachine->ChangeState(PLAYER_STATE::IDLE);
+	}
 }
 
 void PlayerJumpState::Exit()

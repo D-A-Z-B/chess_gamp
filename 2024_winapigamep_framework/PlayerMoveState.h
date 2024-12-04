@@ -5,8 +5,8 @@ class PlayerMoveState :
     public PlayerState
 {
 public:
-    PlayerMoveState(Player* player, StateMachine<PLAYER_STATE>* stateMachine)
-        : PlayerState(player, stateMachine) { }
+    PlayerMoveState(Player* player, StateMachine<PLAYER_STATE>* stateMachine, wstring animation)
+        : PlayerState(player, stateMachine, animation) { }
     ~PlayerMoveState() {}
 public:
     void Enter() override;

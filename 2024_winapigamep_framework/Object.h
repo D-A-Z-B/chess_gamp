@@ -24,9 +24,9 @@ public:
 	void SetDead() { m_IsDie = true; }
 	void SetName(wstring _name) { m_name = _name; }
 	const wstring& GetName() const { return m_name; }
-	void Rotate();
-private:
+protected:
 	bool m_IsDie;
+private:
 	wstring m_name;
 public:
 	template<typename T>

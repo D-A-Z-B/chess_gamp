@@ -4,8 +4,8 @@ class PlayerDashState :
 	public PlayerState
 {
 public:
-	PlayerDashState(Player* player, StateMachine<PLAYER_STATE>* stateMachine)
-		: PlayerState(player, stateMachine) { }
+	PlayerDashState(Player* player, StateMachine<PLAYER_STATE>* stateMachine, wstring animation)
+		: PlayerState(player, stateMachine, animation) { }
 	~PlayerDashState() {}
 public:
 	void Enter() override;
