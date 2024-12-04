@@ -15,6 +15,7 @@ public:
     bool LoadFont(const std::wstring& fontPath, wstring fontName, int height = 24, int weight = FW_NORMAL);
 public:
     wstring GetCurrentText() { return currentText; }
+    wstring GetExecutableDirectory();
 private:
     std::wstring currentText;
     COLORREF currentColor = RGB(0, 0, 0);

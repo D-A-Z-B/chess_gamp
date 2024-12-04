@@ -39,9 +39,6 @@ void Text::Render(HDC _hdc)
 
 
 bool Text::LoadFont(const wstring& fontPath, wstring fontName, int height, int weight) {
-    if (!loadedFontPath.empty()) {
-        RemoveFontResourceEx(loadedFontPath.c_str(), FR_PRIVATE, NULL);
-    }
     if (AddFontResourceEx(fontPath.c_str(), FR_PRIVATE, NULL) == 0) {
         return false;
     }
@@ -70,4 +67,18 @@ bool Text::LoadFont(const wstring& fontPath, wstring fontName, int height, int w
     );
 
     return true;
+}
+
+wstring Text::GetExecutableDirectory()
+{
+    wchar_t buffer[MAX_PATH];
+    GetModuleFileName(nullptr, buffer, MAX_PATH);
+
+    // 전체 경로에서 실행 파일의 디렉토리만 추출
+    std::wstring exePath(buffer);
+    size_t pos = exePath.find_last_of(L"\\/");
+    if (pos != std::wstring::npos) {
+        return exePath.substr(0, pos);
+    }
+    return L""; // 실패 시 빈 문자열 반환
 }
