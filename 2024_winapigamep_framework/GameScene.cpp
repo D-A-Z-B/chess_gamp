@@ -3,6 +3,7 @@
 #include "Ground.h"
 #include "Player.h"
 #include "Aim.h"
+#include "TimeManager.h"
 void GameScene::Init()
 {
 	Object* pPlayer = new Player;

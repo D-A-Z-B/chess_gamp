@@ -3,6 +3,7 @@
 #include "Boss.h"
 #include "Player.h"
 #include "CollisionManager.h"
+#include "TimeManager.h"
 
 #include "Background.h"
 #include "Ground.h"

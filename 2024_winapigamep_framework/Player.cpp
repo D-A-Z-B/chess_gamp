@@ -77,7 +77,7 @@ Player::~Player()
 void Player::Update()
 {
 	stateMachine->CurrentState->UpdateState();
-
+	
 	if (GetPos().y < GROUND && !isDash)
 	{
 		yVelocity += gravity * 200.f * fDT;
@@ -102,7 +102,6 @@ void Player::Update()
 	}
 	if (isShooting)
 	{
-		std::cout << fireAnimTimer << "\n";
 		fireAnimTimer += fDT;
 		if (fireAnimTimer >= fireAnimTime)
 		{
