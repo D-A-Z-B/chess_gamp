@@ -11,6 +11,8 @@
 
 void BossTestScene::Init()
 {
+	Scene::Init();
+
 	Boss* pBoss = new Boss();
 	pBoss->SetName(L"Boss");
 	pBoss->SetPos({SCREEN_WIDTH / 2.f, 150.f });

@@ -6,6 +6,8 @@
 #include "TimeManager.h"
 void GameScene::Init()
 {
+	Scene::Init();
+
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f, 520.f });
 	pPlayer->SetSize({ 10.f,10.f });

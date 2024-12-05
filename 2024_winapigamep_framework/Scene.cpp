@@ -17,6 +17,11 @@ Scene::~Scene()
 	Release();
 }
 
+void Scene::Init()
+{
+	isAlphaBlend = false;
+}
+
 void Scene::Update()
 {
 	for (UINT i = 0; i < (UINT)LAYER::END; ++i)

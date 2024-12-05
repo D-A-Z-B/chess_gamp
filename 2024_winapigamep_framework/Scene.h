@@ -7,7 +7,7 @@ public:
 	Scene();
 	virtual ~Scene(); // 가상 소멸자
 public:
-	virtual void Init() abstract;
+	virtual void Init();
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void Render(HDC _hdc);
