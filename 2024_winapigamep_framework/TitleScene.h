@@ -12,9 +12,13 @@ public:
 	virtual void Init() override;
 	virtual void Update() override;
 private:
+	void NextSceneRoutine();
+private:
 	vector<Background*>vecBackground;
 	vector<Text*> vecButtons;
 private:
 	int currentSelectedNumber = 0;
+
+	bool isNextScene = false;
 };
 

@@ -107,7 +107,7 @@ void KnightState::AttackRoutine()
         static bool isSoundPlay = false;
 
         if (isSoundPlay == false) {
-            GET_SINGLE(ResourceManager)->Play(L"BossMove_Knight");
+            GET_SINGLE(ResourceManager)->Play(L"BossMove_Knight", SOUND_CHANNEL::BOSS);
 
             isSoundPlay = true;
         }
@@ -156,7 +156,7 @@ void KnightState::AttackRoutine()
         else {
             GET_SINGLE(CameraManager)->Shake(50, 0.2f);
 
-            GET_SINGLE(ResourceManager)->Play(L"TakeDown");
+            GET_SINGLE(ResourceManager)->Play(L"TakeDown", SOUND_CHANNEL::BOSS);
 
             isDrop = false;
             isWait = true;

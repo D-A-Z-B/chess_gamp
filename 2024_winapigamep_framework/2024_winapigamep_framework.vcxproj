@@ -173,6 +173,7 @@
     <ClInclude Include="BishopState.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossState.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="DiePanel.h" />
     <ClInclude Include="PlayerDashState.h" />
@@ -182,6 +183,7 @@
     <ClInclude Include="PlayerMoveState.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="QueenProjectile.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
@@ -233,6 +235,7 @@
     <ClCompile Include="BishopState.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossState.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="DiePanel.cpp" />
     <ClCompile Include="PlayerDashState.cpp" />
@@ -242,6 +245,7 @@
     <ClCompile Include="PlayerMoveState.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="QueenProjectile.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />

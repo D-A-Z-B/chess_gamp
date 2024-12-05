@@ -44,9 +44,9 @@ public:
 		currentStateEnum = newStateEnum;
 	}
 public :
-	void ApplyDamage() { m_hp--; }
+	void ApplyDamage();
 private:
-	int m_hp = 800;
+	int m_hp;
 	float patternDelayTime = 0;
 	Texture* m_pTex;
 };

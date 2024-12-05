@@ -69,7 +69,7 @@ void TitleScene::Init()
 	vecButtons.push_back(exitText);
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"TitleBGM", L"Sound\\TitleBGM.mp3", true);
-	GET_SINGLE(ResourceManager)->Play(L"TitleBGM");
+	GET_SINGLE(ResourceManager)->Play(L"TitleBGM", SOUND_CHANNEL::BGM);
 }
 
 void TitleScene::Update()
@@ -77,30 +77,6 @@ void TitleScene::Update()
 	Scene::Update();
 
 	const float speed = -50.f * fDT;
-
-	if (GET_KEYDOWN(KEY_TYPE::ENTER)) {
-		if (vecButtons[currentSelectedNumber]->GetCurrentText() == L"Start") {
-			GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
-			GET_SINGLE(EventManager)->ChangeScene(L"BossTestScene");
-		}
-		else if (vecButtons[currentSelectedNumber]->GetCurrentText() == L"Exit") {
-			GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
-			std::exit(0);
-		}
-	}
-	if (GET_KEYDOWN(KEY_TYPE::UP)) {
-		currentSelectedNumber--;
-		if (currentSelectedNumber < 0) {
-			currentSelectedNumber = vecButtons.size() - 1;
-		}
-	}
-
-	if (GET_KEYDOWN(KEY_TYPE::DOWN)) {
-		currentSelectedNumber++;
-		if (currentSelectedNumber >= vecButtons.size()) {
-			currentSelectedNumber = 0;
-		}
-	}
 
 	for (int i = 0; i < vecButtons.size(); ++i) {
 		wstring path = GET_SINGLE(ResourceManager)->GetResPath();
@@ -124,5 +100,60 @@ void TitleScene::Update()
 		}
 
 		pBackground->SetPos(vPos);
+	}
+
+	if (isNextScene) {
+		NextSceneRoutine();
+		return;
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::ENTER)) {
+		if (vecButtons[currentSelectedNumber]->GetCurrentText() == L"Start") {
+			isNextScene = true;
+		}
+		else if (vecButtons[currentSelectedNumber]->GetCurrentText() == L"Exit") {
+			GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+			std::exit(0);
+		}
+	}
+	if (GET_KEYDOWN(KEY_TYPE::UP)) {
+		currentSelectedNumber--;
+		if (currentSelectedNumber < 0) {
+			currentSelectedNumber = vecButtons.size() - 1;
+		}
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::DOWN)) {
+		currentSelectedNumber++;
+		if (currentSelectedNumber >= vecButtons.size()) {
+			currentSelectedNumber = 0;
+		}
+	}
+}
+
+void TitleScene::NextSceneRoutine()
+{
+	static float elapsedTime = 0;
+	float time = 1.5f;
+
+	static bool isExecutedFadeIn = false;
+
+	if (isExecutedFadeIn == false) {
+		StartBlending(time, 255, true);
+		isExecutedFadeIn = true;
+	}
+
+	if (elapsedTime < time) {
+		float t = elapsedTime / time;
+
+		GET_SINGLE(ResourceManager)->Volume(SOUND_CHANNEL::BGM, 1 - t);
+
+		elapsedTime += fDT;
+	}
+	else {
+		elapsedTime = 0;
+		isExecutedFadeIn = false;
+		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+		GET_SINGLE(EventManager)->ChangeScene(L"BossTestScene");
 	}
 }

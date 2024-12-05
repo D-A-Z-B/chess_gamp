@@ -5,6 +5,7 @@
 #include "ResourceManager.h"
 #include "Collider.h"
 #include "EventManager.h"
+#include "Boss.h"
 Projectile::Projectile()
 	: m_angle(0.f)
 	, m_vDir(1.f, 1.f)
@@ -32,7 +33,14 @@ void Projectile::Update()
 	vPos.y += m_vDir.y * m_speed * fDT;
 	SetPos(vPos);
 	Vec2 vSize = GetSize();
-	if (vPos.y < -vSize.y)
+
+	RECT clientRect;
+	GetClientRect(GetActiveWindow(), &clientRect);
+
+	if (vPos.x + vSize.x / 2 < clientRect.left ||
+		vPos.x - vSize.x / 2 > clientRect.right ||
+		vPos.y + vSize.y / 2 < clientRect.top ||
+		vPos.y - vSize.y / 2 > clientRect.bottom)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
@@ -140,6 +148,7 @@ void Projectile::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Boss")
 	{
+		dynamic_cast<Boss*>(pOtherObj)->ApplyDamage();
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }

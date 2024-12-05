@@ -232,6 +232,9 @@
     <ClInclude Include="PlayerDeadState.h">
       <Filter>Engine\03. Object\Player\State</Filter>
     </ClInclude>
+    <ClInclude Include="Effect.h">
+    	<Filter>Engine\03. Object</Filter>
+    </ClInclude>
     <ClInclude Include="DiePanel.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -405,6 +408,9 @@
     </ClCompile>
     <ClCompile Include="PlayerDeadState.cpp">
       <Filter>Engine\03. Object\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+    	<Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="DiePanel.cpp">
       <Filter>Engine\03. Object</Filter>

@@ -60,6 +60,10 @@ void QueenState::AttackRoutine()
 
 	static bool isRefresh = true;
 
+	static int projectileIndex = 0;
+	static float projectileElapsedTime = 0;
+	float projectileDelay = attackTime / 8; // 발사체 딜레이
+
 	if (currentAttackCount == attackCount) {
 		this->isAttack = false;
 		isEnd = true;
@@ -70,7 +74,7 @@ void QueenState::AttackRoutine()
 
 	if (isRefresh) {
 		Vec2 vPos = __super::boss->GetPos();
-		startPos = { vPos.x, 200.f  };
+		startPos = { vPos.x, 200.f };
 
 		float randX;
 
@@ -85,7 +89,6 @@ void QueenState::AttackRoutine()
 
 	if (isWait) {
 		if (waitElapsedTime < waitTime) {
-
 			waitElapsedTime += fDT;
 		}
 		else {
@@ -99,7 +102,7 @@ void QueenState::AttackRoutine()
 	if (isMove) {
 		if (moveElapsedTime < moveTime) {
 			float t = moveElapsedTime / moveTime;
-			float calcT = t ==  0 ? 0 : t == 1 ? 1 : t < 0.5 ? pow(2, 20 * t - 10) / 2 : (2 - pow(2, -20 * t + 10)) / 2;
+			float calcT = t == 0 ? 0 : t == 1 ? 1 : t < 0.5 ? pow(2, 20 * t - 10) / 2 : (2 - pow(2, -20 * t + 10)) / 2;
 
 			float x = startPos.x * (1 - calcT) + endPos.x * calcT;
 			float y = startPos.y * (1 - calcT) + endPos.y * calcT;
@@ -120,33 +123,43 @@ void QueenState::AttackRoutine()
 		vector<int> dx{ 1, -1, 0, 0, 1, 1, -1, -1 }; // 우, 좌, 상, 하, 우상, 우하, 좌상, 좌하
 		vector<int> dy{ 0, 0, -1, 1, -1, 1, -1, 1 }; // Y축 방향 반전
 
+		static bool isSoundPlay = false;
 
-		static bool alreadyCreatedProjectile = false;
-
-		if (alreadyCreatedProjectile == false) {
-
-			for (int i = 0; i < 8; ++i) {
-				CreateProjectile(i, {dx[i], dy[i]});
-			}
-
-			alreadyCreatedProjectile = true;
+		if (!isSoundPlay) {
+			GET_SINGLE(ResourceManager)->Play(L"Queen_Attack", SOUND_CHANNEL::BOSS);
+			isSoundPlay = true;
 		}
 
-		if (attackElapsedTime < attackTime) {
-			attackElapsedTime += fDT;
+		if (projectileIndex < dx.size()) {
+			if (projectileElapsedTime >= projectileDelay) {
+				CreateProjectile(projectileIndex, { dx[projectileIndex], dy[projectileIndex] });
+				projectileIndex++;
+				projectileElapsedTime = 0;
+			}
+			else {
+				projectileElapsedTime += fDT;
+			}
 		}
 		else {
-			attackElapsedTime = 0;
-			currentAttackCount++;
+			if (attackElapsedTime < attackTime) {
+				attackElapsedTime += fDT;
+			}
+			else {
+				attackElapsedTime = 0;
+				currentAttackCount++;
+				isSoundPlay = false;
 
-			isAttack = false;
-			isWait = true;
-			isRefresh = true;
+				isAttack = false;
+				isWait = true;
+				isRefresh = true;
 
-			alreadyCreatedProjectile = false;
+				projectileIndex = 0;
+				projectileElapsedTime = 0;
+			}
 		}
 	}
 }
+
 
 void QueenState::EndRoutine()
 {
@@ -213,6 +226,7 @@ void QueenState::CreateProjectile(int idx, Vec2 dir)
 	QueenProjectile* projectile = new QueenProjectile();
 	projectile->SetProjectileTexture(L"sprite_" + std::to_wstring(idx));
 	projectile->SetSize({ 300, 300 });
+	cout << "소환" << endl;
 
 	Vec2 vPos = __super::boss->GetPos();
 

@@ -88,17 +88,17 @@ void ResourceManager::LoadSound(const wstring& _key, const wstring& _path, bool 
 	m_mapSounds.insert({ _key, ptSound });
 }
 
-void ResourceManager::Play(const wstring& _key)
+void ResourceManager::Play(const wstring& _key, SOUND_CHANNEL channel)
 {
 	tSoundInfo* ptSound = FindSound(_key);
 	if (!ptSound)
 		return;
 	m_pSoundSystem->update(); // play할때 update를 주기적으로 호출해야 사운드가 정지되지 않음.
-	SOUND_CHANNEL eChannel = SOUND_CHANNEL::BGM;
-	if (!ptSound->IsLoop)
-		eChannel = SOUND_CHANNEL::EFFECT;
+	//SOUND_CHANNEL eChannel = SOUND_CHANNEL::BGM;
+	//if (!ptSound->IsLoop)
+	//	eChannel = SOUND_CHANNEL::EFFECT;
 	// 사운드 재생 함수. &channel로 어떤 채널을 통해 재생되는지 포인터 넘김
-	m_pSoundSystem->playSound(ptSound->pSound, nullptr, false, &m_pChannel[(UINT)eChannel]);
+	m_pSoundSystem->playSound(ptSound->pSound, nullptr, false, &m_pChannel[(UINT)channel]);
 }
 
 void ResourceManager::Stop(SOUND_CHANNEL _channel)

@@ -63,7 +63,7 @@ void PawnState::StartRoutine() {
     static bool isSoundPlay = false;
 
     if (isSoundPlay == false) {
-        GET_SINGLE(ResourceManager)->Play(L"BossMove");
+        GET_SINGLE(ResourceManager)->Play(L"BossMove", SOUND_CHANNEL::BOSS);
 
         isSoundPlay = true;
     }
@@ -107,7 +107,7 @@ void PawnState::EndRoutine() {
     static bool isSoundPlay = false;
 
     if (isSoundPlay == false) {
-        GET_SINGLE(ResourceManager)->Play(L"BossMove");
+        GET_SINGLE(ResourceManager)->Play(L"BossMove", SOUND_CHANNEL::BOSS);
 
         isSoundPlay = true;
     }
@@ -168,7 +168,7 @@ void PawnState::NextPattern() {
 
     endRoutineElapsedTime = 0;
     //stateMachine->ChangeState(BOSS_STATE::QUEEN);
-    __super::boss->SetCurrentStateEnum(static_cast<BOSS_STATE>(BOSS_STATE::ROOK));
-    stateMachine->ChangeState(static_cast<BOSS_STATE>(BOSS_STATE::ROOK));
+    __super::boss->SetCurrentStateEnum(static_cast<BOSS_STATE>(randNum));
+    stateMachine->ChangeState(static_cast<BOSS_STATE>(randNum));
 }
 

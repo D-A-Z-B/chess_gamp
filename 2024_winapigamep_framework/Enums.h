@@ -9,7 +9,9 @@ enum class LAYER
 	BOSS,
 	PROJECTILE,
 	BOSS_PROJECTILE,
+	PORTAL,
 	PLAYER,
+	EFFECT,
 	// UI
 	UI,
 	END
@@ -44,4 +46,8 @@ enum class BOSS_STATE
 enum class PLAYER_STATE
 {
 	IDLE, MOVE, JUMP, DASH, DEAD
+};
+
+enum class EFFECT_TYPE {
+	BOSS_DEAD, BOSS_HIT, PLAYER_DEAD
 };
