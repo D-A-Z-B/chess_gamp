@@ -39,6 +39,9 @@ private:
 	float dashCoolTimer = 0;
 	float dashCoolTime = 0.5;
 
+	float fireAnimTimer = 0;
+	float fireAnimTime = 0.2f;
+
 	float gravity = 9.8f;
 
 	bool isShooting = false;

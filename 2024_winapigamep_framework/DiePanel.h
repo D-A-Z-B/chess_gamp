@@ -1,18 +1,19 @@
 #pragma once
 #include "Object.h"
 
-class Texture;
+class Text;
 
-class Aim :
+class DiePanel :
     public Object
 {
 public:
-	Aim();
-	~Aim();
+	DiePanel();
+	~DiePanel();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 private:
-	Texture* m_pTex;
+	vector<Text*> m_txtObj;
+	Text* gameOverTxt;
 };
 

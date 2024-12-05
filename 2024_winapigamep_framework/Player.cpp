@@ -41,8 +41,8 @@ Player::Player()
 	GetComponent<Animator>()->CreateAnimation(L"RPlayerIdleFire", m_pFireTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 1, 0.f);
 	GetComponent<Animator>()->CreateAnimation(L"LPlayerMoveFire", m_pFireTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.1f);
 	GetComponent<Animator>()->CreateAnimation(L"RPlayerMoveFire", m_pFireTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.1f);
-	GetComponent<Animator>()->CreateAnimation(L"LPlayerDead", m_pDeadTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 8, 0.1f);
-	GetComponent<Animator>()->CreateAnimation(L"RPlayerDead", m_pDeadTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 8, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"LPlayerDead", m_pDeadTex, Vec2(0.f, 0.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 9, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"RPlayerDead", m_pDeadTex, Vec2(0.f, 128.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 9, 0.1f);
 
 	AddComponent<Collider>();
 	GetComponent<Collider>()->SetOwner(this);
@@ -61,6 +61,7 @@ Player::Player()
 
 	//aim
 	Object* pAim = new Aim;
+	pAim->SetSize({ 50, 50 });
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pAim, LAYER::AIM);
 
 	//set
@@ -76,7 +77,7 @@ Player::~Player()
 void Player::Update()
 {
 	stateMachine->CurrentState->UpdateState();
-
+	
 	if (GetPos().y < GROUND && !isDash)
 	{
 		yVelocity += gravity * 200.f * fDT;
@@ -86,18 +87,26 @@ void Player::Update()
 		dashCoolTimer += fDT;
 	}
 
-	if(!isDead)
+	if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && !isDead)
 	{
-		if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+		if (!isShooting)
 		{
 			isShooting = true;
 			GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound", SOUND_CHANNEL::PLAYER);
 			ChangeAnimation(curAnimaton, true);
-
-			CreateProjectile();
 		}
-		else if (GET_KEYUP(KEY_TYPE::LBUTTON))
+
+		fireAnimTimer = 0;
+		GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound");
+
+		CreateProjectile();
+	}
+	if (isShooting)
+	{
+		fireAnimTimer += fDT;
+		if (fireAnimTimer >= fireAnimTime)
 		{
+			fireAnimTimer = 0;
 			isShooting = false;
 			ChangeAnimation(curAnimaton, true);
 		}
@@ -143,11 +152,6 @@ void Player::CheckChangeState()
 
 void Player::Render(HDC _hdc)
 {
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = m_pTex->GetWidth();
-	int height = m_pTex->GetHeight();
-
 	ComponentRender(_hdc);
 }
 
@@ -165,12 +169,19 @@ void Player::ChangeAnimation(wstring changeAnimation, bool isRepeat)
 {
 	curAnimaton = changeAnimation;
 
+	//std::wcout << changeAnimation;
 	GetComponent<Animator>()->StopAnimation();
 	if (isShooting)
+	{
+		//std::cout << "Fire";
 		GetComponent<Animator>()
 			->PlayAnimation((isPacing == 1 ? L"R" : L"L") + changeAnimation + L"Fire", isRepeat, true);
+	}
 	else
+	{
 		GetComponent<Animator>()->PlayAnimation((isPacing == 1 ? L"R" : L"L") + changeAnimation, isRepeat);
+	}
+	//std::cout << "\n";
 }
 
 void Player::SetDead()
@@ -183,7 +194,7 @@ void Player::CreateProjectile()
 {
 	Projectile* pProj = new Projectile;
 	Vec2 vPos = GetPos();
-	vPos.y -= GetSize().y / 2.f;
+	vPos.x += (GetSize().x / 2.f) * isPacing;
 	pProj->SetPos(vPos);
 	pProj->SetSize({ 30.f,30.f });
 
