@@ -182,6 +182,7 @@
     <ClInclude Include="PlayerMoveState.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="QueenProjectile.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
@@ -242,6 +243,7 @@
     <ClCompile Include="PlayerMoveState.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="QueenProjectile.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />

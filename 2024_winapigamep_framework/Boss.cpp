@@ -22,7 +22,7 @@
 
 #include "StateMachine.h"
 
-Boss::Boss() : m_hp(800), m_pTex(nullptr)
+Boss::Boss() : m_hp(500), m_pTex(nullptr)
 {
 
 }
@@ -83,9 +83,9 @@ void Boss::EnterCollision(Collider* _other)
 {
 	Object* pOtherObj = _other->GetOwner();
 
-	//if (pOtherObj->GetName() == L"PlayerBullet") {
-	//	GET_SINGLE(ResourceManager)->Play(L"Boss_Hurt", SOUND_CHANNEL::EFFECT);
-	//}
+	if (pOtherObj->GetName() == L"PlayerBullet") {
+		GET_SINGLE(ResourceManager)->Play(L"Boss_Hurt", SOUND_CHANNEL::EFFECT);
+	}
 
 	if (GetCurrentStateEnum() == BOSS_STATE::PAWN) return;
 
@@ -116,7 +116,9 @@ void Boss::ApplyDamage()
 		Vec2 vPos = GetPos();
 		eff->SetPos(vPos);
 		eff->SetSize({ 500, 500 });
+		GET_SINGLE(ResourceManager)->Play(L"BossDead", SOUND_CHANNEL::BOSS);
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(eff, LAYER::EFFECT);
+		GET_SINGLE(CameraManager)->Shake(50, 0.1f);
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 	cout << "Current Hp: " + std::to_string(m_hp) << endl;

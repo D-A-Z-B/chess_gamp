@@ -81,6 +81,8 @@ void Core::MainUpdate()
 	GET_SINGLE(SceneManager)->Update();
 	GET_SINGLE(CollisionManager)->Update();
 	GET_SINGLE(CameraManager)->Update();
+
+	GET_SINGLE(ResourceManager)->m_pSoundSystem->update();
 }
 
 void Core::MainRender()

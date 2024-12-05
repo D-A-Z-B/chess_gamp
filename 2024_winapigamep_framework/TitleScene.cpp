@@ -144,6 +144,10 @@ void TitleScene::NextSceneRoutine()
 	}
 
 	if (elapsedTime < time) {
+		float t = elapsedTime / time;
+
+		GET_SINGLE(ResourceManager)->Volume(SOUND_CHANNEL::BGM, 1 - t);
+
 		elapsedTime += fDT;
 	}
 	else {

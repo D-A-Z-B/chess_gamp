@@ -33,7 +33,14 @@ void Projectile::Update()
 	vPos.y += m_vDir.y * m_speed * fDT;
 	SetPos(vPos);
 	Vec2 vSize = GetSize();
-	if (vPos.y < -vSize.y)
+
+	RECT clientRect;
+	GetClientRect(GetActiveWindow(), &clientRect);
+
+	if (vPos.x + vSize.x / 2 < clientRect.left ||
+		vPos.x - vSize.x / 2 > clientRect.right ||
+		vPos.y + vSize.y / 2 < clientRect.top ||
+		vPos.y - vSize.y / 2 > clientRect.bottom)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}

@@ -3,7 +3,7 @@
 #pragma comment(lib, "fmod_vc")
 enum class SOUND_CHANNEL //사운드마다 채널
 {
-	BGM, EFFECT, PLAYER, BOSS, END
+	BGM, EFFECT, BOSS, PLAYER, END
 };
 struct tSoundInfo
 {
@@ -29,11 +29,12 @@ public:
 	void Pause(SOUND_CHANNEL _channel, bool _ispause);
 private:
 	tSoundInfo* FindSound(const wstring& _key);
+public:
+	FMOD::System* m_pSoundSystem; // 사운드 시스템
 private:
 	wchar_t m_resourcePath[255] = {};
 	map<wstring, Texture*> m_mapTextures;
 	map<wstring, tSoundInfo*> m_mapSounds;
-	FMOD::System* m_pSoundSystem; // 사운드 시스템
 	FMOD::Channel* m_pChannel[(UINT)SOUND_CHANNEL::END]; // 오디오 채널
 };
 

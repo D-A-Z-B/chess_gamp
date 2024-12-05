@@ -19,6 +19,7 @@
 #include "SceneManager.h"
 #include "PlayerManager.h"
 #include "ResourceManager.h"
+#include "CameraManager.h"
 
 #include "Scene.h"
 #include "StateMachine.h"
@@ -96,7 +97,7 @@ void Player::Update()
 		}
 
 		fireAnimTimer = 0;
-		GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound", SOUND_CHANNEL::PLAYER);
+		//GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound", SOUND_CHANNEL::PLAYER);
 
 		CreateProjectile();
 	}
