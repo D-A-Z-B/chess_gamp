@@ -10,7 +10,7 @@ void PlayerDeadState::Enter()
 	player->SetCurrentStateEnum(PLAYER_STATE::DEAD);
 	player->SetDead();
 
-	GET_SINGLE(SceneManager)->GetCurrentScene()->StartBlending(0.5f, 150);
+	GET_SINGLE(SceneManager)->GetCurrentScene()->StartSceneBlending(0.5f, 150, false);
 
 	Object* pDiePanel = new DiePanel();
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pDiePanel, LAYER::UI);

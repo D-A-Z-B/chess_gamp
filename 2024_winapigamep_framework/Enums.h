@@ -12,7 +12,6 @@ enum class LAYER
 	PLAYER,
 	// UI
 	UI,
-	AIM,
 	END
 };
 

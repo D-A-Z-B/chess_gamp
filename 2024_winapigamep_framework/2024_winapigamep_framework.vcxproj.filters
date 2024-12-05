@@ -235,6 +235,9 @@
     <ClInclude Include="DiePanel.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework.rc">
@@ -405,6 +408,9 @@
     </ClCompile>
     <ClCompile Include="DiePanel.cpp">
       <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

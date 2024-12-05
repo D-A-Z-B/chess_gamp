@@ -173,6 +173,7 @@
     <ClInclude Include="BishopState.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossState.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="DiePanel.h" />
     <ClInclude Include="PlayerDashState.h" />
     <ClInclude Include="PlayerDeadState.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="BishopState.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossState.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="DiePanel.cpp" />
     <ClCompile Include="PlayerDashState.cpp" />
     <ClCompile Include="PlayerDeadState.cpp" />

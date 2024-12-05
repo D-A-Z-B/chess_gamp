@@ -102,7 +102,7 @@ void Scene::AlphaBlendRender(HDC _hdc)
 	DeleteDC(tempDC);
 }
 
-void Scene::StartBlending(float fadeTime, int percent, bool isUIBlend)
+void Scene::StartSceneBlending(float fadeTime, int percent, bool isUIBlend)
 {
 	isAlphaBlend = true;
 	m_executeDelay = fadeTime;
