@@ -30,8 +30,8 @@ void Animator::Render(HDC _hdc)
 		m_pCurrentAnimation->Render(_hdc);
 }
 
-void Animator::CreateAnimation(const wstring& _strName, Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, UINT _framecount, float _fDuration, bool _isRotate)
-{
+void Animator::CreateAnimation(const wstring& _strName, Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, UINT _framecount, float _fDuration, bool _isRotate) {
+	// 기존 코드에서 크기 설정
 	Animation* pAnim = FindAnimation(_strName);
 	if (pAnim != nullptr)
 		return;
@@ -42,6 +42,7 @@ void Animator::CreateAnimation(const wstring& _strName, Texture* _pTex, Vec2 _vL
 	pAnim->Create(_pTex, _vLT, _vSliceSize, _vStep, _framecount, _fDuration, _isRotate);
 	m_mapAnimations.insert({ _strName,pAnim });
 }
+
 
 Animation* Animator::FindAnimation(const wstring& _strName)
 {

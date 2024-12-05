@@ -63,7 +63,7 @@ void BishopState::Exit()
         if (isWait) {
             static bool isSoundPlay = false;
             if (isSoundPlay == false) {
-                GET_SINGLE(ResourceManager)->Play(L"Caution");
+                GET_SINGLE(ResourceManager)->Play(L"Caution", SOUND_CHANNEL::BOSS);
 
                 isSoundPlay = true;
             }
@@ -110,7 +110,7 @@ void BishopState::Exit()
 
 
             if (isSoundPlay == false) {
-                GET_SINGLE(ResourceManager)->Play(L"BossMove_isFast");
+                GET_SINGLE(ResourceManager)->Play(L"BossMove_isFast", SOUND_CHANNEL::BOSS);
 
                 isSoundPlay = true;
             }

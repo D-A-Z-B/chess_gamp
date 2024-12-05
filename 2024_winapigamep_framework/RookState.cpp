@@ -137,7 +137,7 @@ void RookState::AttackRoutine()
         static bool isSoundPlay = false;
 
         if (isSoundPlay == false) {
-            GET_SINGLE(ResourceManager)->Play(L"BossMove_Rook");
+            GET_SINGLE(ResourceManager)->Play(L"BossMove_Rook", SOUND_CHANNEL::BOSS);
             isSoundPlay = true;
         }
 

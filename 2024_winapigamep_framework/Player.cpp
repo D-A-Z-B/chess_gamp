@@ -91,7 +91,7 @@ void Player::Update()
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
 		{
 			isShooting = true;
-			GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound");
+			GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound", SOUND_CHANNEL::PLAYER);
 			ChangeAnimation(curAnimaton, true);
 
 			CreateProjectile();

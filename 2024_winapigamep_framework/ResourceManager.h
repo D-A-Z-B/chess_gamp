@@ -3,7 +3,7 @@
 #pragma comment(lib, "fmod_vc")
 enum class SOUND_CHANNEL //사운드마다 채널
 {
-	BGM, EFFECT, END
+	BGM, EFFECT, PLAYER, BOSS, END
 };
 struct tSoundInfo
 {
@@ -23,7 +23,7 @@ public:
 	void Release();
 public:
 	void LoadSound(const wstring& _key, const wstring& _path, bool _isLoop);
-	void Play(const wstring& _key);
+	void Play(const wstring& _key, SOUND_CHANNEL channel);
 	void Stop(SOUND_CHANNEL _channel);
 	void Volume(SOUND_CHANNEL _channel, float _vol);
 	void Pause(SOUND_CHANNEL _channel, bool _ispause);

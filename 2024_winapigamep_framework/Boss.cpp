@@ -11,6 +11,9 @@
 
 #include "Texture.h"
 #include "Collider.h"
+#include "Scene.h"
+
+#include "Effect.h"
 
 #include "InputManager.h"
 #include "SceneManager.h";
@@ -19,7 +22,7 @@
 
 #include "StateMachine.h"
 
-Boss::Boss() : m_hp(100), m_pTex(nullptr)
+Boss::Boss() : m_hp(10), m_pTex(nullptr)
 {
 
 }
@@ -78,9 +81,13 @@ void Boss::Render(HDC _hdc)
 
 void Boss::EnterCollision(Collider* _other)
 {
-	if (GetCurrentStateEnum() == BOSS_STATE::PAWN) return;
-
 	Object* pOtherObj = _other->GetOwner();
+
+	if (pOtherObj->GetName() == L"PlayerBullet") {
+		GET_SINGLE(ResourceManager)->Play(L"Boss_Hurt", SOUND_CHANNEL::EFFECT);
+	}
+
+	if (GetCurrentStateEnum() == BOSS_STATE::PAWN) return;
 
 	if (pOtherObj->GetName() != L"PlayerBullet" && (GetCurrentStateEnum() == BOSS_STATE::BISHOP || GetCurrentStateEnum() == BOSS_STATE::ROOK)) {
 		GET_SINGLE(CameraManager)->Shake(50, 0.15f);
@@ -99,4 +106,18 @@ void Boss::StayCollision(Collider* _other)
 
 void Boss::ExitCollision(Collider* _other)
 {
+}
+
+void Boss::ApplyDamage()
+{
+	m_hp--;
+	if (m_hp <= 0) {
+		Effect* eff = new Effect(EFFECT_TYPE::BOSS_DEAD, 0.001f, false);
+		Vec2 vPos = GetPos();
+		eff->SetPos(vPos);
+		eff->SetSize({ 500, 500 });
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(eff, LAYER::EFFECT);
+		GET_SINGLE(EventManager)->DeleteObject(this);
+	}
+	cout << "Current Hp: " + std::to_string(m_hp) << endl;
 }

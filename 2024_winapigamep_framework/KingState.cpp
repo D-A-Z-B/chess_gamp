@@ -92,7 +92,7 @@ void KingState::AttackRoutine()
 	if (isMove) {
 		static bool isSoundPlay = false;
 		if (isSoundPlay == false) {
-			GET_SINGLE(ResourceManager)->Play(L"KingMove");
+			GET_SINGLE(ResourceManager)->Play(L"KingMove", SOUND_CHANNEL::BOSS);
 
 			isSoundPlay = true;
 		}
@@ -139,7 +139,7 @@ void KingState::AttackRoutine()
 		static bool isShaked = false;
 
 		if (isSoundPlay == false) {
-			GET_SINGLE(ResourceManager)->Play(L"KingAttack");
+			GET_SINGLE(ResourceManager)->Play(L"KingAttack", SOUND_CHANNEL::BOSS);
 
 			isSoundPlay = true;
 		}

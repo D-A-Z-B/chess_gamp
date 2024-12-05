@@ -4,6 +4,7 @@
 
 #include "TimeManager.h"
 #include "EventManager.h"
+#include "CameraManager.h"
 
 #include "Collider.h"
 #include "Texture.h"
@@ -74,6 +75,7 @@ void QueenProjectile::EnterCollision(Collider* _other)
 	{
 		Player* player = dynamic_cast<Player*>(pOtherObj);
 		(*player).stateMachine->ChangeState(PLAYER_STATE::DEAD);
+		GET_SINGLE(CameraManager)->Shake(50, 0.1f);
 	}
 }
 

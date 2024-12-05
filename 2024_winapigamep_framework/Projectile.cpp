@@ -5,6 +5,7 @@
 #include "ResourceManager.h"
 #include "Collider.h"
 #include "EventManager.h"
+#include "Boss.h"
 Projectile::Projectile()
 	: m_angle(0.f)
 	, m_vDir(1.f, 1.f)
@@ -140,6 +141,7 @@ void Projectile::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Boss")
 	{
+		dynamic_cast<Boss*>(pOtherObj)->ApplyDamage();
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }

@@ -40,6 +40,7 @@ using std::wstring;
 #define SCREEN_WIDTH  1280
 #define SCREEN_HEIGHT 720
 #define GROUND 550
+#define GAME_NAME L"Eternal Board"
 
 // 디버깅용 콘솔창
 #ifdef _DEBUG

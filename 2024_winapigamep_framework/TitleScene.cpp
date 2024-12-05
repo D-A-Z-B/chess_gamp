@@ -69,7 +69,7 @@ void TitleScene::Init()
 	vecButtons.push_back(exitText);
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"TitleBGM", L"Sound\\TitleBGM.mp3", true);
-	GET_SINGLE(ResourceManager)->Play(L"TitleBGM");
+	GET_SINGLE(ResourceManager)->Play(L"TitleBGM", SOUND_CHANNEL::BGM);
 }
 
 void TitleScene::Update()
