@@ -21,7 +21,7 @@ public:
 	{
 		return m_vecObj[(UINT)_type];
 	}
-	void StartBlending(float fadeTime, int percent);
+	void StartBlending(float fadeTime, int percent, bool isUiBlend);
 private:
 	void AlphaBlendRender(HDC _hdc);
 private:
@@ -31,5 +31,6 @@ private:
 	float m_executeDelay;
 	int alphaPercent;
 	bool isAlphaBlend;
+	bool isUIBlending;
 };
 

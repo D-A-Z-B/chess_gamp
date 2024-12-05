@@ -8,6 +8,7 @@ Scene::Scene()
 	, m_executeDelay(0.5f)
 	, alphaPercent(150)
 	, isAlphaBlend(false)
+	, isUIBlending(false)
 {
 }
 
@@ -61,9 +62,13 @@ void Scene::Render(HDC _hdc)
 	}
 
 	AlphaBlendRender(_hdc);
-	for (size_t j = 0; j < m_vecObj[(UINT)LAYER::UI].size();)
+
+	if(!isUIBlending)
 	{
-		m_vecObj[(UINT)LAYER::UI][j++]->Render(_hdc);
+		for (size_t j = 0; j < m_vecObj[(UINT)LAYER::UI].size();)
+		{
+			m_vecObj[(UINT)LAYER::UI][j++]->Render(_hdc);
+		}
 	}
 }
 
@@ -97,11 +102,12 @@ void Scene::AlphaBlendRender(HDC _hdc)
 	DeleteDC(tempDC);
 }
 
-void Scene::StartBlending(float fadeTime, int percent)
+void Scene::StartBlending(float fadeTime, int percent, bool isUIBlend)
 {
 	isAlphaBlend = true;
 	m_executeDelay = fadeTime;
 	alphaPercent = percent;
+	isUIBlending = isUIBlend;
 }
 
 void Scene::Release()
