@@ -56,7 +56,7 @@ void KingState::AttackRoutine()
 	float waitTime = 0.5f;
 
 	static float attackWaitElapsedTime = 0;
-	float attackWaitTime = 0.5f;
+	float attackWaitTime = 0.55f;
 
 	static float decreaseElapsedTime = 0;
 	float decreaseTime = attackTime / 2;

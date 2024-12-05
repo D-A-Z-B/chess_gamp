@@ -22,7 +22,7 @@
 
 #include "StateMachine.h"
 
-Boss::Boss() : m_hp(10), m_pTex(nullptr)
+Boss::Boss() : m_hp(800), m_pTex(nullptr)
 {
 
 }
@@ -83,9 +83,9 @@ void Boss::EnterCollision(Collider* _other)
 {
 	Object* pOtherObj = _other->GetOwner();
 
-	if (pOtherObj->GetName() == L"PlayerBullet") {
-		GET_SINGLE(ResourceManager)->Play(L"Boss_Hurt", SOUND_CHANNEL::EFFECT);
-	}
+	//if (pOtherObj->GetName() == L"PlayerBullet") {
+	//	GET_SINGLE(ResourceManager)->Play(L"Boss_Hurt", SOUND_CHANNEL::EFFECT);
+	//}
 
 	if (GetCurrentStateEnum() == BOSS_STATE::PAWN) return;
 

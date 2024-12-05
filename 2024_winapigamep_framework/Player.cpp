@@ -92,12 +92,11 @@ void Player::Update()
 		if (!isShooting)
 		{
 			isShooting = true;
-			GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound", SOUND_CHANNEL::PLAYER);
 			ChangeAnimation(curAnimaton, true);
 		}
 
 		fireAnimTimer = 0;
-		GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound");
+		GET_SINGLE(ResourceManager)->Play(L"PlayerShootSound", SOUND_CHANNEL::PLAYER);
 
 		CreateProjectile();
 	}
