@@ -7,7 +7,7 @@ public:
 	Scene();
 	virtual ~Scene(); // 가상 소멸자
 public:
-	virtual void Init() abstract;
+	virtual void Init();
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void Render(HDC _hdc);
@@ -21,7 +21,7 @@ public:
 	{
 		return m_vecObj[(UINT)_type];
 	}
-	void StartBlending(float fadeTime, int percent, bool isUiBlend);
+	void StartSceneBlending(float fadeTime, int percent, bool isUiBlend);
 private:
 	void AlphaBlendRender(HDC _hdc);
 private:

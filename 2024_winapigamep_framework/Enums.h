@@ -14,7 +14,6 @@ enum class LAYER
 	EFFECT,
 	// UI
 	UI,
-	AIM,
 	END
 };
 

@@ -63,7 +63,7 @@ Player::Player()
 	//aim
 	Object* pAim = new Aim;
 	pAim->SetSize({ 50, 50 });
-	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pAim, LAYER::AIM);
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pAim, LAYER::UI);
 
 	//set
 	GET_SINGLE(PlayerManager)->SetPlayer(this);
@@ -194,7 +194,7 @@ void Player::CreateProjectile()
 {
 	Projectile* pProj = new Projectile;
 	Vec2 vPos = GetPos();
-	vPos.x += (GetSize().x / 2.f) * isPacing;
+	vPos.x += (GetSize().x / 2.f - 10) * isPacing;
 	pProj->SetPos(vPos);
 	pProj->SetSize({ 30.f,30.f });
 

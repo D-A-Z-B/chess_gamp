@@ -19,6 +19,8 @@ TitleScene::~TitleScene()
 
 void TitleScene::Init()
 {
+	Scene::Init();
+
 	Background* pBackground1 = new Background();
 
 	wstring path = GET_SINGLE(ResourceManager)->GetResPath();
@@ -139,7 +141,7 @@ void TitleScene::NextSceneRoutine()
 	static bool isExecutedFadeIn = false;
 
 	if (isExecutedFadeIn == false) {
-		StartBlending(time, 255, true);
+		StartSceneBlending(time, 255, true);
 		isExecutedFadeIn = true;
 	}
 

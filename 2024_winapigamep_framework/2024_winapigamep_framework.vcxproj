@@ -174,7 +174,9 @@
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossState.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="DiePanel.h" />
+    <ClInclude Include="EndingScene.h" />
     <ClInclude Include="PlayerDashState.h" />
     <ClInclude Include="PlayerDeadState.h" />
     <ClInclude Include="PlayerIdleState.h" />
@@ -192,7 +194,6 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Define.h" />
-    <ClInclude Include="EndingScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
@@ -235,7 +236,9 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossState.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="DiePanel.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="PlayerDashState.cpp" />
     <ClCompile Include="PlayerDeadState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
@@ -252,7 +255,6 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
