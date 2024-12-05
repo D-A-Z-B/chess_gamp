@@ -222,7 +222,7 @@
     </ClInclude>
     <ClInclude Include="QueenProjectile.h">
       <Filter>Engine\03. Object\Boss</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="PlayerDeadState.h">
       <Filter>Engine\03. Object\Player\State</Filter>
     </ClInclude>
@@ -231,6 +231,9 @@
     </ClInclude>
     <ClInclude Include="PlayerDeadState.h">
       <Filter>Engine\03. Object\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="DiePanel.h">
+      <Filter>Engine\03. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -390,7 +393,7 @@
     </ClCompile>
     <ClCompile Include="QueenProjectile.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="PlayerDeadState.cpp">
       <Filter>Engine\03. Object\Player\State</Filter>
     </ClCompile>
@@ -399,6 +402,9 @@
     </ClCompile>
     <ClCompile Include="PlayerDeadState.cpp">
       <Filter>Engine\03. Object\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="DiePanel.cpp">
+      <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

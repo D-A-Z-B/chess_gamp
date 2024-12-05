@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "DiePanel.h"
 
 void PlayerDeadState::Enter()
 {
@@ -10,6 +11,9 @@ void PlayerDeadState::Enter()
 	player->SetDead();
 
 	GET_SINGLE(SceneManager)->GetCurrentScene()->StartBlending(0.5f, 150);
+
+	Object* pDiePanel = new DiePanel();
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pDiePanel, LAYER::UI);
 
 	__super::Enter();
 }
