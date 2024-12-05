@@ -9,6 +9,7 @@ public:
 	Portal();
 	~Portal();
 public:
+	void Init();
     void Update() override;
     void Render(HDC _hdc) override;
 public:
