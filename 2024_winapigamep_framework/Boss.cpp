@@ -23,7 +23,7 @@
 #include "StateMachine.h"
 #include "Portal.h"
 
-Boss::Boss() : m_hp(10), m_pTex(nullptr)
+Boss::Boss() : m_hp(500), m_pTex(nullptr)
 {
 
 }
@@ -121,7 +121,7 @@ void Boss::ApplyDamage()
 		portal->Init();
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(portal, LAYER::PORTAL);
 
-		Effect* eff = new Effect(EFFECT_TYPE::BOSS_DEAD, 0.001f, false);
+		Effect* eff = new Effect(EFFECT_TYPE::BOSS_DEAD, 0.002f, false);
 		eff->SetPos(vPos);
 		eff->SetSize({ 500, 500 });
 		GET_SINGLE(ResourceManager)->Play(L"BossDead", SOUND_CHANNEL::BOSS);

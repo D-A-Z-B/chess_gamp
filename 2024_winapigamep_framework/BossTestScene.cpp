@@ -43,6 +43,7 @@ void BossTestScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::BOSS);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::BOSS_ATTACK_OBJECT);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::BOSS_PROJECTILE);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::PORTAL);
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"TakeDown", L"Sound\\Boss\\TakeDown.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"Caution", L"Sound\\Boss\\Caution.mp3", false);

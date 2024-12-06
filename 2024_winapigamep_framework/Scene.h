@@ -21,7 +21,7 @@ public:
 	{
 		return m_vecObj[(UINT)_type];
 	}
-	void StartSceneBlending(float fadeTime, int percent, bool isUiBlend);
+	void StartSceneBlending(float fadeTime, int percent, bool isUiBlend, DWORD color = BLACKNESS);
 private:
 	void AlphaBlendRender(HDC _hdc);
 private:
@@ -32,5 +32,6 @@ private:
 	int alphaPercent;
 	bool isAlphaBlend;
 	bool isUIBlending;
+	DWORD color;
 };
 

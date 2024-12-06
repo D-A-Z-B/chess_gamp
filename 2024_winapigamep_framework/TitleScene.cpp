@@ -25,6 +25,8 @@ void TitleScene::Init()
 
 	wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 
+	StartSceneBlending(0, 0, true);
+
 	pBackground1->SetPos({ 0, 150 });
 	pBackground1->SetSize({ 1280, 1280 });
 	pBackground1->SetBackgroundTexture(L"board_plain_04_darkened");
@@ -65,7 +67,7 @@ void TitleScene::Init()
 	exitText->SetSize({ 175, 0 });
 	exitText->SetColor(RGB(255, 255, 255));
 	Vec2 exitTextSize = exitText->GetSize();
-	exitText->LoadFont(L"C:\\Cpp\\chess_gamp\\Output\\build\\Resource\\Font\\Galmuri7.ttf", L"Galmuri7 Regular", exitTextSize.x / 2);
+	exitText->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", exitTextSize.x / 2);
 	exitText->Init();
 	AddObject(exitText, LAYER::UI);
 	vecButtons.push_back(exitText);
@@ -155,6 +157,10 @@ void TitleScene::NextSceneRoutine()
 	else {
 		elapsedTime = 0;
 		isExecutedFadeIn = false;
+		isNextScene = false;
+		currentSelectedNumber = 0;
+		vecButtons.clear();
+		vecBackground.clear();
 		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 		GET_SINGLE(EventManager)->ChangeScene(L"BossTestScene");
 	}

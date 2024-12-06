@@ -86,7 +86,7 @@ void Scene::AlphaBlendRender(HDC _hdc)
 	HBITMAP tempBitmap = CreateCompatibleBitmap(_hdc, SCREEN_WIDTH, SCREEN_HEIGHT);
 	HBITMAP oldBitmap = (HBITMAP)SelectObject(tempDC, tempBitmap);
 
-	PatBlt(tempDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACKNESS);
+	PatBlt(tempDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, color);
 
 	float percent = m_executeTimer / m_executeDelay;
 
@@ -107,12 +107,13 @@ void Scene::AlphaBlendRender(HDC _hdc)
 	DeleteDC(tempDC);
 }
 
-void Scene::StartSceneBlending(float fadeTime, int percent, bool isUIBlend)
+void Scene::StartSceneBlending(float fadeTime, int percent, bool isUIBlend, DWORD color)
 {
 	isAlphaBlend = true;
 	m_executeDelay = fadeTime;
 	alphaPercent = percent;
 	isUIBlending = isUIBlend;
+	this->color = color;
 }
 
 void Scene::Release()
