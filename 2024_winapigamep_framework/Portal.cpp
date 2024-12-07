@@ -57,13 +57,13 @@ void Portal::ClearRoutine()
 	if (isExecutedFadeIn == false) {
 		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 		GET_SINGLE(SceneManager)->GetCurrentScene()->StartSceneBlending(time - 1.f, 255, true, WHITENESS);
-		GET_SINGLE(ResourceManager)->Play(L"noise", SOUND_CHANNEL::EFFECT);
+		GET_SINGLE(ResourceManager)->Play(L"ClearBGM", SOUND_CHANNEL::BGM);
 		isExecutedFadeIn = true;
 	}
 
 	if (elapsedTime < time) {
 		float t = elapsedTime / time;
-		GET_SINGLE(ResourceManager)->Volume(SOUND_CHANNEL::EFFECT, t);
+		GET_SINGLE(ResourceManager)->Volume(SOUND_CHANNEL::BGM, t);
 
 		elapsedTime += fDT;
 	}
@@ -71,7 +71,6 @@ void Portal::ClearRoutine()
 		elapsedTime = 0;
 		isExecutedFadeIn = false;
 		isClear = false;
-		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::EFFECT);
 		GET_SINGLE(EventManager)->ChangeScene(L"ClearScene");
 
 	}
