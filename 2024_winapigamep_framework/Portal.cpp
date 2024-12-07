@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include "Scene.h"
 
+#include "EventManager.h"
 #include "SceneManager.h"
 #include "TimeManager.h"
 #include "InputManager.h"
@@ -25,6 +26,8 @@ Portal::~Portal()
 
 void Portal::Init()
 {
+	GET_SINGLE(SceneManager)->GetCurrentScene()->StartSceneBlending(0, 0, true, WHITENESS);
+
 	Vec2 vSize = GetSize();
 	Vec2 vPos = GetPos();
 	AddComponent<Collider>();
@@ -47,19 +50,20 @@ void Portal::Render(HDC _hdc)
 void Portal::ClearRoutine()
 {
 	static float elapsedTime = 0;
-	float time = 3.5f;
+	float time = 4.f;
 
 	static bool isExecutedFadeIn = false;
 
 	if (isExecutedFadeIn == false) {
-		GET_SINGLE(SceneManager)->GetCurrentScene()->StartSceneBlending(time - 0.5f, 255, true, WHITENESS);
+		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->StartSceneBlending(time - 1.f, 255, true, WHITENESS);
+		GET_SINGLE(ResourceManager)->Play(L"noise", SOUND_CHANNEL::EFFECT);
 		isExecutedFadeIn = true;
 	}
 
 	if (elapsedTime < time) {
 		float t = elapsedTime / time;
-
-		GET_SINGLE(ResourceManager)->Volume(SOUND_CHANNEL::BGM, t);
+		GET_SINGLE(ResourceManager)->Volume(SOUND_CHANNEL::EFFECT, t);
 
 		elapsedTime += fDT;
 	}
@@ -67,6 +71,8 @@ void Portal::ClearRoutine()
 		elapsedTime = 0;
 		isExecutedFadeIn = false;
 		isClear = false;
+		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::EFFECT);
+		GET_SINGLE(EventManager)->ChangeScene(L"ClearScene");
 
 	}
 }

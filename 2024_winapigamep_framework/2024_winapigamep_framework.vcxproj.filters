@@ -235,7 +235,12 @@
     <ClInclude Include="Button.h">
       <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Portal.h" />
+    <ClInclude Include="Portal.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework.rc">
@@ -407,9 +412,11 @@
     <ClCompile Include="Button.cpp">
       <Filter>Engine\03. Object\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Portal.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClCompile Include="Portal.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

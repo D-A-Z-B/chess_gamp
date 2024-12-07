@@ -173,6 +173,7 @@
     <ClInclude Include="BishopState.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossState.h" />
+    <ClInclude Include="ClearScene.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="DiePanel.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="BishopState.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossState.cpp" />
+    <ClCompile Include="ClearScene.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="DiePanel.cpp" />
