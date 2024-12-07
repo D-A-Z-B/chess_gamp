@@ -110,6 +110,7 @@ void Scene::AlphaBlendRender(HDC _hdc)
 void Scene::StartSceneBlending(float fadeTime, int percent, bool isUIBlend, DWORD color)
 {
 	isAlphaBlend = true;
+	m_executeTimer = 0;
 	m_executeDelay = fadeTime;
 	alphaPercent = percent;
 	isUIBlending = isUIBlend;
