@@ -58,6 +58,7 @@ void BossTestScene::Init()
 	GET_SINGLE(ResourceManager)->LoadSound(L"Queen_Attack", L"Sound\\Boss\\Queen_Attack.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShootSound", L"Sound\\Player\\PlayerShootSound.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDead", L"Sound\\Player\\PlayerDead.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"noise", L"Sound\\noise.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"GameBGM", L"Sound\\GameBGM.mp3", true);
 
 	GET_SINGLE(ResourceManager)->Play(L"GameBGM", SOUND_CHANNEL::BGM);

@@ -45,8 +45,11 @@ public:
 	}
 public :
 	void ApplyDamage();
+	int GetCurrentHp() { return m_hp; }
+	int GetDefaultHp() { return defaultHp; }
 private:
 	int m_hp;
+	int defaultHp = m_hp;
 	float patternDelayTime = 0;
 	Texture* m_pTex;
 };
