@@ -19,4 +19,7 @@ private:
 private:
     bool isAttack;
     bool isEnd;
+    bool isRefresh = true;
+
+    int currentAttackCount = 0;
 };

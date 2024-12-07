@@ -12,6 +12,7 @@ void BishopState::Enter()
 	__super::Enter();
 
     isAttack = true;
+    currentAttackCount = 0;
 
 	cout << "Bishop State Enter" << endl;
 }
@@ -34,113 +35,113 @@ void BishopState::Exit()
 	__super::Exit();
 }
 
-    void BishopState::AttackRoutine()
-    {
-        static int currentAttackCount = 0;
-        int attackRepeatCount = 4;
+void BishopState::AttackRoutine()
+{
 
-        static float attackElapsedTime = 0;
-        float attackTime = 2.f;
+    int attackRepeatCount = 4;
 
-        static float waitElapsedTime = 0;
-        float waitTime = 1.2f;
+    static float attackElapsedTime = 0;
+    float attackTime = 2.f;
 
-        static bool isAttack = false;
-        static bool isWait = true;
-        static bool isRefresh = true;
-        static bool isTopDown = true; // 위에서 아래로
+    static float waitElapsedTime = 0;
+    float waitTime = 1.2f;
 
-        static Vec2 startPos;
-        static Vec2 endPos;
+    static bool isAttack = false;
+    static bool isWait = true;
+    static bool isRefresh = true;
+    static bool isTopDown = true; // 위에서 아래로
 
-        if (currentAttackCount == attackRepeatCount) {
-            currentAttackCount = 0;
-            isEnd = true;
-            this->isAttack = false;
-            return;
-        }
+    static Vec2 startPos;
+    static Vec2 endPos;
 
-        if (isWait) {
-            static bool isSoundPlay = false;
-            if (isSoundPlay == false) {
-                GET_SINGLE(ResourceManager)->Play(L"Caution", SOUND_CHANNEL::BOSS);
-
-                isSoundPlay = true;
-            }
-
-            if (waitElapsedTime < waitTime) {
-                float t = waitElapsedTime / waitTime;
-
-                if (waitElapsedTime > 1.f) {
-                    if (isRefresh) {
-                        if (isTopDown) {
-                            startPos.y = -200;
-                        }
-                        else {
-                            startPos.y = SCREEN_HEIGHT + 200;
-                        }
-
-                        startPos.x = rand() % 1280;
-                        Vec2 playerPos = GET_SINGLE(PlayerManager)->GetPlayer()->GetPos();
-                        Vec2 dir = playerPos - startPos;
-                        dir.Normalize();
-                        endPos = playerPos + dir * (sqrt(pow(SCREEN_WIDTH, 2) + pow(SCREEN_HEIGHT, 2)));
-
-                        __super::boss->SetPos(startPos);
-                        isTopDown = !isTopDown;
-                        isRefresh = false;
-                    }
-                }
-
-                waitElapsedTime += fDT;
-            }
-            else {
-
-                isWait = false;
-                isAttack = true;
-
-                isSoundPlay = false;
-
-                waitElapsedTime = 0;
-            }
-        }
-
-        if (isAttack) {
-            static bool isSoundPlay = false;
-
-
-            if (isSoundPlay == false) {
-                GET_SINGLE(ResourceManager)->Play(L"BossMove_isFast", SOUND_CHANNEL::BOSS);
-
-                isSoundPlay = true;
-            }
-
-            if (attackElapsedTime < attackTime) {
-                float t = attackElapsedTime / attackTime;
-
-                float calcT = sqrt(1 - pow(t - 1, 2));
-
-                float x = startPos.x * (1 - calcT) + endPos.x * calcT;
-                float y = startPos.y * (1 - calcT) + endPos.y * calcT;
-
-                __super::boss->SetPos({ x, y });
-
-                attackElapsedTime += fDT;
-            }
-            else {
-                attackElapsedTime = 0;
-
-                isAttack = false;
-                isWait = true;
-                isRefresh = true;
-
-                isSoundPlay = false;
-
-                currentAttackCount++;
-            }
-        }
-
+    if (currentAttackCount == attackRepeatCount) {
+        currentAttackCount = 0;
+        isEnd = true;
+        this->isAttack = false;
+        return;
     }
+
+    if (isWait) {
+        static bool isSoundPlay = false;
+        if (isSoundPlay == false) {
+            GET_SINGLE(ResourceManager)->Play(L"Caution", SOUND_CHANNEL::BOSS);
+
+            isSoundPlay = true;
+        }
+
+        if (waitElapsedTime < waitTime) {
+            float t = waitElapsedTime / waitTime;
+
+            if (waitElapsedTime > 1.f) {
+                if (isRefresh) {
+                    if (isTopDown) {
+                        startPos.y = -200;
+                    }
+                    else {
+                        startPos.y = SCREEN_HEIGHT + 200;
+                    }
+
+                    startPos.x = rand() % 1280;
+                    Vec2 playerPos = GET_SINGLE(PlayerManager)->GetPlayer()->GetPos();
+                    Vec2 dir = playerPos - startPos;
+                    dir.Normalize();
+                    endPos = playerPos + dir * (sqrt(pow(SCREEN_WIDTH, 2) + pow(SCREEN_HEIGHT, 2)));
+
+                    __super::boss->SetPos(startPos);
+                    isTopDown = !isTopDown;
+                    isRefresh = false;
+                }
+            }
+
+            waitElapsedTime += fDT;
+        }
+        else {
+
+            isWait = false;
+            isAttack = true;
+
+            isSoundPlay = false;
+
+            waitElapsedTime = 0;
+        }
+    }
+
+    if (isAttack) {
+        static bool isSoundPlay = false;
+
+
+        if (isSoundPlay == false) {
+            GET_SINGLE(ResourceManager)->Play(L"BossMove_isFast", SOUND_CHANNEL::BOSS);
+
+            isSoundPlay = true;
+        }
+
+        if (attackElapsedTime < attackTime) {
+            float t = attackElapsedTime / attackTime;
+
+            float calcT = sqrt(1 - pow(t - 1, 2));
+
+            float x = startPos.x * (1 - calcT) + endPos.x * calcT;
+            float y = startPos.y * (1 - calcT) + endPos.y * calcT;
+
+            __super::boss->SetPos({ x, y });
+
+            attackElapsedTime += fDT;
+        }
+        else {
+            attackElapsedTime = 0;
+
+            isAttack = false;
+            isWait = true;
+            isRefresh = true;
+
+            isSoundPlay = false;
+
+            currentAttackCount++;
+        }
+    }
+
+}
 
 void BishopState::EndRoutine()
 {

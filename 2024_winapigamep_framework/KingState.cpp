@@ -18,7 +18,7 @@ void KingState::Enter()
 	cout << "King State Enter" << endl;
 
 	isAttack = true;
-
+	currentAttackCount = 0;
 }
 
 void KingState::UpdateState()
@@ -43,7 +43,6 @@ void KingState::Exit()
 
 void KingState::AttackRoutine()
 {
-	static int currentAttackCount = 0;
 	int attackCount = 4;
 
 	static float moveElapsedTime = 0;

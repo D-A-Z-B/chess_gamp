@@ -17,5 +17,6 @@ private:
 private:
     bool isAttack = false;
     bool isEnd = false;
+    int currentAttackCount;
 };
 

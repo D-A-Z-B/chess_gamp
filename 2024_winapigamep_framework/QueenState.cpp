@@ -14,6 +14,7 @@ void QueenState::Enter()
 
 	isAttack = true;
 	isEnd = false;
+	isRefresh = true;
 
 	cout << "Queen State Enter" << endl;
 }
@@ -39,7 +40,6 @@ void QueenState::Exit()
 
 void QueenState::AttackRoutine()
 {
-	static int currentAttackCount = 0;
 	int attackCount = 4;
 
 	static float waitElapsedTime = 0;
@@ -57,8 +57,6 @@ void QueenState::AttackRoutine()
 
 	static Vec2 startPos;
 	static Vec2 endPos;
-
-	static bool isRefresh = true;
 
 	static int projectileIndex = 0;
 	static float projectileElapsedTime = 0;
