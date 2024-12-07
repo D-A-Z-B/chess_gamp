@@ -2,6 +2,7 @@
 #include "BossTestScene.h"
 #include "Boss.h"
 #include "Player.h"
+#include "Ground.h"
 #include "CollisionManager.h"
 #include "TimeManager.h"
 
@@ -14,7 +15,7 @@ void BossTestScene::Init()
 
 	Boss* pBoss = new Boss();
 	pBoss->SetName(L"Boss");
-	pBoss->SetPos({SCREEN_WIDTH / 2.f, 150.f });
+	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
 	pBoss->SetSize({ 160.f, 320.f });
 	pBoss->SetPatternDelayTime(3.f);
 	pBoss->Initialize();
@@ -28,9 +29,14 @@ void BossTestScene::Init()
 
 	Background* pBackground = new Background();
 	pBackground->SetPos({ 500, 0 });
-	pBackground->SetSize({1920, 1920});
+	pBackground->SetSize({ 1920, 1920 });
 	pBackground->SetBackgroundTexture(L"board_plain_04");
 	AddObject(pBackground, LAYER::BACKGROUND);
+
+	Ground* pGround = new Ground();
+	pGround->SetPos({ SCREEN_WIDTH / 2.f,650.f });
+	pGround->SetSize({ (float)SCREEN_WIDTH, 150.f });
+	AddObject(pGround, LAYER::Ground);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::BOSS, LAYER::PLAYER);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
@@ -57,12 +63,4 @@ void BossTestScene::Init()
 	GET_SINGLE(ResourceManager)->LoadSound(L"ClearBGM", L"Sound\\ClearBGM.mp3", true);
 
 	GET_SINGLE(ResourceManager)->Play(L"GameBGM", SOUND_CHANNEL::BGM);
-}
-
-void BossTestScene::Render(HDC _hdc)
-{
-	Scene::Render(_hdc);
-
-	Vec2 vPos = { SCREEN_WIDTH / 2.f,650.f };
-	Utils::RenderRectColor(_hdc, vPos, SCREEN_WIDTH, 150.f, RGB(0, 0, 0));
 }

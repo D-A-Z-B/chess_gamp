@@ -8,7 +8,6 @@ class ClearScene :
 public:
     void Init() override;
     void Update() override;
-    void Render(HDC _hdc) override;
 private:
     void StartRoutine();
     void ButtonRoutine();

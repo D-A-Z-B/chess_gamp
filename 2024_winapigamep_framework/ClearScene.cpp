@@ -2,6 +2,7 @@
 #include "ClearScene.h"
 
 #include "Text.h"
+#include "Ground.h"
 
 #include "InputManager.h"
 #include "TimeManager.h"
@@ -13,6 +14,11 @@ void ClearScene::Init()
 	StartSceneBlending(0, 0, false);
 
 	wstring path = GET_SINGLE(ResourceManager)->GetResPath();
+
+	Ground* pGround = new Ground();
+	pGround->SetPos({ SCREEN_WIDTH / 2.f,650.f });
+	pGround->SetSize({ (float)SCREEN_WIDTH, 150.f });
+	AddObject(pGround, LAYER::Ground);
 
 	Text* pTitle = new Text();
 	pTitle->SetPos({ SCREEN_WIDTH / 2, 150 });
@@ -63,14 +69,6 @@ void ClearScene::Update()
 	else {
 		NormalRoutine();
 	}
-}
-
-void ClearScene::Render(HDC _hdc)
-{
-	Vec2 vPos = { SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f };
-	Utils::RenderRectColor(_hdc, vPos, SCREEN_WIDTH, SCREEN_HEIGHT, RGB(0, 0, 0));
-
-	Scene::Render(_hdc);
 }
 
 void ClearScene::StartRoutine()
