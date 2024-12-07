@@ -34,7 +34,7 @@ public:
 
     void Update() {
         if (CurrentState) {
-            CurrentState->Update();
+            CurrentState->UpdateState();
         }
     }
 

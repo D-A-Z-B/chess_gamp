@@ -60,7 +60,7 @@ void Boss::ComponentInitialize()
 
 void Boss::Update()
 {
-	stateMachine->CurrentState->UpdateState();
+	stateMachine->Update();
 }
 
 void Boss::Render(HDC _hdc)

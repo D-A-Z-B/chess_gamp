@@ -61,7 +61,7 @@ void KnightState::AttackRoutine()
     static float waitElapsedTime = 0;
     const float waitTime = 0.3f;
 
-    static int currentAttackCount = 1;
+    currentAttackCount = 1;
 
     static bool isMove = true;
     static bool isDropWait = false;
