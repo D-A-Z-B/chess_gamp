@@ -50,16 +50,16 @@ void KnightState::Exit()
 void KnightState::AttackRoutine()
 {
     static float moveElapsedTime = 0;
-    const float moveTime = 0.2f;
+    float moveTime = 0.2f;
 
     static float dropElapsedTime = 0;
-    const float dropTime = 0.02f;
+    float dropTime = 0.02f;
 
     static float dropWaitElapsedTime = 0;
-    const float dropWaitTime = 0.3f;
+    float dropWaitTime = 0.3f;
 
     static float waitElapsedTime = 0;
-    const float waitTime = 0.3f;
+    float waitTime = 0.3f;
 
     currentAttackCount = 1;
 
