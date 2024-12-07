@@ -20,6 +20,9 @@ void KnightState::Enter()
 	__super::boss->SetSize(vSize * 1.5);
 
 	isAttack = true;
+    isRefresh = true;
+    isFirst = true;
+    currentAttackCount = 1;
 
 	cout << "Knight State Enter" << endl;
 }
@@ -61,8 +64,6 @@ void KnightState::AttackRoutine()
     static float waitElapsedTime = 0;
     float waitTime = 0.3f;
 
-    currentAttackCount = 1;
-
     static bool isMove = true;
     static bool isDropWait = false;
     static bool isDrop = false;
@@ -70,9 +71,6 @@ void KnightState::AttackRoutine()
 
     static Vec2 moveStartPos, moveEndPos;
     static Vec2 dropStartPos, dropEndPos;
-
-    static bool isRefresh = true;
-    static bool isFirst = true;
 
     if (currentAttackCount >= 8) {
         isAttack = false;

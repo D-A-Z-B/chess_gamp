@@ -17,6 +17,8 @@ private:
 private:
     bool isAttack = false;
     bool isEnd = false;
+    bool isRefresh = true;
+    bool isFirst = true;
     int currentAttackCount = 1;
 };
 

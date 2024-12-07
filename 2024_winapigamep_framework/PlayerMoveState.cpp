@@ -9,8 +9,6 @@ void PlayerMoveState::Enter()
 {
 	player->SetCurrentStateEnum(PLAYER_STATE::MOVE);
 	__super::Enter();
-
-	player->isMove = true;
 }
 
 void PlayerMoveState::UpdateState()
@@ -37,5 +35,4 @@ void PlayerMoveState::UpdateState()
 
 void PlayerMoveState::Exit()
 {
-	player->isMove = false;
 }

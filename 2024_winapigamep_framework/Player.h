@@ -20,31 +20,20 @@ private:
 public:
 	StateMachine<PLAYER_STATE>* stateMachine;
 	PLAYER_STATE currentStateEnum;
-
 	float yVelocity = 0;
-
 	float moveSpeed = 200.f;
-	bool isMove = false;
-
 	bool isDash = false;
-
 	int isPacing = 1;
 private:
 	Texture* m_pTex;
 	Texture* m_pDeadTex;
 	Texture* m_pFireTex;
-
 	wstring curAnimaton;
-
 	float dashCoolTimer = 0;
 	float dashCoolTime = 0.5;
-
 	float fireAnimTimer = 0;
 	float fireAnimTime = 0.2f;
-
 	float gravity = 9.8f;
-
 	bool isShooting = false;
-
 	bool isDead = false;
 };
