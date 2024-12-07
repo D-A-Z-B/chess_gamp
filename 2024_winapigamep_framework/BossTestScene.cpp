@@ -6,7 +6,6 @@
 #include "TimeManager.h"
 
 #include "Background.h"
-#include "Ground.h"
 #include "Portal.h"
 
 void BossTestScene::Init()
@@ -33,11 +32,6 @@ void BossTestScene::Init()
 	pBackground->SetBackgroundTexture(L"board_plain_04");
 	AddObject(pBackground, LAYER::BACKGROUND);
 
-	Object* pGround = new Ground;
-	pGround->SetPos({ SCREEN_WIDTH / 2.f,650.f });
-	pGround->SetSize({ (float)SCREEN_WIDTH, 150.f });
-	AddObject(pGround, LAYER::Ground);
-
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::BOSS, LAYER::PLAYER);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::BOSS);
@@ -61,4 +55,12 @@ void BossTestScene::Init()
 	GET_SINGLE(ResourceManager)->LoadSound(L"GameBGM", L"Sound\\GameBGM.mp3", true);
 
 	GET_SINGLE(ResourceManager)->Play(L"GameBGM", SOUND_CHANNEL::BGM);
+}
+
+void BossTestScene::Render(HDC _hdc)
+{
+	Scene::Render(_hdc);
+
+	Vec2 vPos = { SCREEN_WIDTH / 2.f,650.f };
+	Utils::RenderRectColor(_hdc, vPos, SCREEN_WIDTH, 150.f, RGB(0, 0, 0));
 }

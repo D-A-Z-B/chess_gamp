@@ -106,9 +106,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -168,9 +165,6 @@
     </ClInclude>
     <ClInclude Include="KingState.h">
       <Filter>Engine\03. Object\Boss\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Engine\Utils</Filter>
@@ -233,7 +227,7 @@
       <Filter>Engine\03. Object\Player\State</Filter>
     </ClInclude>
     <ClInclude Include="Effect.h">
-    	<Filter>Engine\03. Object</Filter>
+      <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="DiePanel.h">
       <Filter>Engine\03. Object</Filter>
@@ -241,6 +235,7 @@
     <ClInclude Include="Button.h">
       <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Portal.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework.rc">
@@ -283,9 +278,6 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
@@ -327,9 +319,6 @@
     </ClCompile>
     <ClCompile Include="BossState.cpp">
       <Filter>Engine\03. Object\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Engine\Utils</Filter>
@@ -410,7 +399,7 @@
       <Filter>Engine\03. Object\Player\State</Filter>
     </ClCompile>
     <ClCompile Include="Effect.cpp">
-    	<Filter>Engine\03. Object</Filter>
+      <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="DiePanel.cpp">
       <Filter>Engine\03. Object</Filter>
@@ -418,5 +407,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Engine\03. Object\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Portal.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -198,9 +198,7 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GameScene.h" />
     <ClInclude Include="GDISelector.h" />
-    <ClInclude Include="Ground.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="KingAttackObject.h" />
     <ClInclude Include="KingState.h" />
@@ -257,9 +255,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
-    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="KingAttackObject.cpp" />
     <ClCompile Include="KingState.cpp" />
@@ -288,6 +284,9 @@
   <ItemGroup>
     <Image Include="2024_winapigamep_framework_22.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

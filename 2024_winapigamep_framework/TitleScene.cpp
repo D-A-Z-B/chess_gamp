@@ -9,8 +9,6 @@
 
 #include "Background.h"
 #include "Text.h"
-#include "Ground.h"
-
 
 TitleScene::~TitleScene()
 {

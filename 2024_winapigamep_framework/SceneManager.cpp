@@ -2,7 +2,6 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TitleScene.h"
-#include "GameScene.h"
 #include "BossTestScene.h"
 #include "EndingScene.h"
 void SceneManager::Init()
@@ -11,7 +10,6 @@ void SceneManager::Init()
 
 	// ¾À µî·Ï
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
-	RegisterScene(L"GameScene",std::make_shared<GameScene>());
 	RegisterScene(L"EndingScene", std::make_shared<EndingScene>());
 
 	//Test Scene
