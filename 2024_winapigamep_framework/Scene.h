@@ -26,6 +26,9 @@ private:
 	void AlphaBlendRender(HDC _hdc);
 private:
 	vector<Object*> m_vecObj[(UINT)LAYER::END];
+	HDC m_tempDC;
+	HBITMAP m_tempBitmap;
+	HBITMAP m_oldBitmap;
 
 	float m_executeTimer;
 	float m_executeDelay;

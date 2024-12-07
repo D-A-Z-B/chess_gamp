@@ -82,11 +82,11 @@ void Scene::AlphaBlendRender(HDC _hdc)
 	if (!isAlphaBlend)
 		return;
 
-	HDC tempDC = CreateCompatibleDC(_hdc);
-	HBITMAP tempBitmap = CreateCompatibleBitmap(_hdc, SCREEN_WIDTH, SCREEN_HEIGHT);
-	HBITMAP oldBitmap = (HBITMAP)SelectObject(tempDC, tempBitmap);
+	m_tempDC = CreateCompatibleDC(_hdc);
+	m_tempBitmap = CreateCompatibleBitmap(_hdc, SCREEN_WIDTH, SCREEN_HEIGHT);
+	m_oldBitmap = (HBITMAP)SelectObject(m_tempDC, m_tempBitmap);
 
-	PatBlt(tempDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, color);
+	PatBlt(m_tempDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, color);
 
 	float percent = m_executeTimer / m_executeDelay;
 
@@ -98,13 +98,13 @@ void Scene::AlphaBlendRender(HDC _hdc)
 
 	GdiAlphaBlend(
 		_hdc, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
-		tempDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
+		m_tempDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
 		bf
 	);
 
-	SelectObject(tempDC, oldBitmap);
-	DeleteObject(tempBitmap);
-	DeleteDC(tempDC);
+	SelectObject(m_tempDC, m_oldBitmap);
+	DeleteObject(m_tempBitmap);
+	DeleteDC(m_tempDC);
 }
 
 void Scene::StartSceneBlending(float fadeTime, int percent, bool isUIBlend, DWORD color)
@@ -129,4 +129,7 @@ void Scene::Release()
 		m_vecObj[i].clear();
 	}
 	GET_SINGLE(CollisionManager)->CheckReset();
+
+	if (m_tempDC) DeleteDC(m_tempDC);
+	if (m_tempBitmap) DeleteObject(m_tempBitmap);
 }
