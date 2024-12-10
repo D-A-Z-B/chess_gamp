@@ -178,9 +178,6 @@
     <ClInclude Include="BossTestScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="EndingScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -240,6 +237,10 @@
     </ClInclude>
     <ClInclude Include="ClearScene.h">
       <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="PlayerHealth.h">
+      <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -352,9 +353,6 @@
     <ClCompile Include="Aim.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="EndingScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="BossTestScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
@@ -418,5 +416,12 @@
     <ClCompile Include="ClearScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="PlayerHealth.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

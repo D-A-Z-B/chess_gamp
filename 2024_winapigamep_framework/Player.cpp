@@ -13,6 +13,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "PlayerHealth.h"
 
 #include "TimeManager.h"
 #include "InputManager.h"
@@ -25,7 +26,7 @@
 #include "StateMachine.h"
 
 Player::Player()
-	: m_pTex(nullptr)
+	: m_pTex(nullptr), hp(5)
 {
 	//texure
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerMove", L"Texture\\Player\\Player.bmp");
@@ -68,6 +69,11 @@ Player::Player()
 	//set
 	GET_SINGLE(PlayerManager)->SetPlayer(this);
 	SetName(L"Player");
+
+	PlayerHealth* playerHealth = new PlayerHealth();
+	playerHealth->SetName(L"PlayerHealth");
+	playerHealth->SetSize({100, 10});
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(playerHealth, LAYER::UI);
 }
 
 Player::~Player()
@@ -188,6 +194,15 @@ void Player::SetDead()
 {
 	isDead = true;
 	isShooting = false;
+}
+
+void Player::ApplyDamage()
+{
+	hp--;
+	if (hp <= 0) {
+		SetDead();
+		stateMachine->ChangeState(PLAYER_STATE::DEAD);
+	}
 }
 
 void Player::CreateProjectile()
