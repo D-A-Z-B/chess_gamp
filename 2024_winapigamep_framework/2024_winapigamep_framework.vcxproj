@@ -109,7 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Output\build\Resource\Fmod\inc</AdditionalIncludeDirectories>
@@ -149,7 +149,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Output\build\Resource\Fmod\inc</AdditionalIncludeDirectories>
@@ -180,6 +180,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="PlayerDashState.h" />
     <ClInclude Include="PlayerDeadState.h" />
+    <ClInclude Include="PlayerHealth.h" />
     <ClInclude Include="PlayerIdleState.h" />
     <ClInclude Include="PlayerJumpState.h" />
     <ClInclude Include="PlayerMoveState.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="PlayerDashState.cpp" />
     <ClCompile Include="PlayerDeadState.cpp" />
+    <ClCompile Include="PlayerHealth.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
     <ClCompile Include="PlayerJumpState.cpp" />
     <ClCompile Include="PlayerMoveState.cpp" />

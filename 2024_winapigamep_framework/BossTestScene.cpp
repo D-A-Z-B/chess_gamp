@@ -6,12 +6,16 @@
 #include "CollisionManager.h"
 #include "TimeManager.h"
 
+#include "Text.h"
+
 #include "Background.h"
 #include "Portal.h"
 
 void BossTestScene::Init()
 {
 	Scene::Init();
+
+	wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 
 	Boss* pBoss = new Boss();
 	pBoss->SetName(L"Boss");
@@ -37,6 +41,51 @@ void BossTestScene::Init()
 	pGround->SetPos({ SCREEN_WIDTH / 2.f,650.f });
 	pGround->SetSize({ (float)SCREEN_WIDTH, 150.f });
 	AddObject(pGround, LAYER::Ground);
+
+	Text* moveText = new Text();
+	moveText->SetPos({ 100, 625 });
+	moveText->SetSize({ 90.f, 0.f });
+	moveText->SetText(L"MOVE: AD");
+	moveText->SetColor(RGB(255, 255, 255));
+	Vec2 moveTextSize = moveText->GetSize();
+	moveText->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", moveTextSize.x / 2);
+	AddObject(moveText, LAYER::UI);
+
+	Text* jumpText = new Text();
+	jumpText->SetPos({ 120, 675 });
+	jumpText->SetSize({ 90.f, 0.f });
+	jumpText->SetText(L"JUMP: SPACE");
+	jumpText->SetColor(RGB(255, 255, 255));
+	Vec2 jumpTextSize = jumpText->GetSize();
+	jumpText->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", jumpTextSize.x / 2);
+	AddObject(jumpText, LAYER::UI);
+
+	Text* dashText = new Text();
+	dashText->SetPos({ 370, 625 });
+	dashText->SetSize({ 90.f, 0.f });
+	dashText->SetText(L"DASH: SHIFT");
+	dashText->SetColor(RGB(255, 255, 255));
+	Vec2 dashTextSize = dashText->GetSize();
+	dashText->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", dashTextSize.x / 2);
+	AddObject(dashText, LAYER::UI);
+
+	Text* attackText = new Text();
+	attackText->SetPos({ 380, 675 });
+	attackText->SetSize({ 90.f, 0.f });
+	attackText->SetText(L"ATTACK: LMB");
+	attackText->SetColor(RGB(255, 255, 255));
+	Vec2 attackTextSize = attackText->GetSize();
+	attackText->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", attackTextSize.x / 2);
+	AddObject(attackText, LAYER::UI);
+
+	Text* interactText = new Text();
+	interactText->SetPos({ 640, 625 });
+	interactText->SetSize({ 90.f, 0.f });
+	interactText->SetText(L"INTERACT: W");
+	interactText->SetColor(RGB(255, 255, 255));
+	Vec2 interactTextSize = interactText->GetSize();
+	interactText->LoadFont(path + L"Font\\Galmuri7.ttf", L"Galmuri7 Regular", interactTextSize.x / 2);
+	AddObject(interactText, LAYER::UI);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::BOSS, LAYER::PLAYER);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);

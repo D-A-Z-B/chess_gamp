@@ -14,6 +14,9 @@ public:
 	void ChangePacing(int pacing);
 	void ChangeAnimation(wstring changeAnimation, bool isRepeat);
 	void SetDead();
+	void ApplyDamage();
+	int GetCurrentHP() { return hp; }
+	int GetDefaultHP() { return defaultHP; }
 private:
 	void CreateProjectile();
 	void CheckChangeState();
@@ -24,6 +27,8 @@ public:
 	float moveSpeed = 200.f;
 	bool isDash = false;
 	int isPacing = 1;
+	int hp;
+	int defaultHP = hp;
 private:
 	Texture* m_pTex;
 	Texture* m_pDeadTex;

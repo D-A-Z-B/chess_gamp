@@ -16,8 +16,8 @@ void ClearScene::Init()
 	wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 
 	Ground* pGround = new Ground();
-	pGround->SetPos({ SCREEN_WIDTH / 2.f,650.f });
-	pGround->SetSize({ (float)SCREEN_WIDTH, 150.f });
+	pGround->SetPos({ SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f });
+	pGround->SetSize({ SCREEN_WIDTH, SCREEN_HEIGHT });
 	AddObject(pGround, LAYER::Ground);
 
 	Text* pTitle = new Text();
