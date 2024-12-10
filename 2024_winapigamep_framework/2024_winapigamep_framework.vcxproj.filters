@@ -178,9 +178,6 @@
     <ClInclude Include="BossTestScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="EndingScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -241,6 +238,12 @@
     <ClInclude Include="ClearScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="resource1.h" />
+    <ClInclude Include="resource2.h" />
+    <ClInclude Include="resource3.h" />
+    <ClInclude Include="resource4.h" />
+    <ClInclude Include="resource5.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework.rc">
@@ -252,6 +255,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="2024_winapigamep_framework_22.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="chessIcon.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -352,9 +358,6 @@
     <ClCompile Include="Aim.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="EndingScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="BossTestScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
@@ -418,5 +421,10 @@
     <ClCompile Include="ClearScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

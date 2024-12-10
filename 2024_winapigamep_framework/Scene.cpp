@@ -101,10 +101,6 @@ void Scene::AlphaBlendRender(HDC _hdc)
 		m_tempDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
 		bf
 	);
-
-	SelectObject(m_tempDC, m_oldBitmap);
-	DeleteObject(m_tempBitmap);
-	DeleteDC(m_tempDC);
 }
 
 void Scene::StartSceneBlending(float fadeTime, int percent, bool isUIBlend, DWORD color)
