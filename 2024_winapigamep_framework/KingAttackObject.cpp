@@ -48,7 +48,7 @@ void KingAttackObject::EnterCollision(Collider* _other)
 	if (pOtherObj->GetName() == L"Player")
 	{
 		Player* player = dynamic_cast<Player*>(pOtherObj);
-		(*player).stateMachine->ChangeState(PLAYER_STATE::DEAD);
+		(*player).ApplyDamage();
 	}
 }
 

@@ -19,6 +19,6 @@ private:
     bool isAttack;
     bool isEnd;
 
-    int currentAttackCount = 0;
+    float currentAttackCount = 0;
 };
 
