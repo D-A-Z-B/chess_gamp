@@ -14,6 +14,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "PlayerHealth.h"
+#include "Effect.h"
 
 #include "TimeManager.h"
 #include "InputManager.h"
@@ -199,6 +200,9 @@ void Player::SetDead()
 void Player::ApplyDamage()
 {
 	hp--;
+	Effect* eff = new Effect(EFFECT_TYPE::PLAYER_HIT, 0.001, false);
+	eff->SetPos(GetPos());
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(eff, LAYER::EFFECT);
 	if (hp <= 0) {
 		SetDead();
 		stateMachine->ChangeState(PLAYER_STATE::DEAD);

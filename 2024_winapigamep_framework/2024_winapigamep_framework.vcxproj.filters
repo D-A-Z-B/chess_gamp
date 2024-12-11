@@ -76,14 +76,8 @@
     <ClInclude Include="Define.h">
       <Filter>Engine\99. Header</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Engine\99. Header</Filter>
-    </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>Engine\02. Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Enums.h">
-      <Filter>Engine\99. Header</Filter>
     </ClInclude>
     <ClInclude Include="BaseWindow.h">
       <Filter>Engine\01. Core</Filter>
@@ -241,6 +235,12 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="PlayerHealth.h">
       <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Engine\99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Engine\99. Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

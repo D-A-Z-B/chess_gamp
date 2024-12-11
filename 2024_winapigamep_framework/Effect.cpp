@@ -20,12 +20,8 @@ Effect::Effect(EFFECT_TYPE type, float time, bool isReapt)
 			pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"BossDeadEffect", L"Texture\\Effect\\BossDeadEffect.bmp");
 			break;
 		}
-		case EFFECT_TYPE::BOSS_HIT: {
-			// 아직 없음
-			break;
-		}
-		case EFFECT_TYPE::PLAYER_DEAD: {
-			// 아직 없음
+		case EFFECT_TYPE::PLAYER_HIT: {
+			pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerBlood", L"Texture\\Effect\\PlayerBlood.bmp");
 			break;
 		}
 	}
